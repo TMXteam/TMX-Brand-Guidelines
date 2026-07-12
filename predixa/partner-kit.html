@@ -31,7 +31,7 @@ html[data-theme="dark"]{
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
   --surface:rgba(14,14,16,.55); --surface-solid:#101014;
   --accent:#FFB627; --accent-deep:#D79F1E; --accent-mid:#E08F0F; --accent-high:#FFD89A;
-  --foil:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F,#FFB627,#FFD89A);
+  --foil:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
   --shadow:0 24px 60px rgba(0,0,0,.45);
   --divider:rgba(242,242,242,.28);
@@ -340,7 +340,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.0 · 2026-07-12</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.1.0 · 2026-07-12</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -475,7 +475,7 @@ ol{max-width:66ch;padding-left:20px}
             <thead><tr><th>Lockup</th><th>Use it when</th></tr></thead>
             <tbody>
               <tr><td>Primary shield</td><td>The default. Navbars, ad centerpieces, anywhere the mark carries the name.</td></tr>
-              <tr><td>Globe emblem</td><td>Premium, symmetrical centerpieces where you want the richer render.</td></tr>
+              <tr><td>Globe emblem</td><td>Premium, symmetrical centerpieces where you want the dimensional globe rather than the flat mark. Dark globe on ink surfaces, light globe on paper.</td></tr>
               <tr><td>App glyph (icon)</td><td>Favicons, app tiles, and small square slots. The shield itself, shipped as <code>favicon.svg</code> plus 16 and 32px PNGs.</td></tr>
             </tbody>
           </table></div>
@@ -505,7 +505,7 @@ ol{max-width:66ch;padding-left:20px}
           <div class="clearspace"><img src="assets/predixa/logo/predixa-logo.svg" alt="Predixa clear-space" /></div>
           <div class="law">
             <div class="h"><span class="badge">Hard rule</span><span class="t">Minimum size.</span></div>
-            <p><strong>20px tall on screen, 8mm in print.</strong> Below that the shield's facets and shamrock stop reading clearly; use the provided favicon build (<code>favicon.svg</code>, <code>favicon-16/32.png</code>) rather than scaling the full mark down yourself.</p>
+            <p><strong>20px tall on screen, 8mm in print.</strong> Below that the shield's facets stop reading clearly; use the provided favicon build (<code>favicon.svg</code>, <code>favicon-16/32.png</code>) rather than scaling the full mark down yourself.</p>
           </div>
         </div>
       </div>
@@ -531,8 +531,8 @@ ol{max-width:66ch;padding-left:20px}
           <div class="swatches">
             <div class="sw"><div class="chip" style="background:#0E7A40"></div><div class="nm">Predixa Emerald</div><div class="hex">#0E7A40</div><div class="use">The daylight accent. Pills, live dot, the single foil clause.</div></div>
             <div class="sw"><div class="chip" style="background:#0A5630"></div><div class="nm">Deep Emerald</div><div class="hex">#0A5630</div><div class="use">Accent text at small sizes (stronger contrast).</div></div>
-            <div class="sw"><div class="chip" style="background:#0C6E3A"></div><div class="nm">Mid Emerald</div><div class="hex">#0C6E3A</div><div class="use">Foil-gradient low stop in light.</div></div>
-            <div class="sw"><div class="chip" style="background:#2AA862"></div><div class="nm">Bright Emerald</div><div class="hex">#2AA862</div><div class="use">Fill bars, foil highlight.</div></div>
+            <div class="sw"><div class="chip" style="background:#0B6E39"></div><div class="nm">Mid Emerald</div><div class="hex">#0B6E39</div><div class="use">Foil-gradient low stop in light.</div></div>
+            <div class="sw"><div class="chip" style="background:#1FA85C"></div><div class="nm">Bright Emerald</div><div class="hex">#1FA85C</div><div class="use">Foil-gradient high stop in light.</div></div>
           </div>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
@@ -656,7 +656,7 @@ ol{max-width:66ch;padding-left:20px}
               <tr><td>Accent</td><td>Gold <code>#FFB627</code></td><td>Emerald <code>#0E7A40</code></td></tr>
               <tr><td>Depth</td><td>Frost + accent halo</td><td>Soft shadow + hairline borders</td></tr>
               <tr><td>Glow / backdrop-filter</td><td>Allowed on data panels</td><td>Forbidden: none on paper</td></tr>
-              <tr><td>Up / down candle fill</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#0F7D43</code> / <code>#C0392B</code></td></tr>
+              <tr><td>Up / down candle fill</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td></tr>
               <tr><td>Up / down status text</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#1F9E57</code> / <code>#C0392B</code></td></tr>
             </tbody>
           </table></div>
@@ -724,7 +724,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.0 · reproduction-only · 2026-07-12</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.1.0 · reproduction-only · 2026-07-12</p>
     </section>
   </main>
 </div>
