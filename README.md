@@ -48,3 +48,9 @@ _More kits (TMX DEX) will be added here._
 Use the supplied vector and raster files as-is. Never redraw, re-trace, recolour,
 or AI-generate a mark or lockup. If a value ever disagrees with the live brand
 source, the source wins.
+
+## Versioning
+
+Each kit is versioned independently &mdash; see [`VERSIONING.md`](VERSIONING.md).
+The current version and date show in the kit's top bar and at the top of its
+`usage-policy.md`; any change to a kit bumps that version.
