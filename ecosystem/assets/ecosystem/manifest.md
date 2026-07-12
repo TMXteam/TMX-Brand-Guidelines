@@ -33,3 +33,5 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `logo/ecosystem-logo-mono.svg` | Mono-black vector for 1-colour use: stencil, cutout, watermark, emboss. |
 | `logo/ecosystem-logo-white.png` | Solid white silhouette, reversed for dark surfaces. |
 | `logo/ecosystem-logo.svg` | Colour vector master, the editable source. |
+| `tokens.css` | Brand tokens as CSS custom properties (drop-in, both themes). |
+| `tokens.json` | Brand tokens as structured JSON (colours per theme, type, radius). |
