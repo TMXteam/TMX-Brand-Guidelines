@@ -22,4 +22,4 @@ leave the version behind a change.
 - Record each release as one line in `<brand>/CHANGELOG.md`: `vX.Y.Z  YYYY-MM-DD  — what changed`.
 - All kit changes reach `main` by PR; the maintainer merges.
 
-A kit's current version is shown in its top bar and at the top of its `<brand>/CHANGELOG.md` — this doc does not restate it, so there is nothing here to keep in sync.
+A kit's current version is shown in its top bar and at the top of its `<brand>/CHANGELOG.md`.
