@@ -1,0 +1,52 @@
+/* ecosystem brand tokens — verbatim from partner-kit.html. Drop into your stylesheet. */
+:root{
+  --sans: "Inter",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+  --serif: "Fraunces",Georgia,serif;
+  --mono: "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r-card: 22px;
+  --r-pill: 9999px;
+  --pad: clamp(20px,5vw,72px);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+/* dark (canonical) */
+html[data-theme="dark"]{
+  --bg: #0A0A0C;
+  --ink: #F2F2F2;
+  --muted: rgba(242,242,242,.72);
+  --faint: rgba(242,242,242,.64);
+  --rule: rgba(242,242,242,.10);
+  --rule-strong: rgba(242,242,242,.18);
+  --surface: rgba(14,14,16,.55);
+  --surface-solid: #101014;
+  --accent: #D67341;
+  --accent-deep: #8B3F1F;
+  --accent-mid: #AF592D;
+  --accent-high: #FEE5A2;
+  --foil: linear-gradient(135deg,#FEE5A2,#D67341,#AF592D);
+  --select: #7DF9D5;
+  --yes: #7DE0B0;
+  --no: #E07A7A;
+  --shadow: 0 24px 60px rgba(0,0,0,.45);
+  --divider: rgba(242,242,242,.28);
+}
+/* light (daylight twin) */
+html[data-theme="light"]{
+  --bg: #F6F2E8;
+  --ink: #16140F;
+  --muted: rgba(22,20,15,.78);
+  --faint: rgba(22,20,15,.66);
+  --rule: rgba(22,20,15,.12);
+  --rule-strong: rgba(22,20,15,.20);
+  --surface: #FCFAF3;
+  --surface-solid: #FCFAF3;
+  --accent: #A54D1F;
+  --accent-deep: #A44A24;
+  --accent-mid: #B6562F;
+  --accent-high: #EBB371;
+  --foil: linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
+  --select: #9CE1C8;
+  --yes: #1F9E57;
+  --no: #C0392B;
+  --shadow: 0 14px 30px -20px rgba(22,20,15,.28);
+  --divider: rgba(22,20,15,.30);
+}

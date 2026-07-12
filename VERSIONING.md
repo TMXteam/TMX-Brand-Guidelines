@@ -22,9 +22,4 @@ leave the version behind a change.
 - Record each release as one line in `<brand>/CHANGELOG.md`: `vX.Y.Z  YYYY-MM-DD  — what changed`.
 - All kit changes reach `main` by PR; the maintainer merges.
 
-## Current
-
-- `predixa` — v1.0
-- `ecosystem` — v1.0
-
-Both adopt the three-part form (`v1.0.x` / `v1.x.0`) at their next bump.
+A kit's current version is shown in its top bar and at the top of its `<brand>/CHANGELOG.md` — this doc does not restate it, so there is nothing here to keep in sync.

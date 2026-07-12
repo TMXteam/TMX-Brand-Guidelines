@@ -339,7 +339,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.1.0 · 2026-07-12</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.2.0 · 2026-07-12</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -371,6 +371,7 @@ ol{max-width:66ch;padding-left:20px}
           </ul>
           <h3>How to read it</h3>
           <p>Sections marked <span class="mono" style="color:var(--accent)">Hard rule</span> are non-negotiable; breaking one makes the work off-brand or, in an ad, a scam risk. Everything else is the spec to match. If your campaign is actually about <strong>Predixa</strong> or <strong>TMX DEX</strong>, stop here and use that product's kit; §02 shows how to tell the three apart.</p>
+          <p>Questions, or want a co-branded layout signed off before it ships? Email <a href="mailto:team@tmx.info">team@tmx.info</a>.</p>
         </div>
       </div>
     </section>
@@ -520,16 +521,16 @@ ol{max-width:66ch;padding-left:20px}
 
           <div class="grouplabel">Accent · dark (canonical)</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#D67341"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#D67341</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause.</div></div>
+            <div class="sw"><div class="chip" style="background:#D67341"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#D67341</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause. 6:1 on ink (AA).</div></div>
             <div class="sw"><div class="chip" style="background:#AF592D"></div><div class="nm">Mid Terracotta</div><div class="hex">#AF592D</div><div class="use">Foil-gradient low stop. Never a flat fill.</div></div>
-            <div class="sw"><div class="chip" style="background:#8B3F1F"></div><div class="nm">Deep Terracotta</div><div class="hex">#8B3F1F</div><div class="use">Small-text AA pair. Use for accent text under ~18px.</div></div>
+            <div class="sw"><div class="chip" style="background:#8B3F1F"></div><div class="nm">Deep Terracotta</div><div class="hex">#8B3F1F</div><div class="use">Deepest shade. Hovers, borders. Not for small text on ink (2.7:1); for small accent text use the accent (6:1, AA).</div></div>
             <div class="sw"><div class="chip" style="background:#FEE5A2"></div><div class="nm">Warm Highlight</div><div class="hex">#FEE5A2</div><div class="use">Foil-gradient high stop.</div></div>
           </div>
 
           <div class="grouplabel">Accent · light (daylight)</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#A54D1F"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#A54D1F</div><div class="use">The daylight accent. Pills, live dot, the single foil clause.</div></div>
-            <div class="sw"><div class="chip" style="background:#A44A24"></div><div class="nm">Deep Terracotta</div><div class="hex">#A44A24</div><div class="use">Accent text at small sizes (stronger contrast).</div></div>
+            <div class="sw"><div class="chip" style="background:#A54D1F"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#A54D1F</div><div class="use">The daylight accent. Pills, live dot, the single foil clause. 5.1:1 on paper (AA).</div></div>
+            <div class="sw"><div class="chip" style="background:#A44A24"></div><div class="nm">Deep Terracotta</div><div class="hex">#A44A24</div><div class="use">Accent text at small sizes (stronger contrast). 5.2:1 on paper (AA).</div></div>
             <div class="sw"><div class="chip" style="background:#B6562F"></div><div class="nm">Mid Terracotta</div><div class="hex">#B6562F</div><div class="use">Foil-gradient low stop in light.</div></div>
             <div class="sw"><div class="chip" style="background:#EBB371"></div><div class="nm">Warm Highlight</div><div class="hex">#EBB371</div><div class="use">Fill bars, foil highlight.</div></div>
           </div>
@@ -635,8 +636,7 @@ ol{max-width:66ch;padding-left:20px}
             <li><strong>Frost is fine; neon is not.</strong> TMX Ecosystem may use frosted glass on data panels; it never glows. Save the neon for DEX.</li>
             <li><strong>The CTA is a terracotta <code>tmx.info</code> pill.</strong> The real domain, spelled out.</li>
             <li><strong>One Fraunces foil clause per frame,</strong> a tiny mono risk line, the mark as the calm anchor. No symmetric text-on-both-sides banners.</li>
-            <li><strong>Don't invent figures</strong> and <strong>don't name a competitor.</strong> Any number must be true, current, and sourced from the live product; if it can't be sourced, cut it.</li>
-          </ul>
+            <li><strong>Don't invent figures</strong> and <strong>don't name a competitor.</strong> Any number must be true, current, and sourced from the live product; if it can't be sourced, cut it.</li>          </ul>
         </div>
       </div>
     </section>
@@ -659,11 +659,11 @@ ol{max-width:66ch;padding-left:20px}
               <tr><td>Up / down status text</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#1F9E57</code> / <code>#C0392B</code></td></tr>
             </tbody>
           </table></div>
+          <p class="fine" style="margin-top:14px">On paper, the status <em>text</em> pair measures: down <code>#C0392B</code> at 4.9:1 (AA), up <code>#1F9E57</code> at 3.1:1 (large text only).</p>
           <div class="callout">
             <div class="mono">The invariant</div>
             <p style="color:var(--ink)">Off-black on dark, off-white on paper, <strong>always</strong>. Never <code>#000</code>, never <code>#FFF</code>. Status fills are constant across themes; only the status <em>text</em> colour swaps to hold AA contrast on paper.</p>
-          </div>
-        </div>
+          </div>        </div>
       </div>
     </section>
 
@@ -704,7 +704,7 @@ ol{max-width:66ch;padding-left:20px}
     <section id="assets">
       <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 11 · Assets</div>
       <h2 style="max-width:14ch">The source files.</h2>
-      <p>The real payload of this kit is the downloadable pack in <code>assets/ecosystem/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, and the kit's bundled webfonts, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
+      <p>The real payload of this kit is the downloadable pack in <code>assets/ecosystem/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, <code>fonts/</code>, and machine-readable <code>tokens</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, the kit's bundled webfonts, and brand tokens as CSS and JSON, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
       <p style="margin-top:18px"><a class="btn solid" href="assets/ecosystem/ecosystem-assets.zip" download>Download the pack (zip)</a></p>
       <div class="scrollx"><table>
         <thead><tr><th>File</th><th>Mark</th><th>Use</th></tr></thead>
@@ -718,12 +718,13 @@ ol{max-width:66ch;padding-left:20px}
           <tr><td><code>logo/ecosystem-logo-white.png</code> / <code>logo/ecosystem-logo-black.png</code></td><td>Reversed / silhouette</td><td>White for dark surfaces; black stencil / cutout.</td></tr>
           <tr><td><code>favicon/</code> (svg, 16/32px, apple-touch)</td><td>Favicons</td><td>Browser tab / home-screen icon.</td></tr>
           <tr><td><code>fonts/</code> (Inter, Fraunces, JetBrains Mono)</td><td>Webfonts</td><td>Bundled latin woff2 so the kit renders with no network.</td></tr>
+          <tr><td><code>tokens.css</code> / <code>tokens.json</code></td><td>Machine-readable tokens</td><td>Brand tokens as CSS custom properties and structured JSON: colours per theme, type, radius.</td></tr>
           <tr><td><code>ecosystem-assets.zip</code></td><td>The whole pack</td><td>One download of every file above.</td></tr>
         </tbody>
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The mark is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.1.0 · reproduction-only · 2026-07-12</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.2.0 · reproduction-only · 2026-07-12 · team@tmx.info</p>
     </section>
   </main>
 </div>
