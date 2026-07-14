@@ -1,3 +1,4 @@
+v1.6.3  2026-07-14  — §02 "you are here" outline now contrasts the zone fill per theme (ink on the bright gold, white on the dark emerald) instead of always white.
 v1.6.2  2026-07-14  — §02 "Which TMX is this" now follows the theme (the Predixa zone is emerald on the light field, not stuck on gold, per the gold-by-night / emerald-by-day rule); click-to-copy swatch band now fills the chip's full top edge (removed the 1px inset gap).
 v1.6.1  2026-07-14  — Hero mark now renders in 3D; equalized the §03 on-ink/on-paper plates so both marks align (facets moved to a row below); vertically centered the three-lockup tiles.
 v1.6.0  2026-07-14  — Refreshed the 3D shield render with deeper relief (updated the 3D PNGs and the download pack) and added a §03 note that the finish only reads at large, premium sizes—ship the flat vector below that.
