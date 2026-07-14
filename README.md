@@ -16,10 +16,14 @@
 
 ---
 
-Self-contained, reproduction-only design specs for partners running co-branded
-campaigns with TMX ecosystem products. Each kit shows how to render a product's
+Self-contained, reproduction-only design specs for rendering TMX ecosystem
+products correctly in a campaign. Each kit shows how to render a product's
 brand so it reads as ours: the marks, colour, type, co-brand lockups, and the
 usage terms. Every value is verified against the TMX design source of truth.
+
+> **Who this is for:** partners, press, and internal teams reproducing the brand.
+> If you landed here by chance and just want TMX's public brand kit, head to
+> [tmx.info/ambassadors](https://tmx.info/ambassadors).
 
 ## Kits
 

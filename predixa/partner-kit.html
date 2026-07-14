@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Predixa: Partner Design-Spec Kit</title>
-<meta name="description" content="How to reproduce Predixa correctly in a co-branded campaign. Reproduction-only design spec." />
+<meta name="description" content="How to reproduce Predixa correctly in a campaign. Reproduction-only design spec." />
 <link rel="icon" href="assets/predixa/favicon/favicon.svg" />
 <style>
 /* bundled webfonts: self-contained, no CDN. Fraunces carries the opsz 9..144 axis. */
@@ -219,6 +219,8 @@ pre .c{color:var(--faint)}
 .variants .v{border:1px solid var(--rule);border-radius:16px;padding:22px;text-align:center;background:var(--surface)}
 .variants .v img{height:52px;width:auto}
 .variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+html[data-theme="dark"] .globe-light{display:none}
+html[data-theme="light"] .globe-dark{display:none}
 
 .clearspace{border:1px dashed var(--rule-strong);border-radius:16px;display:inline-flex;padding:40px;margin-top:6px}
 .clearspace img{height:44px;width:auto}
@@ -340,11 +342,11 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.2.0 · 2026-07-12</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.2.1 · 2026-07-14</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
-          <p class="lead">This kit exists for one job: helping a partner render Predixa correctly inside a co-branded campaign. It is the design spec, not a rulebook on permission. Every value here is drawn from the same source the product is built from.</p>
+          <p class="lead">This kit exists for one job: rendering Predixa correctly in a campaign. It is the design spec, not a rulebook on permission. Every value here is drawn from the same source the product is built from.</p>
         </div>
         <div class="cover-mark">
           <img src="assets/predixa/logo/predixa-logo.svg" alt="The Predixa shield: one mark split into a green facet and a gold facet" />
@@ -372,7 +374,7 @@ ol{max-width:66ch;padding-left:20px}
           </ul>
           <h3>How to read it</h3>
           <p>Sections marked <span class="mono" style="color:var(--accent)">Hard rule</span> are non-negotiable; breaking one makes the work off-brand or, in an ad, a scam risk. Everything else is the spec to match. If your campaign is actually about <strong>TMX DEX</strong> or the <strong>TMX umbrella</strong>, stop here and use that product's kit; §02 shows how to tell the three apart.</p>
-          <p>Questions, or want a co-branded layout signed off before it ships? Email <a href="mailto:team@tmx.info">team@tmx.info</a>.</p>
+          <p>Questions, or want a layout signed off before it ships? Email <a href="mailto:team@tmx.info">team@tmx.info</a>.</p>
         </div>
       </div>
     </section>
@@ -442,7 +444,7 @@ ol{max-width:66ch;padding-left:20px}
             <div class="h"><span class="badge">Hard rule</span><span class="t">Accents stay in their lane.</span></div>
             <p>Predixa is <strong>gold</strong> (dark) / <strong>emerald</strong> (light). Never dress it in the umbrella's terracotta or DEX's cyan and jewel tones, and never put Predixa's gold on an umbrella surface. Reaching for a neon glow on Predixa is DEX's move, not ours.</p>
           </div>
-          <p class="fine" style="margin-top:22px">TMX (tmx.info) is not affiliated with, endorsed by, or connected to "TMX Global," a separate and unrelated entity. On first mention, always pair "TMX" with a product name or the tmx.info domain.</p>
+          <p class="fine" style="margin-top:22px">On first mention, always pair "TMX" with a product name or the tmx.info domain.</p>
         </div>
       </div>
     </section>
@@ -469,7 +471,7 @@ ol{max-width:66ch;padding-left:20px}
           <h3>The three lockups</h3>
           <div class="variants">
             <div class="v"><img src="assets/predixa/logo/predixa-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
-            <div class="v"><img src="assets/predixa/globe/predixa-globe-dark.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
+            <div class="v"><img class="globe-dark" src="assets/predixa/globe/predixa-globe-dark.png" alt="Globe emblem" /><img class="globe-light" src="assets/predixa/globe/predixa-globe-light.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
             <div class="v"><img src="assets/predixa/favicon/favicon.svg" alt="Predixa app glyph" /><div class="lb">Icon · app glyph</div></div>
           </div>
           <div class="scrollx"><table>
@@ -725,7 +727,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.2.0 · reproduction-only · 2026-07-12 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.2.1 · reproduction-only · 2026-07-14 · team@tmx.info</p>
     </section>
   </main>
 </div>
