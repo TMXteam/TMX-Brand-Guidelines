@@ -1,3 +1,4 @@
+v1.6.1  2026-07-14  — Hero mark now renders in 3D; equalized the §03 on-ink/on-paper plates so both marks align (facets moved to a row below); vertically centered the three-lockup tiles.
 v1.6.0  2026-07-14  — Refreshed the 3D shield render with deeper relief (updated the 3D PNGs and the download pack) and added a §03 note that the finish only reads at large, premium sizes—ship the flat vector below that.
 v1.5.0  2026-07-14  Navigation redesign across breakpoints (safe-area/notch fix, click-to-close scrim), sun/moon theme toggle icon, click-to-copy colour swatches.
 v1.4.0  2026-07-14  — Light is now the default theme (dark stays the canonical reference); campaigns lead in light; replaced the mislabeled "app glyph" favicon lockup with an honest favicon entry plus an illustrative iOS app-icon mockup (squircle tile).
