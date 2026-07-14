@@ -342,7 +342,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.2.1 · 2026-07-14</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.3.0 · 2026-07-14</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -468,6 +468,12 @@ ol{max-width:66ch;padding-left:20px}
             </div>
           </div>
 
+          <h3>Flat &amp; 3D</h3>
+          <p class="fine" style="margin-bottom:16px">The shield ships in two finishes: the <strong>flat vector</strong> for everyday use, print, and small sizes; the <strong>3D render</strong> for premium centerpieces only.</p>
+          <div class="variants">
+            <div class="v"><img src="assets/predixa/logo/predixa-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · print &amp; small sizes</div></div>
+            <div class="v"><img src="assets/predixa/logo/predixa-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
+          </div>
           <h3>The three lockups</h3>
           <div class="variants">
             <div class="v"><img src="assets/predixa/logo/predixa-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
@@ -478,7 +484,7 @@ ol{max-width:66ch;padding-left:20px}
             <thead><tr><th>Lockup</th><th>Use it when</th></tr></thead>
             <tbody>
               <tr><td>Primary shield</td><td>The default. Navbars, ad centerpieces, anywhere the mark carries the name.</td></tr>
-              <tr><td>Globe emblem</td><td>Premium, symmetrical centerpieces where you want the dimensional globe rather than the flat mark. Dark globe on ink surfaces, light globe on paper.</td></tr>
+              <tr><td>Globe emblem</td><td>Premium, symmetrical centerpieces where you want the globe-backed emblem rather than the shield alone. Dark globe on ink surfaces, light globe on paper.</td></tr>
               <tr><td>App glyph (icon)</td><td>Favicons, app tiles, and small square slots. The shield itself, shipped as <code>favicon.svg</code> plus 16 and 32px PNGs.</td></tr>
             </tbody>
           </table></div>
@@ -708,7 +714,7 @@ ol{max-width:66ch;padding-left:20px}
       <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 11 · Assets</div>
       <h2 style="max-width:14ch">The source files.</h2>
       <p>The real payload of this kit is the downloadable pack in <code>assets/predixa/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, <code>fonts/</code>, and machine-readable <code>tokens</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, the kit's bundled webfonts, and brand tokens as CSS and JSON, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
-      <p style="margin-top:18px"><a class="btn solid" href="assets/predixa/predixa-assets.zip" download>Download the pack (zip)</a></p>
+      <p style="margin-top:18px"><a class="btn solid" href="assets/predixa/TMX-predixa-assets.zip" download>Download the pack (zip)</a></p>
       <div class="scrollx"><table>
         <thead><tr><th>File</th><th>Mark</th><th>Use</th></tr></thead>
         <tbody>
@@ -722,12 +728,12 @@ ol{max-width:66ch;padding-left:20px}
           <tr><td><code>favicon/</code> (svg, 16/32px, apple-touch)</td><td>Favicons</td><td>Browser tab / home-screen icon.</td></tr>
           <tr><td><code>fonts/</code> (Inter, Fraunces, JetBrains Mono)</td><td>Webfonts</td><td>Bundled latin woff2 so the kit renders with no network.</td></tr>
           <tr><td><code>tokens.css</code> / <code>tokens.json</code></td><td>Machine-readable tokens</td><td>Brand tokens as CSS custom properties and structured JSON: colours per theme, type, radius.</td></tr>
-          <tr><td><code>predixa-assets.zip</code></td><td>The whole pack</td><td>One download of every file above.</td></tr>
+          <tr><td><code>TMX-predixa-assets.zip</code></td><td>The whole pack</td><td>One download of every file above.</td></tr>
         </tbody>
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.2.1 · reproduction-only · 2026-07-14 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.3.0 · reproduction-only · 2026-07-14 · team@tmx.info</p>
     </section>
   </main>
 </div>

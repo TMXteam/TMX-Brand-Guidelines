@@ -34,7 +34,7 @@ usage terms. Every value is verified against the TMX design source of truth.
 | **Open the kit** | **[tmxteam.github.io/TMX-Brand-Guidelines/ecosystem ↗](https://tmxteam.github.io/TMX-Brand-Guidelines/ecosystem/partner-kit.html)** &middot; the live page (fonts and marks bundled, no network needed) |
 | **Usage policy** | [`ecosystem/usage-policy.md`](ecosystem/usage-policy.md) &middot; nominative-use and trademark terms |
 | **Marks** | [`ecosystem/assets/ecosystem/`](ecosystem/assets/ecosystem) &middot; grouped into `logo/`, `globe/`, `favicon/`, `fonts/` |
-| **One download** | [`ecosystem-assets.zip`](ecosystem/assets/ecosystem/ecosystem-assets.zip) &middot; the whole pack |
+| **One download** | [`TMX-ecosystem-assets.zip`](ecosystem/assets/ecosystem/TMX-ecosystem-assets.zip) &middot; the whole pack |
 
 ### Predixa &middot; prediction market
 
@@ -43,7 +43,7 @@ usage terms. Every value is verified against the TMX design source of truth.
 | **Open the kit** | **[tmxteam.github.io/TMX-Brand-Guidelines/predixa ↗](https://tmxteam.github.io/TMX-Brand-Guidelines/predixa/partner-kit.html)** &middot; the live page (fonts and marks bundled, no network needed) |
 | **Usage policy** | [`predixa/usage-policy.md`](predixa/usage-policy.md) &middot; nominative-use and trademark terms |
 | **Marks** | [`predixa/assets/predixa/`](predixa/assets/predixa) &middot; grouped into `logo/`, `globe/`, `favicon/`, `fonts/` |
-| **One download** | [`predixa-assets.zip`](predixa/assets/predixa/predixa-assets.zip) &middot; the whole pack |
+| **One download** | [`TMX-predixa-assets.zip`](predixa/assets/predixa/TMX-predixa-assets.zip) &middot; the whole pack |
 
 _More kits (TMX DEX) will be added here._
 
