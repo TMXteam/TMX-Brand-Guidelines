@@ -173,7 +173,7 @@ html.nav-open #navToggle span:nth-child(3){transform:translateY(-6.5px) rotate(-
 /* click-to-copy affordance on colour swatches (main grid only) — slim top band
    so an eyedropper can still sample the pure colour in the chip's lower half */
 .swatches .sw .chip{position:relative;cursor:pointer}
-.swatches .sw .chip::after{content:"Click to copy";position:absolute;inset:0 0 auto;height:45%;
+.swatches .sw .chip::after{content:"Click to copy";position:absolute;inset:-1px -1px auto;height:calc(45% + 1px);
   display:flex;align-items:center;justify-content:center;
   font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
   background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--rule-strong);
@@ -385,7 +385,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.1 · 2026-07-14</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.2 · 2026-07-14</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -777,7 +777,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.6.1 · reproduction-only · 2026-07-14 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.6.2 · reproduction-only · 2026-07-14 · team@tmx.info</p>
     </section>
   </main>
 </div>
