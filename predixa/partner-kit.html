@@ -200,16 +200,11 @@ html.nav-open #navToggle span:nth-child(3){transform:translateY(-6.5px) rotate(-
 .z-here{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:#F2F2F2;background:#0A0A0C;padding:4px 9px;border-radius:var(--r-pill)}
 .z-px.here{box-shadow:inset 0 0 0 2.5px #0A0A0C}
+/* dark: the "you are here" outline reads white, not black-on-gold */
+html[data-theme="dark"] .z-px.here{box-shadow:inset 0 0 0 2.5px #F2F2F2}
 .z-eco{background:linear-gradient(150deg,#D67341,#A54D1F)}
-.z-px{background:linear-gradient(150deg,var(--accent),var(--accent-deep))}
+.z-px{background:linear-gradient(150deg,#FFB627,#D79F1E)}
 .z-dex{background:linear-gradient(150deg,#00D4FF,#0883A8)}
-/* light: Predixa's own accent is emerald, so its zone follows the theme (not stuck on gold) */
-html[data-theme="light"] .z-px{color:#F2F2F2}
-html[data-theme="light"] .z-px .z-dom,html[data-theme="light"] .z-px .z-desc,html[data-theme="light"] .z-px .z-row{color:rgba(242,242,242,.84)}
-html[data-theme="light"] .z-px .z-row{border-top-color:rgba(242,242,242,.26)}
-html[data-theme="light"] .z-px .z-row b{color:#F2F2F2}
-html[data-theme="light"] .z-px .meter i{background:rgba(242,242,242,.88)}
-html[data-theme="light"] .z-px.here{box-shadow:inset 0 0 0 2.5px #F2F2F2}
 
 /* ---------- type specimens (lighter, not boxed) ---------- */
 .spec{padding:22px 0;border-bottom:1px solid var(--rule)}
@@ -391,7 +386,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.3 · 2026-07-14</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.4 · 2026-07-14</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -783,7 +778,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.6.3 · reproduction-only · 2026-07-14 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v1.6.4 · reproduction-only · 2026-07-14 · team@tmx.info</p>
     </section>
   </main>
 </div>
