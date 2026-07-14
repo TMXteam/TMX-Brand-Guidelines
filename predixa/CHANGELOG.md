@@ -1,3 +1,4 @@
+v1.4.0  2026-07-14  — Light is now the default theme (dark stays the canonical reference); campaigns lead in light; replaced the mislabeled "app glyph" favicon lockup with an honest favicon entry plus an illustrative iOS app-icon mockup (squircle tile).
 v1.3.0  2026-07-14  Added a §03 flat-vs-3D finish showcase and renamed the download to TMX-predixa-assets.zip.
 v1.2.1  2026-07-14  — Neutral kit-purpose framing (dropped co-branded assumption), removed the TMX Global disclaimer sentence, globe emblem now switches dark/light with theme.
 v1.2.0  2026-07-12  Added WCAG contrast ratios to colour swatches, in-kit contact/approval line, machine-readable token export (tokens.css/json).
