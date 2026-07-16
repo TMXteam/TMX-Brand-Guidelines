@@ -130,6 +130,11 @@ html[data-theme="light"] .bar{backdrop-filter:none;background:var(--bg)}
   height:34px;padding:0 16px;border-radius:var(--r-pill);cursor:pointer;transition:background .2s,border-color .2s}
 .btn:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:calc(var(--z-bar) + 1);
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  background:var(--bg);color:var(--ink);border:.5px solid var(--rule-strong);padding:10px 16px;border-radius:var(--r-pill)}
+.skip-link:focus{left:var(--pad);top:10px}
+.skip-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* icon-only control (theme toggle): square button, centred glyph */
 .btn.icon{width:34px;padding:0}
 .btn.icon svg{width:18px;height:18px;display:block}
@@ -154,6 +159,7 @@ html.nav-open #navToggle span:nth-child(3){transform:translateY(-6.5px) rotate(-
 .cover .lead{margin-top:26px;max-width:54ch}
 .cover-mark{position:relative;display:flex;justify-content:center;align-items:center;min-height:200px}
 .cover-mark img{width:min(240px,64%);height:auto;position:relative;z-index:1;filter:drop-shadow(0 18px 36px rgba(0,0,0,.32))}
+html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,20,15,.20))}
 .cover-mark::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle,color-mix(in srgb,var(--accent) 26%,transparent),transparent 68%);filter:blur(14px)}
 .fact{margin-top:clamp(44px,7vw,80px);border-top:1px solid var(--rule-strong);padding-top:26px;max-width:720px}
@@ -343,7 +349,9 @@ ol{max-width:66ch;padding-left:20px}
   .rail-grid{grid-template-columns:1fr} .rail{position:static}
   section{break-inside:avoid;border-color:#ddd} body{font-size:11pt}
   /* print is the paper field whatever the screen was in: take the whole light
-     token set, or dark's muted/faint/accent print blank on white */
+     token set, or dark's muted/faint/accent print blank on white.
+     #fff here is the one sanctioned exception to the never-pure-white rule:
+     the printer's own stock is the field, and backgrounds are stripped by default. */
   html[data-theme]{
     --bg:#fff; --ink:#16140F;
     --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
@@ -360,6 +368,7 @@ ol{max-width:66ch;padding-left:20px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#cover">Skip to content</a>
 
 <div class="bar">
   <button class="btn" id="navToggle" aria-label="Sections" aria-expanded="false" aria-controls="toc" onclick="toggleNav()"><span></span><span></span><span></span></button>
@@ -397,7 +406,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.5 · 2026-07-16</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.7.0 · 2026-07-16</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -495,6 +504,7 @@ ol{max-width:66ch;padding-left:20px}
       <div class="rail-grid" style="margin-top:0">
         <div class="rail" aria-hidden="true"></div>
         <div class="body">
+          <p class="mono" style="margin-top:2px;margin-bottom:20px">Fixed identity swatches: shown at signature value in either theme.</p>
           <div class="law">
             <div class="h"><span class="badge">Hard rule</span><span class="t">Accents stay in their lane.</span></div>
             <p>TMX Ecosystem is <strong>terracotta</strong>, in both themes. Never dress it in Predixa's gold or emerald, or DEX's cyan and jewel tones, and never let another product's colour land on an umbrella surface. Reaching for a neon glow on TMX Ecosystem is DEX's move, not ours.</p>
@@ -527,7 +537,7 @@ ol{max-width:66ch;padding-left:20px}
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · print &amp; small sizes</div></div>
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
           </div>
-          <p class="fine" style="margin-top:14px">The relief is deliberately restrained: at UI and favicon sizes the two finishes read almost identically, so the 3D render only earns its place on large, premium centerpieces. When in doubt, ship the flat vector.</p>
+          <p class="fine" style="margin-top:14px">The relief is deliberately restrained: at UI and favicon sizes the two finishes read almost identically, so the 3D render only earns its place on large, premium centerpieces. When in doubt, ship the flat vector. The 3D render is one asset for both themes: the relief is lit to sit on ink or paper unchanged. Only the globe emblem ships a per-theme pair.</p>
           <h3>The three lockups</h3>
           <div class="variants">
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
@@ -789,7 +799,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.6.5 · reproduction-only · 2026-07-16 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.7.0 · reproduction-only · 2026-07-16 · team@tmx.info</p>
     </section>
   </main>
 </div>
