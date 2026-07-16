@@ -40,8 +40,11 @@ html[data-theme="dark"], .stage.dk, .plate.dark{
   --accent:#D67341;
   --foil:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
+  /* status text: dark uses the fills as-is; light derives an ink-deepened pair for AA at label sizes */
+  --yes-ink:var(--yes); --no-ink:var(--no);
   --shadow:0 24px 60px rgba(0,0,0,.45);
   --divider:rgba(242,242,242,.28);
+  color-scheme:dark;
 }
 /* ---------- LIGHT (daylight twin) ---------- */
 html[data-theme="light"], .stage.lt, .plate.paper{
@@ -52,8 +55,10 @@ html[data-theme="light"], .stage.lt, .plate.paper{
   --accent:#A54D1F;
   --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
   --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
+  --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
   --shadow:0 14px 30px -20px rgba(22,20,15,.28);
   --divider:rgba(22,20,15,.30);
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -191,7 +196,7 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .house{border-top:1px solid var(--rule);margin-top:8px}
 .hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 0;border-bottom:1px solid var(--rule)}
 .hchip{width:44px;height:28px;border-radius:8px;flex:0 0 auto}
-.hname{font-weight:700;letter-spacing:-.01em;min-width:12ch;color:var(--ink)}
+.hname{font-weight:700;letter-spacing:-.01em;min-width:14ch;color:var(--ink)}
 .hacc{font-size:13px;color:var(--muted);margin-left:auto}
 .hyou{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--ink);padding:4px 9px;border-radius:var(--r-pill)}
 .z-eco{background:#D67341}
@@ -201,14 +206,20 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 html[data-theme="light"] .z-eco{background:#A54D1F}
 html[data-theme="light"] .z-px{background:#0E7A40}
 html[data-theme="light"] .z-dex{background:#0883A8}
+/* narrow strips: domain and accent stack under the name, left-aligned, instead of ragged flex wrap */
+@media(max-width:840px){.hdom{flex-basis:100%}.hacc{margin-left:0;flex-basis:100%}}
 
 /* ---------- type specimens (lighter, not boxed) ---------- */
 .spec{padding:22px 0;border-bottom:1px solid var(--rule)}
 .spec:first-of-type{border-top:1px solid var(--rule)}
 .spec-tag{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .specimen-display{font-size:clamp(32px,5.6vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.02;color:var(--ink)}
+/* the foil specimen keeps its clipped-gradient fill: .foil's transparent color must beat the specimen ink */
+.specimen-display.foil{color:transparent}
 
 .scrollx{overflow-x:auto;max-width:100%;margin-top:22px}
+.scrollx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
 th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500}
@@ -255,7 +266,7 @@ html[data-theme="light"] .globe-dark{display:none}
 @media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
 .card{border:1px solid var(--rule);border-radius:var(--r-card);padding:22px 24px;background:var(--surface)}
 .card h4{margin:0 0 14px;font-size:12px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase}
-.card.do h4{color:var(--yes)} .card.dont h4{color:var(--no)}
+.card.do h4{color:var(--yes-ink)} .card.dont h4{color:var(--no-ink)}
 .card ul{margin:0;padding-left:18px} .card li{color:var(--muted);margin:9px 0;font-size:14px}
 
 /* ---------- callout (kept where a box is the right affordance) ---------- */
@@ -290,8 +301,8 @@ html[data-theme="light"] .law .h .badge{color:#F6F2E8}
 .tile .stage{height:132px;display:flex;align-items:center;justify-content:center;position:relative;padding:16px;text-align:center}
 .tile .badge{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   padding:3px 8px;border-radius:var(--r-pill)}
-.tile.ok .badge{background:color-mix(in srgb,var(--yes) 20%,transparent);color:var(--yes)}
-.tile.bad .badge{background:color-mix(in srgb,var(--no) 20%,transparent);color:var(--no)}
+.tile.ok .badge{background:color-mix(in srgb,var(--yes) 20%,transparent);color:var(--yes-ink)}
+.tile.bad .badge{background:color-mix(in srgb,var(--no) 20%,transparent);color:var(--no-ink)}
 .tile .cap{padding:12px 14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
 .tile .cap b{color:var(--ink);font-weight:600}
 .stage.dk,.stage.lt{background:var(--bg);color:var(--ink)}
@@ -316,9 +327,9 @@ ol{max-width:66ch;padding-left:20px}
   nav.toc{position:fixed;top:0;left:0;right:0;height:auto;max-height:88vh;width:auto;
     border-right:none;border-bottom:1px solid var(--rule);background:var(--bg);z-index:var(--z-drawer);
     padding:calc(var(--bar-h) + 16px) 24px calc(26px + env(safe-area-inset-bottom,0px));
-    transform:translateY(-102%);transition:transform .34s var(--ease);
+    transform:translateY(-102%);visibility:hidden;transition:transform .34s var(--ease),visibility 0s .34s;
     box-shadow:0 24px 50px rgba(0,0,0,.28)}
-  html.nav-open nav.toc{transform:translateY(0)}
+  html.nav-open nav.toc{transform:translateY(0);visibility:visible;transition-delay:0s}
   .nav-scrim{display:block;position:fixed;inset:0;z-index:var(--z-scrim);
     background:rgba(10,10,12,.5);opacity:0;pointer-events:none;transition:opacity .34s var(--ease)}
   html.nav-open .nav-scrim{opacity:1;pointer-events:auto}
@@ -346,10 +357,13 @@ ol{max-width:66ch;padding-left:20px}
     --accent:#A54D1F;
     --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
     --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
+    --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
     --shadow:none; --divider:rgba(22,20,15,.30);
   }
-  /* specimens depict a fixed field; make it survive the printer's bg stripping */
-  .stage,.plate,.hchip,.sw .chip,.facet .fc{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  /* specimens depict a fixed field; make it survive the printer's bg stripping.
+     .foil, .hyou, the law badge and the solid pill also carry their own fill:
+     stripped, their text prints transparent-on-white or paper-on-white. */
+  .stage,.plate,.hchip,.sw .chip,.facet .fc,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   /* print is the paper field whatever the screen was in: house chips pin their daylight values */
   .z-eco{background:#A54D1F}.z-px{background:#0E7A40}.z-dex{background:#0883A8}
 }
@@ -398,6 +412,10 @@ ol{max-width:66ch;padding-left:20px}
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
           <p class="lead">This kit exists for one job: rendering TMX Ecosystem correctly in a campaign. It is the design spec, not a rulebook on permission. Every value here is drawn from the same source the site is built from.</p>
+          <p style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn solid" href="assets/ecosystem/TMX-ecosystem-assets.zip" download>Download everything (zip)</a>
+            <a class="btn" href="assets/ecosystem/TMX-ecosystem-essentials.zip" download>Essential marks · 4 files</a>
+          </p>
         </div>
         <div class="cover-mark">
           <img src="assets/ecosystem/logo/ecosystem-logo-3d.png" alt="The TMX Ecosystem mark in 3D relief" />
@@ -428,8 +446,8 @@ ol{max-width:66ch;padding-left:20px}
             <div class="hrow">
               <span class="hchip z-eco" aria-hidden="true"></span>
               <span class="hname">TMX Ecosystem</span>
-              <span class="hyou">You are here</span>
               <span class="hdom mono">tmx.info</span>
+              <span class="hyou">You are here</span>
               <span class="hacc">Terracotta · #D67341 dark / #A54D1F light</span>
             </div>
             <div class="hrow">
@@ -484,8 +502,8 @@ ol{max-width:66ch;padding-left:20px}
             <div class="v"><img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" /><img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
             <div class="v"><div class="app-icon" role="img" aria-label="The TMX Ecosystem mark placed in an iOS app icon (illustrative mockup)"><img class="app-icon-mark" src="assets/ecosystem/favicon/favicon.svg" alt="" /></div><div class="lb">iOS app icon · mockup</div></div>
           </div>
-          <div class="scrollx"><table>
-            <thead><tr><th>Lockup</th><th>Use it when</th></tr></thead>
+          <div class="scrollx" tabindex="0" role="region" aria-label="Lockup usage table"><table>
+            <thead><tr><th scope="col">Lockup</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
               <tr><td>Primary shield</td><td>The default. Navbars, ad centerpieces, anywhere the mark carries the name.</td></tr>
               <tr><td>Emblem</td><td>Premium, symmetrical centerpieces where you want the globe-backed emblem rather than the shield alone. Dark globe on ink surfaces, light globe on paper.</td></tr>
@@ -530,7 +548,7 @@ ol{max-width:66ch;padding-left:20px}
         <div class="rail pivot"><span class="folio">05</span><span class="kick"><span class="dot">●</span> Colour</span></div>
         <div class="body">
           <h2>One accent, <span class="foil">two settings.</span></h2>
-          <p class="lead">TMX Ecosystem owns a single chromatic accent, terracotta, and it stays terracotta in both themes. Dark uses a deeper, richer terracotta; light uses a lighter one. This is a deliberate decision, not a mechanical inversion.</p>
+          <p class="lead">TMX Ecosystem owns a single chromatic accent, terracotta, and it stays terracotta in both themes. Dark uses a brighter terracotta; light uses a deeper, richer one. This is a deliberate decision, not a mechanical inversion.</p>
 
           <div class="grouplabel">Accent · dark (canonical)</div>
           <div class="swatches">
@@ -682,8 +700,8 @@ ol{max-width:66ch;padding-left:20px}
       <h2 style="max-width:14ch">The source files.</h2>
       <p>The real payload of this kit is the downloadable pack in <code>assets/ecosystem/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, <code>fonts/</code>, and machine-readable <code>tokens</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, the kit's bundled webfonts, and brand tokens as CSS custom properties, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
       <p style="margin-top:18px"><a class="btn solid" href="assets/ecosystem/TMX-ecosystem-assets.zip" download>Download the pack (zip)</a></p>
-      <div class="scrollx"><table>
-        <thead><tr><th>File</th><th>Mark</th><th>Use</th></tr></thead>
+      <div class="scrollx" tabindex="0" role="region" aria-label="Asset files table"><table>
+        <thead><tr><th scope="col">File</th><th scope="col">Mark</th><th scope="col">Use</th></tr></thead>
         <tbody>
           <tr><td><code>logo/ecosystem-logo.svg</code></td><td>Colour shield, vector master</td><td>Default mark: navbars, lockups, ad centerpieces. The editable source.</td></tr>
           <tr><td><code>logo/ecosystem-logo-mono.svg</code></td><td>Mono-black shield, vector</td><td>One-colour use: stencil, cutout, watermark, emboss.</td></tr>
@@ -696,6 +714,7 @@ ol{max-width:66ch;padding-left:20px}
           <tr><td><code>fonts/</code> (Inter, Fraunces, JetBrains Mono)</td><td>Webfonts</td><td>Bundled latin woff2 so the kit renders with no network.</td></tr>
           <tr><td><code>tokens.css</code></td><td>Machine-readable tokens</td><td>Brand tokens as CSS custom properties: colours per theme, foil, type, radius.</td></tr>
           <tr><td><code>TMX-ecosystem-assets.zip</code></td><td>The whole pack</td><td>One download of every file above.</td></tr>
+          <tr><td><code>TMX-ecosystem-essentials.zip</code></td><td>Essential marks</td><td>Just the four marks in high quality: flat vector master, 3D render, dark and light globe masters.</td></tr>
         </tbody>
       </table></div>
       <h3>Naming &amp; manifest</h3>
@@ -756,6 +775,7 @@ secs.forEach(function(s){if(s)obs.observe(s);});
     el.setAttribute('role','button');
     el.setAttribute('tabindex','0');
     el.setAttribute('aria-label','Copy '+val);
+    el.setAttribute('aria-live','polite');
     el.title='Click to copy';
     function copy(){navigator.clipboard.writeText(val).then(function(){
       el.textContent='Copied ✓';el.classList.add('copied');
