@@ -1,11 +1,10 @@
-/* predixa brand tokens — verbatim from partner-kit.html. Drop into your stylesheet. */
+/* predixa brand tokens — the reproduction set. Drop into your stylesheet. */
 :root{
   --sans: "Inter",system-ui,-apple-system,"Helvetica Neue",sans-serif;
   --serif: "Fraunces",Georgia,serif;
   --mono: "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --r-card: 22px;
   --r-pill: 9999px;
-  --pad: clamp(20px,5vw,72px);
   --ease: cubic-bezier(.22,1,.36,1);
 }
 /* dark (canonical) */
@@ -17,17 +16,10 @@ html[data-theme="dark"]{
   --rule: rgba(242,242,242,.10);
   --rule-strong: rgba(242,242,242,.18);
   --surface: rgba(14,14,16,.55);
-  --surface-solid: #101014;
   --accent: #FFB627;
-  --accent-deep: #D79F1E;
-  --accent-mid: #E08F0F;
-  --accent-high: #FFD89A;
+  --accent-text: #D79F1E; /* accent-coloured text at small sizes */
   --foil: linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F);
-  --select: #7DF9D5;
-  --yes: #7DE0B0;
-  --no: #E07A7A;
   --shadow: 0 24px 60px rgba(0,0,0,.45);
-  --divider: rgba(242,242,242,.28);
 }
 /* light (daylight twin) */
 html[data-theme="light"]{
@@ -38,15 +30,8 @@ html[data-theme="light"]{
   --rule: rgba(22,20,15,.12);
   --rule-strong: rgba(22,20,15,.20);
   --surface: #FCFAF3;
-  --surface-solid: #FCFAF3;
   --accent: #0E7A40;
-  --accent-deep: #0A5630;
-  --accent-mid: #0C6E3A;
-  --accent-high: #2AA862;
+  --accent-text: #0A5630; /* accent-coloured text at small sizes */
   --foil: linear-gradient(135deg,#1FA85C,#0B6E39);
-  --select: #9CE1C8;
-  --yes: #1F9E57;
-  --no: #C0392B;
   --shadow: 0 14px 30px -20px rgba(22,20,15,.28);
-  --divider: rgba(22,20,15,.30);
 }

@@ -34,4 +34,3 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `logo/predixa-logo-white.png` | Solid white silhouette, reversed for dark surfaces. |
 | `logo/predixa-logo.svg` | Colour vector master, the editable source. |
 | `tokens.css` | Brand tokens as CSS custom properties (drop-in, both themes). |
-| `tokens.json` | Brand tokens as structured JSON (colours per theme, type, radius). |

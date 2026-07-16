@@ -36,8 +36,8 @@ html[data-theme="dark"], .stage.dk, .plate.dark{
   --bg:#0A0A0C; --ink:#F2F2F2;
   --muted:rgba(242,242,242,.72); --faint:rgba(242,242,242,.64);
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
-  --surface:rgba(14,14,16,.55); --surface-solid:#101014;
-  --accent:#D67341; --accent-deep:#8B3F1F; --accent-mid:#AF592D; --accent-high:#FEE5A2;
+  --surface:rgba(14,14,16,.55);
+  --accent:#D67341;
   --foil:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
   --shadow:0 24px 60px rgba(0,0,0,.45);
@@ -48,8 +48,8 @@ html[data-theme="light"], .stage.lt, .plate.paper{
   --bg:#F6F2E8; --ink:#16140F;
   --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
-  --surface:#FCFAF3; --surface-solid:#FCFAF3;
-  --accent:#A54D1F; --accent-deep:#A44A24; --accent-mid:#B6562F; --accent-high:#EBB371;
+  --surface:#FCFAF3;
+  --accent:#A54D1F;
   --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
   --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
   --shadow:0 14px 30px -20px rgba(22,20,15,.28);
@@ -190,28 +190,20 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .swatches .sw.copied .chip::after{content:"Copied ✓";opacity:1}
 .swatches .sw .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-/* ---------- full-bleed loudness band (three brands, drenched) ---------- */
-.bleed{margin:clamp(28px,4vw,42px) calc(-1 * var(--pad)) 0}
-.loud{display:grid;grid-template-columns:1fr}
-@media(min-width:720px){.loud{grid-template-columns:repeat(3,1fr)}}
-.loud-zone{padding:clamp(28px,3.3vw,44px) clamp(22px,3vw,38px);min-height:258px;
-  display:flex;flex-direction:column;justify-content:space-between;color:#0A0A0C;position:relative}
-.loud-zone .z-top{display:flex;flex-direction:column;gap:5px}
-.z-name{font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-.z-dom{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:rgba(10,10,12,.72)}
-.z-desc{font-size:13px;color:rgba(10,10,12,.82);max-width:28ch;margin-top:12px;line-height:1.5}
-.meter{display:flex;align-items:flex-end;gap:6px;height:32px;margin-top:16px}
-.meter i{flex:0 0 11px;background:rgba(10,10,12,.8);border-radius:3px 3px 0 0;display:block;min-height:3px}
-.z-rows{margin-top:14px}
-.z-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:9px 0;border-top:1px solid rgba(10,10,12,.2);color:rgba(10,10,12,.72)}
-.z-row b{color:#0A0A0C;font-weight:700}
-.z-here{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:#F2F2F2;background:#0A0A0C;padding:4px 9px;border-radius:var(--r-pill)}
-.z-eco.here{box-shadow:inset 0 0 0 2.5px #0A0A0C}
-html[data-theme="dark"] .z-eco.here{box-shadow:inset 0 0 0 2.5px #F2F2F2}
-.z-eco{background:linear-gradient(150deg,#D67341,#A54D1F)}
-.z-px{background:linear-gradient(150deg,#FFB627,#D79F1E)}
-.z-dex{background:linear-gradient(150deg,#00D4FF,#0883A8)}
+/* ---------- house strip (three brands, one row each) ---------- */
+.house{border-top:1px solid var(--rule);margin-top:8px}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 0;border-bottom:1px solid var(--rule)}
+.hchip{width:44px;height:28px;border-radius:8px;flex:0 0 auto}
+.hname{font-weight:700;letter-spacing:-.01em;min-width:12ch;color:var(--ink)}
+.hacc{font-size:13px;color:var(--muted);margin-left:auto}
+.hyou{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--ink);padding:4px 9px;border-radius:var(--r-pill)}
+.z-eco{background:#D67341}
+.z-px{background:#FFB627}
+.z-dex{background:#00D4FF}
+/* the chips follow the theme: daylight counterparts on paper, per each brand's own accent rules */
+html[data-theme="light"] .z-eco{background:#A54D1F}
+html[data-theme="light"] .z-px{background:#0E7A40}
+html[data-theme="light"] .z-dex{background:#0883A8}
 
 /* ---------- type specimens (lighter, not boxed) ---------- */
 .spec{padding:22px 0;border-bottom:1px solid var(--rule)}
@@ -225,9 +217,6 @@ th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--rule);vert
 th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500}
 td{color:var(--muted)}td:first-child{color:var(--ink);font-weight:500}
 code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(--ink) 7%,transparent);padding:2px 6px;border-radius:5px;color:var(--ink)}
-pre{font-family:var(--mono);font-size:12.5px;line-height:1.7;background:var(--surface-solid);border:1px solid var(--rule);
-  border-radius:16px;padding:22px;overflow:auto;color:var(--ink);margin-top:8px}
-pre .c{color:var(--faint)}
 
 /* ---------- logo feature (asymmetric) ---------- */
 .logo-feature{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
@@ -356,14 +345,16 @@ ol{max-width:66ch;padding-left:20px}
     --bg:#fff; --ink:#16140F;
     --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
     --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
-    --surface:#FCFAF3; --surface-solid:#FCFAF3;
-    --accent:#A54D1F; --accent-deep:#A44A24; --accent-mid:#B6562F; --accent-high:#EBB371;
+    --surface:#FCFAF3;
+    --accent:#A54D1F;
     --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
     --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
     --shadow:none; --divider:rgba(22,20,15,.30);
   }
   /* specimens depict a fixed field; make it survive the printer's bg stripping */
-  .stage,.plate,.loud-zone,.sw .chip,.facet .fc{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .stage,.plate,.hchip,.sw .chip,.facet .fc{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  /* print is the paper field whatever the screen was in: house chips pin their daylight values */
+  .z-eco{background:#A54D1F}.z-px{background:#0E7A40}.z-dex{background:#0883A8}
 }
 </style>
 </head>
@@ -398,15 +389,14 @@ ol{max-width:66ch;padding-left:20px}
     <a href="#type"><span class="n">06</span>Typography</a>
     <a href="#cobrand"><span class="n">07</span>Co-brand lockups</a>
     <a href="#adlaws"><span class="n">08</span>Ad laws</a>
-    <a href="#themes"><span class="n">09</span>Light / dark laws</a>
-    <a href="#dodont"><span class="n">10</span>Do / Don't</a>
-    <a href="#assets"><span class="n">11</span>Assets</a>
+    <a href="#dodont"><span class="n">09</span>Do / Don't</a>
+    <a href="#assets"><span class="n">10</span>Assets</a>
   </nav>
 
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.7.0 · 2026-07-16</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.0.0 · 2026-07-16</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -426,21 +416,8 @@ ol{max-width:66ch;padding-left:20px}
     <section id="use" class="breather">
       <div class="kick" style="margin-bottom:26px"><span class="dot">●</span> 01 · How to use this kit</div>
       <h2>Reproduction, not approval.</h2>
-      <p class="lead">You are reproducing <strong>TMX Ecosystem</strong>, the TMX umbrella site, at <strong>tmx.info</strong>. This kit tells you how to render the brand so it reads as ours: the mark, the colour, the type, the co-brand lockup, and the hard rules that protect it in a paid placement.</p>
-      <div class="rail-grid" style="margin-top:26px">
-        <div></div>
-        <div class="body">
-          <h3>What this kit is (and isn't)</h3>
-          <ul class="plain">
-            <li><strong>It's a reproduction spec.</strong> How to place the mark, which accent per theme, what a co-brand lockup looks like, what a display ad may and may not do.</li>
-            <li><strong>It isn't a permission form.</strong> Whether you may run a placement, and any sign-off, is agreed with your TMX contact, not decided here.</li>
-            <li><strong>Every value traces to source.</strong> Hex, type, and spacing come from TMX Ecosystem's own design tokens; don't substitute values from memory or a screenshot.</li>
-          </ul>
-          <h3>How to read it</h3>
-          <p>Sections marked <span class="mono" style="color:var(--accent)">Hard rule</span> are non-negotiable; breaking one makes the work off-brand or, in an ad, a scam risk. Everything else is the spec to match. If your campaign is actually about <strong>Predixa</strong> or <strong>TMX DEX</strong>, stop here and use that product's kit; §02 shows how to tell the three apart.</p>
-          <p>Questions, or want a layout signed off before it ships? Email <a href="mailto:team@tmx.info">team@tmx.info</a>.</p>
-        </div>
-      </div>
+      <p class="lead">You are reproducing <strong>TMX Ecosystem</strong>, the TMX umbrella site, at <strong>tmx.info</strong>: the mark, the colour, the type, the co-brand lockup. Sections marked <span class="mono" style="color:var(--accent)">Hard rule</span> are non-negotiable; everything else is the spec to match.</p>
+      <p>Whether you may run a placement, and the full usage terms, live in the <a href="usage-policy.md">usage &amp; trademark policy</a>. Questions, or a layout to sign off? <a href="mailto:team@tmx.info">team@tmx.info</a>.</p>
     </section>
 
     <!-- 02 WHICH TMX -->
@@ -449,62 +426,28 @@ ol{max-width:66ch;padding-left:20px}
         <div class="rail"><span class="folio">02</span><span class="kick"><span class="dot">●</span> Which TMX is this</span></div>
         <div class="body">
           <h2>Three brands, one house.</h2>
-          <p class="lead">TMX is one ecosystem with a deliberate volume dial. The umbrella, TMX Ecosystem, is quietest; Predixa sits in the middle; TMX DEX is loudest. Each owns its accent inside its own routes and nowhere else. Reproduce TMX Ecosystem at its own volume; don't borrow another product's colour to make it louder or quieter.</p>
-        </div>
-      </div>
-
-      <div class="bleed">
-        <div class="loud">
-          <div class="loud-zone z-eco here">
-            <span class="z-here">You are here</span>
-            <div class="z-top">
-              <div class="z-name">TMX Ecosystem</div>
-              <div class="z-dom">tmx.info</div>
-              <div class="z-desc">Quietest. Terracotta only (#D67341 → #A54D1F).</div>
+          <p class="lead">TMX is one house with three products, and each product owns one accent inside its own surfaces. This kit renders <strong>TMX Ecosystem</strong>; if your campaign is about Predixa or TMX DEX, stop here and use that product's kit.</p>
+          <div class="house">
+            <div class="hrow">
+              <span class="hchip z-eco" aria-hidden="true"></span>
+              <span class="hname">TMX Ecosystem</span>
+              <span class="hyou">You are here</span>
+              <span class="hdom mono">tmx.info</span>
+              <span class="hacc">Terracotta · #D67341 dark / #A54D1F light</span>
             </div>
-            <div>
-              <div class="meter" aria-hidden="true"><i style="height:34%"></i><i style="height:20%"></i><i style="height:10%"></i></div>
-              <div class="z-rows">
-                <div class="z-row"><span>Loudness</span><b>Quietest</b></div>
-                <div class="z-row"><span>Signature</span><b>Editorial calm</b></div>
-              </div>
+            <div class="hrow">
+              <span class="hchip z-px" aria-hidden="true"></span>
+              <span class="hname">Predixa</span>
+              <span class="hdom mono">predixa.xyz</span>
+              <span class="hacc">Gold by night, emerald by day</span>
             </div>
-          </div>
-          <div class="loud-zone z-px">
-            <div class="z-top">
-              <div class="z-name">Predixa</div>
-              <div class="z-dom">predixa.xyz</div>
-              <div class="z-desc">Mid. Gold by night, emerald by day.</div>
-            </div>
-            <div>
-              <div class="meter" aria-hidden="true"><i style="height:52%"></i><i style="height:74%"></i><i style="height:44%"></i></div>
-              <div class="z-rows">
-                <div class="z-row"><span>Loudness</span><b>Mid</b></div>
-                <div class="z-row"><span>Signature</span><b>Two-sided shield</b></div>
-              </div>
+            <div class="hrow">
+              <span class="hchip z-dex" aria-hidden="true"></span>
+              <span class="hname">TMX DEX</span>
+              <span class="hdom mono">tribe-dex.com</span>
+              <span class="hacc">Cyan + jewel tones</span>
             </div>
           </div>
-          <div class="loud-zone z-dex">
-            <div class="z-top">
-              <div class="z-name">TMX DEX</div>
-              <div class="z-dom">tribe-dex.com</div>
-              <div class="z-desc">Loudest. Cyan, plus a jewel palette (#00D4FF → #0883A8).</div>
-            </div>
-            <div>
-              <div class="meter" aria-hidden="true"><i style="height:66%"></i><i style="height:96%"></i><i style="height:80%"></i></div>
-              <div class="z-rows">
-                <div class="z-row"><span>Loudness</span><b>Loudest</b></div>
-                <div class="z-row"><span>Signature</span><b>Halftone globe + neon</b></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rail-grid" style="margin-top:0">
-        <div class="rail" aria-hidden="true"></div>
-        <div class="body">
-          <p class="mono" style="margin-top:2px;margin-bottom:20px">Fixed identity swatches: shown at signature value in either theme.</p>
           <div class="law">
             <div class="h"><span class="badge">Hard rule</span><span class="t">Accents stay in their lane.</span></div>
             <p>TMX Ecosystem is <strong>terracotta</strong>, in both themes. Never dress it in Predixa's gold or emerald, or DEX's cyan and jewel tones, and never let another product's colour land on an umbrella surface. Reaching for a neon glow on TMX Ecosystem is DEX's move, not ours.</p>
@@ -594,19 +537,15 @@ ol{max-width:66ch;padding-left:20px}
 
           <div class="grouplabel">Accent · dark (canonical)</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#D67341"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#D67341</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause. 6:1 on ink (AA).</div></div>
-            <div class="sw"><div class="chip" style="background:#AF592D"></div><div class="nm">Mid Terracotta</div><div class="hex">#AF592D</div><div class="use">Foil-gradient low stop. Never a flat fill.</div></div>
-            <div class="sw"><div class="chip" style="background:#8B3F1F"></div><div class="nm">Deep Terracotta</div><div class="hex">#8B3F1F</div><div class="use">Deepest shade. Hovers, borders. Not for small text on ink (2.7:1); for small accent text use the accent (6:1, AA).</div></div>
-            <div class="sw"><div class="chip" style="background:#FEE5A2"></div><div class="nm">Warm Highlight</div><div class="hex">#FEE5A2</div><div class="use">Foil-gradient high stop.</div></div>
+            <div class="sw"><div class="chip" style="background:#D67341"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#D67341</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause, and small accent text. 6:1 on ink (AA).</div></div>
           </div>
 
           <div class="grouplabel">Accent · light (daylight)</div>
           <div class="swatches">
             <div class="sw"><div class="chip" style="background:#A54D1F"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#A54D1F</div><div class="use">The daylight accent. Pills, live dot, the single foil clause. 5.1:1 on paper (AA).</div></div>
             <div class="sw"><div class="chip" style="background:#A44A24"></div><div class="nm">Deep Terracotta</div><div class="hex">#A44A24</div><div class="use">Accent text at small sizes (stronger contrast). 5.2:1 on paper (AA).</div></div>
-            <div class="sw"><div class="chip" style="background:#B6562F"></div><div class="nm">Mid Terracotta</div><div class="hex">#B6562F</div><div class="use">Foil-gradient low stop in light.</div></div>
-            <div class="sw"><div class="chip" style="background:#EBB371"></div><div class="nm">Warm Highlight</div><div class="hex">#EBB371</div><div class="use">Fill bars, foil highlight.</div></div>
           </div>
+          <p class="fine" style="margin-top:18px">The foil gradient's remaining stops ship in <code>tokens.css</code> (<code>--foil</code>); the foil exists for the single italic clause and the one display numeral, nothing else.</p>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
@@ -620,6 +559,7 @@ ol{max-width:66ch;padding-left:20px}
             <div class="h"><span class="badge">Hard rule</span><span class="t">Terracotta is the only accent.</span></div>
             <p>Terracotta is TMX Ecosystem's only accent, on both fields. No neon, gold, cyan, jewel-tone, or glow effect may appear on an umbrella surface. One accent per surface: no stacked colours, no rainbow data-viz. The foil gradient is reserved for the single italic clause and the one display numeral; never on body copy or buttons.</p>
           </div>
+          <p class="fine" style="margin-top:22px">Two themes, one identity: reproduce whichever field your placement sits in (campaigns lead in light, §08), never a mechanical inversion of the other. And never pure <code>#000</code> or <code>#FFF</code>.</p>
         </div>
       </div>
     </section>
@@ -645,16 +585,6 @@ ol{max-width:66ch;padding-left:20px}
             <div class="mono" style="font-size:12.5px;color:var(--ink)">● &nbsp;TMX Ecosystem · 02 / 08 &nbsp;·&nbsp; In development, Q3 2026</div>
           </div>
 
-          <div class="scrollx"><table>
-            <thead><tr><th>Role</th><th>Family / weight</th><th>Size</th><th>Tracking / leading</th></tr></thead>
-            <tbody>
-              <tr><td>Display</td><td>Inter 700</td><td>clamp(40px, 7vw, 84px)</td><td>−0.045em / 1.01</td></tr>
-              <tr><td>Display emphasis</td><td>Fraunces italic 500 (foil)</td><td>matches display</td><td>−0.04em / 1.02</td></tr>
-              <tr><td>Section</td><td>Inter 700</td><td>clamp(28px, 4.4vw, 48px)</td><td>−0.03em / 1.04</td></tr>
-              <tr><td>Body</td><td>Inter 400</td><td>14–19px</td><td>normal / 1.6</td></tr>
-              <tr><td>Label / kicker</td><td>JetBrains Mono 500</td><td>11px floor</td><td>0.22em / 1.3</td></tr>
-            </tbody>
-          </table></div>
           <div class="callout">
             <div class="mono">Type rules</div>
             <ul style="color:var(--ink)">
@@ -705,46 +635,17 @@ ol{max-width:66ch;padding-left:20px}
 
           <h3>The rest of the ad spec</h3>
           <ul class="plain">
-            <li><strong>Lead in light.</strong> Campaigns default to warm paper; reach for the dark frame only when the placement itself is dark. Standing apart from a dark-by-default category is the point.</li>
-            <li><strong>Accent by theme.</strong> Terracotta leads on both dark and light. One accent per frame.</li>
-            <li><strong>Frost is fine; neon is not.</strong> TMX Ecosystem may use frosted glass on data panels; it never glows. Save the neon for DEX.</li>
+            <li><strong>Lead in light.</strong> Campaigns default to warm paper, terracotta leading on both fields, one accent per frame; reach for the dark frame only when the placement itself is dark.</li>
             <li><strong>The CTA is a terracotta <code>tmx.info</code> pill.</strong> The real domain, spelled out.</li>
-            <li><strong>One Fraunces foil clause per frame,</strong> a tiny mono risk line, the mark as the calm anchor. No symmetric text-on-both-sides banners.</li>
-            <li><strong>Don't invent figures</strong> and <strong>don't name a competitor.</strong> Any number must be true, current, and sourced from the live product; if it can't be sourced, cut it.</li>          </ul>
+            <li><strong>Don't invent figures</strong> and <strong>don't name a competitor.</strong> Any number must be true, current, and sourced from the live product; if it can't be sourced, cut it.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- 09 LIGHT/DARK LAWS -->
-    <section id="themes">
-      <div class="rail-grid">
-        <div class="rail"><span class="folio">09</span><span class="kick"><span class="dot">●</span> Light / dark laws</span></div>
-        <div class="body">
-          <h2>Light by default. Dark by reference.</h2>
-          <p>Light is the default. TMX presents in warm paper, and campaigns lead in light: in a category that defaults to dark, daylight is how the brand stands apart. Dark is the canonical reference, the screenshot-locked identity light is designed against, reproduced wherever the surface or partner is dark. Neither theme is an inversion of the other; reproduce whichever your surface is in, and keep the devices that belong to each.</p>
-          <div class="scrollx"><table>
-            <thead><tr><th></th><th>Dark (canonical)</th><th>Light (default)</th></tr></thead>
-            <tbody>
-              <tr><td>Role</td><td>Canonical reference (locked)</td><td><strong>Default</strong> · leads campaigns</td></tr>
-              <tr><td>Field</td><td><code>#0A0A0C</code> ink</td><td><code>#F6F2E8</code> warm paper</td></tr>
-              <tr><td>Accent</td><td>Terracotta <code>#D67341</code></td><td>Terracotta <code>#A54D1F</code></td></tr>
-              <tr><td>Depth</td><td>Frost + accent halo</td><td>Soft shadow + hairline borders</td></tr>
-              <tr><td>Glow / backdrop-filter</td><td>Allowed on data panels</td><td>Forbidden: none on paper</td></tr>
-              <tr><td>Up / down candle fill</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td></tr>
-              <tr><td>Up / down status text</td><td><code>#7DE0B0</code> / <code>#E07A7A</code></td><td><code>#1F9E57</code> / <code>#C0392B</code></td></tr>
-            </tbody>
-          </table></div>
-          <p class="fine" style="margin-top:14px">On paper, the status <em>text</em> pair measures: down <code>#C0392B</code> at 4.9:1 (AA), up <code>#1F9E57</code> at 3.1:1 (large text only).</p>
-          <div class="callout">
-            <div class="mono">The invariant</div>
-            <p style="color:var(--ink)">Off-black on dark, off-white on paper, <strong>always</strong>. Never <code>#000</code>, never <code>#FFF</code>. Status fills are constant across themes; only the status <em>text</em> colour swaps to hold AA contrast on paper.</p>
-          </div>        </div>
-      </div>
-    </section>
-
-    <!-- 10 DO / DONT -->
+    <!-- 09 DO / DONT -->
     <section id="dodont">
-      <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 10 · Do / Don't gallery</div>
+      <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 09 · Do / Don't gallery</div>
       <h2 style="max-width:16ch">The rules, shown.</h2>
       <p>The laws above, shown rather than asserted. Each pair puts the wrong move beside the right one, in the field it applies to.</p>
       <div class="gallery">
@@ -775,11 +676,11 @@ ol{max-width:66ch;padding-left:20px}
       </div>
     </section>
 
-    <!-- 11 ASSETS -->
+    <!-- 10 ASSETS -->
     <section id="assets">
-      <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 11 · Assets</div>
+      <div class="kick" style="margin-bottom:22px"><span class="dot">●</span> 10 · Assets</div>
       <h2 style="max-width:14ch">The source files.</h2>
-      <p>The real payload of this kit is the downloadable pack in <code>assets/ecosystem/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, <code>fonts/</code>, and machine-readable <code>tokens</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, the kit's bundled webfonts, and brand tokens as CSS and JSON, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
+      <p>The real payload of this kit is the downloadable pack in <code>assets/ecosystem/</code>, grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, <code>fonts/</code>, and machine-readable <code>tokens</code>: two SVG masters (colour and mono), PNG exports at 256/512/1024, the 3D render, dark and light globe emblems, favicons, the kit's bundled webfonts, and brand tokens as CSS custom properties, all in one zip. They are the canonical exports; don't redraw or re-trace them. If a value here ever disagrees with the live brand source, the source wins.</p>
       <p style="margin-top:18px"><a class="btn solid" href="assets/ecosystem/TMX-ecosystem-assets.zip" download>Download the pack (zip)</a></p>
       <div class="scrollx"><table>
         <thead><tr><th>File</th><th>Mark</th><th>Use</th></tr></thead>
@@ -793,13 +694,13 @@ ol{max-width:66ch;padding-left:20px}
           <tr><td><code>logo/ecosystem-logo-white.png</code> / <code>logo/ecosystem-logo-black.png</code></td><td>Reversed / silhouette</td><td>White for dark surfaces; black stencil / cutout.</td></tr>
           <tr><td><code>favicon/</code> (svg, 16/32px, apple-touch)</td><td>Favicons</td><td>Browser tab / home-screen icon.</td></tr>
           <tr><td><code>fonts/</code> (Inter, Fraunces, JetBrains Mono)</td><td>Webfonts</td><td>Bundled latin woff2 so the kit renders with no network.</td></tr>
-          <tr><td><code>tokens.css</code> / <code>tokens.json</code></td><td>Machine-readable tokens</td><td>Brand tokens as CSS custom properties and structured JSON: colours per theme, type, radius.</td></tr>
+          <tr><td><code>tokens.css</code></td><td>Machine-readable tokens</td><td>Brand tokens as CSS custom properties: colours per theme, foil, type, radius.</td></tr>
           <tr><td><code>TMX-ecosystem-assets.zip</code></td><td>The whole pack</td><td>One download of every file above.</td></tr>
         </tbody>
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.7.0 · reproduction-only · 2026-07-16 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v2.0.0 · reproduction-only · 2026-07-16 · team@tmx.info</p>
     </section>
   </main>
 </div>
