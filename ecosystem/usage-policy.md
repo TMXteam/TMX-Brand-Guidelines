@@ -1,6 +1,6 @@
 # TMX Ecosystem: Brand Usage & Trademark Policy
 
-Version 1.6.4 · 2026-07-14 · Not legal advice.
+Version 1.7.0 · 2026-07-16 · Not legal advice.
 
 ## You may
 

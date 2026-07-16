@@ -30,8 +30,9 @@
   /* semantic depth scale (page < scrim < drawer < bar) */
   --z-scrim:30; --z-drawer:40; --z-bar:50;
 }
+/* a theme sets the page's field; a specimen (.stage/.plate) pins the field it depicts, so its subtree never inherits the page's palette */
 /* ---------- DARK (canonical) ---------- */
-html[data-theme="dark"]{
+html[data-theme="dark"], .stage.dk, .plate.dark{
   --bg:#0A0A0C; --ink:#F2F2F2;
   --muted:rgba(242,242,242,.72); --faint:rgba(242,242,242,.64);
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
@@ -43,7 +44,7 @@ html[data-theme="dark"]{
   --divider:rgba(242,242,242,.28);
 }
 /* ---------- LIGHT (daylight twin) ---------- */
-html[data-theme="light"]{
+html[data-theme="light"], .stage.lt, .plate.paper{
   --bg:#F6F2E8; --ink:#16140F;
   --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
@@ -121,6 +122,7 @@ em{font-style:italic}
 .bar{position:sticky;top:0;z-index:var(--z-bar);display:flex;align-items:center;gap:10px;
   padding:var(--bar-pad-top) var(--pad) 12px;background:color-mix(in srgb,var(--bg) 82%,transparent);
   backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+html[data-theme="light"] .bar{backdrop-filter:none;background:var(--bg)}
 .bar .tag{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-right:auto}
 .btn{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
@@ -128,6 +130,11 @@ em{font-style:italic}
   height:34px;padding:0 16px;border-radius:var(--r-pill);cursor:pointer;transition:background .2s,border-color .2s}
 .btn:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:calc(var(--z-bar) + 1);
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;
+  background:var(--bg);color:var(--ink);border:.5px solid var(--rule-strong);padding:10px 16px;border-radius:var(--r-pill)}
+.skip-link:focus{left:var(--pad);top:10px}
+.skip-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* icon-only control (theme toggle): square button, centred glyph */
 .btn.icon{width:34px;padding:0}
 .btn.icon svg{width:18px;height:18px;display:block}
@@ -152,6 +159,7 @@ html.nav-open #navToggle span:nth-child(3){transform:translateY(-6.5px) rotate(-
 .cover .lead{margin-top:26px;max-width:54ch}
 .cover-mark{position:relative;display:flex;justify-content:center;align-items:center;min-height:200px}
 .cover-mark img{width:min(240px,64%);height:auto;position:relative;z-index:1;filter:drop-shadow(0 18px 36px rgba(0,0,0,.32))}
+html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,20,15,.20))}
 .cover-mark::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle,color-mix(in srgb,var(--accent) 26%,transparent),transparent 68%);filter:blur(14px)}
 .fact{margin-top:clamp(44px,7vw,80px);border-top:1px solid var(--rule-strong);padding-top:26px;max-width:720px}
@@ -226,10 +234,8 @@ pre .c{color:var(--faint)}
 @media(min-width:760px){.logo-feature{grid-template-columns:1.4fr 1fr}}
 .plate{border:1px solid var(--rule);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;position:relative;min-height:230px;padding:30px}
 .plate img{height:auto;max-height:120px;max-width:80%}
-.plate.dark{background:#0A0A0C}
-.plate.paper{background:#F6F2E8}
-.plate .cap{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.plate.dark .cap{color:#F2F2F2;opacity:.7}.plate.paper .cap{color:#16140F;opacity:.7}
+.plate.dark,.plate.paper{background:var(--bg);color:var(--ink)}
+.plate .cap{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
 .logo-side{display:flex;flex-direction:column;gap:16px}
 .plate.sm{min-height:150px}.plate.sm img{max-height:92px}
 .facets{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -302,8 +308,7 @@ html[data-theme="light"] .law .h .badge{color:#F6F2E8}
 .tile.bad .badge{background:color-mix(in srgb,var(--no) 20%,transparent);color:var(--no)}
 .tile .cap{padding:12px 14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
 .tile .cap b{color:var(--ink);font-weight:600}
-.stage.dk{background:#0A0A0C;color:#F2F2F2}
-.stage.lt{background:#F6F2E8;color:#16140F}
+.stage.dk,.stage.lt{background:var(--bg);color:var(--ink)}
 .ad-shield{height:42px;width:auto;display:block;margin:0 auto 10px}
 .ad-pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:5px 11px;border-radius:var(--r-pill);
   background:#D67341;color:#0A0A0C}
@@ -343,11 +348,27 @@ ol{max-width:66ch;padding-left:20px}
   .bar,nav.toc{display:none} .shell{grid-template-columns:1fr}
   .rail-grid{grid-template-columns:1fr} .rail{position:static}
   section{break-inside:avoid;border-color:#ddd} body{font-size:11pt}
-  html[data-theme]{--bg:#fff;--ink:#111}
+  /* print is the paper field whatever the screen was in: take the whole light
+     token set, or dark's muted/faint/accent print blank on white.
+     #fff here is the one sanctioned exception to the never-pure-white rule:
+     the printer's own stock is the field, and backgrounds are stripped by default. */
+  html[data-theme]{
+    --bg:#fff; --ink:#16140F;
+    --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
+    --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
+    --surface:#FCFAF3; --surface-solid:#FCFAF3;
+    --accent:#A54D1F; --accent-deep:#A44A24; --accent-mid:#B6562F; --accent-high:#EBB371;
+    --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
+    --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
+    --shadow:none; --divider:rgba(22,20,15,.30);
+  }
+  /* specimens depict a fixed field; make it survive the printer's bg stripping */
+  .stage,.plate,.loud-zone,.sw .chip,.facet .fc{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#cover">Skip to content</a>
 
 <div class="bar">
   <button class="btn" id="navToggle" aria-label="Sections" aria-expanded="false" aria-controls="toc" onclick="toggleNav()"><span></span><span></span><span></span></button>
@@ -385,7 +406,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.6.4 · 2026-07-14</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v1.7.0 · 2026-07-16</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -483,6 +504,7 @@ ol{max-width:66ch;padding-left:20px}
       <div class="rail-grid" style="margin-top:0">
         <div class="rail" aria-hidden="true"></div>
         <div class="body">
+          <p class="mono" style="margin-top:2px;margin-bottom:20px">Fixed identity swatches: shown at signature value in either theme.</p>
           <div class="law">
             <div class="h"><span class="badge">Hard rule</span><span class="t">Accents stay in their lane.</span></div>
             <p>TMX Ecosystem is <strong>terracotta</strong>, in both themes. Never dress it in Predixa's gold or emerald, or DEX's cyan and jewel tones, and never let another product's colour land on an umbrella surface. Reaching for a neon glow on TMX Ecosystem is DEX's move, not ours.</p>
@@ -515,7 +537,7 @@ ol{max-width:66ch;padding-left:20px}
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · print &amp; small sizes</div></div>
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
           </div>
-          <p class="fine" style="margin-top:14px">The relief is deliberately restrained: at UI and favicon sizes the two finishes read almost identically, so the 3D render only earns its place on large, premium centerpieces. When in doubt, ship the flat vector.</p>
+          <p class="fine" style="margin-top:14px">The relief is deliberately restrained: at UI and favicon sizes the two finishes read almost identically, so the 3D render only earns its place on large, premium centerpieces. When in doubt, ship the flat vector. The 3D render is one asset for both themes: the relief is lit to sit on ink or paper unchanged. Only the globe emblem ships a per-theme pair.</p>
           <h3>The three lockups</h3>
           <div class="variants">
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
@@ -777,7 +799,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>Files are grouped into <code>logo/</code>, <code>globe/</code>, <code>favicon/</code>, and <code>fonts/</code>. The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.6.4 · reproduction-only · 2026-07-14 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v1.7.0 · reproduction-only · 2026-07-16 · team@tmx.info</p>
     </section>
   </main>
 </div>
