@@ -178,17 +178,14 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .sw .nm{font-size:13px;font-weight:600;color:var(--ink);margin-top:11px}
 .sw .hex{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 .sw .use{font-size:11.5px;color:var(--faint);margin-top:8px;line-height:1.5}
-/* click-to-copy affordance on colour swatches (main grid only) — slim top band
-   so an eyedropper can still sample the pure colour in the chip's lower half */
-.swatches .sw .chip{position:relative;cursor:pointer}
-.swatches .sw .chip::after{content:"Click to copy";position:absolute;inset:-1px -1px auto;height:calc(45% + 1px);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
-  background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--rule-strong);
-  border-radius:12px 12px 0 0;opacity:0;transition:opacity .18s var(--ease)}
-.swatches .sw .chip:hover::after,.swatches .sw .chip:focus-visible::after{opacity:1}
-.swatches .sw.copied .chip::after{content:"Copied ✓";opacity:1}
-.swatches .sw .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* click-to-copy on the value lines: hex and rgb copy separately */
+.sw .hex[role="button"]{cursor:pointer;width:max-content;max-width:100%;border-bottom:1px dashed transparent;transition:color .18s var(--ease),border-color .18s var(--ease)}
+.sw .hex[role="button"]:hover{color:var(--ink);border-bottom-color:var(--rule-strong)}
+.sw .hex[role="button"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.sw .hex.copied,.sw .hex.copied:hover{color:var(--accent);border-bottom-color:transparent;text-transform:none}
+.sw .rgb{text-transform:none;margin-top:2px}
+.sw .foil-val{text-transform:none;overflow-wrap:anywhere}
+.swatches.foils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 
 /* ---------- house strip (three brands, one row each) ---------- */
 .house{border-top:1px solid var(--rule);margin-top:8px}
@@ -547,7 +544,11 @@ ol{max-width:66ch;padding-left:20px}
             <div class="sw"><div class="chip" style="background:#0E7A40"></div><div class="nm">Predixa Emerald</div><div class="hex">#0E7A40</div><div class="use">The daylight accent. Pills, live dot, the single foil clause. 4.8:1 on paper (AA).</div></div>
             <div class="sw"><div class="chip" style="background:#0A5630"></div><div class="nm">Deep Emerald</div><div class="hex">#0A5630</div><div class="use">Accent text at small sizes (stronger contrast). 7.9:1 on paper (AAA).</div></div>
           </div>
-          <p class="fine" style="margin-top:18px">The foil gradient's remaining stops ship in <code>tokens.css</code> (<code>--foil</code>); the foil exists for the single italic clause and the one display numeral, nothing else.</p>
+          <div class="grouplabel">Foil gradient · the italic clause</div>
+          <div class="swatches foils">
+            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)"></div><div class="nm">Foil · dark</div><div class="hex foil-val">linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)</div><div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div></div>
+            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#1FA85C,#0B6E39)"></div><div class="nm">Foil · light</div><div class="hex foil-val">linear-gradient(135deg,#1FA85C,#0B6E39)</div><div class="use">The emerald ramp of the same device, on paper.</div></div>
+          </div>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
@@ -738,21 +739,34 @@ var obs=new IntersectionObserver(function(es){
 },{rootMargin:'-45% 0px -50% 0px'});
 secs.forEach(function(s){if(s)obs.observe(s);});
 
-/* click-to-copy on colour swatches (main grid only) */
-// ponytail: one delegated pass over .swatches .sw, copies the row's .hex text; no per-swatch markup
+/* hex + rgb per swatch, each value copyable on its own */
+// ponytail: rgb derived from the hex in one pass; no per-swatch markup
 [].slice.call(document.querySelectorAll('.swatches .sw')).forEach(function(sw){
-  var chip=sw.querySelector('.chip'), hexEl=sw.querySelector('.hex');
-  if(!chip||!hexEl)return;
+  var hexEl=sw.querySelector('.hex');
+  if(!hexEl)return;
   var hex=hexEl.textContent.trim();
-  chip.setAttribute('role','button');
-  chip.setAttribute('tabindex','0');
-  chip.setAttribute('aria-label','Copy '+hex);
-  function copy(){navigator.clipboard.writeText(hex).then(function(){
-    sw.classList.add('copied');
-    setTimeout(function(){sw.classList.remove('copied');},1200);
-  });}
-  chip.addEventListener('click',copy);
-  chip.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();copy();}});
+  var targets=[hexEl];
+  if(/^#[0-9A-Fa-f]{6}$/.test(hex)){
+    var n=parseInt(hex.slice(1),16);
+    var rgbEl=document.createElement('div');
+    rgbEl.className='hex rgb';
+    rgbEl.textContent='rgb('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+')';
+    hexEl.insertAdjacentElement('afterend',rgbEl);
+    targets.push(rgbEl);
+  }
+  targets.forEach(function(el){
+    var val=el.textContent;
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label','Copy '+val);
+    el.title='Click to copy';
+    function copy(){navigator.clipboard.writeText(val).then(function(){
+      el.textContent='Copied ✓';el.classList.add('copied');
+      setTimeout(function(){el.textContent=val;el.classList.remove('copied');},1100);
+    });}
+    el.addEventListener('click',copy);
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();copy();}});
+  });
 });
 </script>
 </body>
