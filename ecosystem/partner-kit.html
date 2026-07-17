@@ -280,6 +280,10 @@ code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(-
 .variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
 .variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
+/* each asset downloads on its own; the globe ships a per-theme pair, so it carries two.
+   margin-top:auto seats the row on the card floor, so the buttons line up across the three
+   tiles instead of drifting with however far each label wraps. */
+.variants .v .dl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:auto;padding-top:16px}
 html[data-theme="dark"] .globe-light{display:none}
 html[data-theme="light"] .globe-dark{display:none}
 
@@ -506,9 +510,25 @@ ol{max-width:66ch;padding-left:20px}
 
           <h3>The three assets</h3>
           <div class="variants">
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · the primary mark</div></div>
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
-            <div class="v"><img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" /><img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
+            <div class="v">
+              <img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" />
+              <div class="lb">Flat · the primary mark</div>
+              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo.svg" download aria-label="Download the flat shield, SVG vector master">↓&nbsp; SVG</a></div>
+            </div>
+            <div class="v">
+              <img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" />
+              <div class="lb">3D · premium centerpieces</div>
+              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
+            </div>
+            <div class="v">
+              <img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" />
+              <img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" />
+              <div class="lb">Emblem · globe centerpiece</div>
+              <div class="dl">
+                <a class="btn" href="assets/ecosystem/globe/ecosystem-globe-dark.png" download aria-label="Download the globe emblem for ink, full-size PNG">↓&nbsp; Dark</a>
+                <a class="btn" href="assets/ecosystem/globe/ecosystem-globe-light.png" download aria-label="Download the globe emblem for paper, full-size PNG">↓&nbsp; Light</a>
+              </div>
+            </div>
           </div>
           <p class="fine" style="margin-top:14px">The flat vector is the primary mark: ship it unless the placement is large enough for the 3D render to read. The 3D render is one asset for both themes. Only the globe emblem ships a per-theme pair.</p>
           <div class="scrollx" tabindex="0" role="region" aria-label="Asset usage table"><table>
