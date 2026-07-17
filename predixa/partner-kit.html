@@ -7,15 +7,15 @@
 <meta name="description" content="How to reproduce Predixa correctly in a campaign. Reproduction-only design spec." />
 <link rel="icon" href="assets/predixa/favicon/favicon.svg" />
 <style>
-/* bundled webfonts: self-contained, no CDN. Fraunces is cut static at opsz 14 to match the site. */
-@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/inter-400.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url("assets/predixa/fonts/inter-500.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("assets/predixa/fonts/inter-600.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url("assets/predixa/fonts/inter-700.woff2") format("woff2")}
+/* Bundled webfonts: self-contained, no CDN. One face per family, per cut:
+   - Inter is a variable font; the 400/500/600/700 files were four byte-identical copies of it,
+     downloaded separately. One face over the wght axis renders the same and fetches once.
+   - Inter italic and JetBrains Mono are static cuts (no live wght axis), so they declare one weight.
+   - Fraunces is cut static at opsz 14 to match the site. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/predixa/fonts/inter-400.woff2") format("woff2")}
 @font-face{font-family:"Inter";font-style:italic;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/inter-400-italic.woff2") format("woff2")}
 @font-face{font-family:"Fraunces";font-style:italic;font-weight:500;font-display:swap;src:url("assets/predixa/fonts/fraunces-500-italic.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/jetbrains-mono-400.woff2") format("woff2")}
-@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("assets/predixa/fonts/jetbrains-mono-500.woff2") format("woff2")}
 :root{
   --sans:"Inter",system-ui,-apple-system,"Helvetica Neue",sans-serif;
   --serif:"Fraunces",Georgia,serif;
@@ -176,34 +176,60 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .breather .lead{font-size:clamp(18.5px,2.1vw,23px);max-width:60ch;line-height:1.5;color:var(--ink);margin-bottom:26px}
 .breather h2{font-size:clamp(32px,5.2vw,60px);max-width:17ch;line-height:1.02;margin-bottom:24px}
 
-/* ---------- swatches (borderless, breathe) ---------- */
+/* ---------- swatches (field-matted cards, every value copyable) ---------- */
 .grouplabel{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:34px 0 16px}
-.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:22px 20px;margin-top:4px}
-/* ring sits outside the fill: a translucent hairline drawn as a border composites over a bright
-   gradient and reads as a milky fringe. Outside, it only ever meets the page field. */
-.sw .chip{height:66px;border-radius:12px;box-shadow:0 0 0 1px var(--rule)}
-.sw .nm{font-size:13px;font-weight:600;color:var(--ink);margin-top:11px}
-.sw .hex{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
-.sw .use{font-size:11.5px;color:var(--faint);margin-top:8px;line-height:1.5}
-/* click-to-copy on the value lines: hex and rgb copy separately.
-   The dashed underline rests visible: the affordance has to read without a hover. */
-.sw .hex[role="button"]{cursor:pointer;width:max-content;max-width:100%;
-  border-bottom:1px dashed var(--rule-strong);transition:color .18s var(--ease),border-color .18s var(--ease)}
-.sw .hex[role="button"]:hover{color:var(--ink);border-bottom-color:var(--accent)}
-.sw .hex[role="button"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.sw .hex.copied,.sw .hex.copied:hover{color:var(--accent);border-bottom-color:transparent;text-transform:none}
-.sw .rgb{text-transform:none;margin-top:2px}
-.sw .foil-val{text-transform:none;overflow-wrap:anywhere}
-.swatches.foils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:20px;margin-top:4px}
+/* wide enough that the whole linear-gradient(...) string reads without truncating */
+.swatches.foils{grid-template-columns:repeat(auto-fill,minmax(392px,1fr))}
 
-/* gradient stops: every step of a foil copies on its own, same as a flat swatch */
-.sw .stops{display:flex;flex-direction:column;gap:7px;margin-top:11px}
-.sw .stop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.sw .stop .sq{width:12px;height:12px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 1px var(--rule)}
-.sw .stop .hex{margin-top:0}
+/* a swatch is a card: specimen on top, name + copyable values below */
+.sw{border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg)}
+
+/* A themed accent is matted on the field it is tuned for, so "on dark" reads without the label,
+   and a dark-theme value is never shown sitting on paper (§09 files that image under "Don't").
+   The ground's hairline keys to the GROUND, not the page: a light ring on ink, an ink ring on
+   paper. So the box still has an edge when the page theme happens to match the ground it depicts. */
+.ground{padding:16px;display:flex}
+.ground.dk{background:#0A0A0C;box-shadow:inset 0 0 0 1px color-mix(in srgb,#F6F2E8 20%,transparent)}
+.ground.lt{background:#F6F2E8;box-shadow:inset 0 0 0 1px color-mix(in srgb,#0A0A0C 20%,transparent)}
+.ground .chip{flex:1;height:76px;border-radius:10px}
+/* the foil is matted on its field too: a dark-theme gradient laid straight onto paper is the
+   same violation as the flat accent, just larger (predixa's rule: gold never touches paper) */
+.ground .chip.foil-chip{height:112px}
+/* Shared neutrals carry no theme split, so they stay a plain full-bleed field: no ground, no
+   label. The inset hairline keys to --ink, so whichever neutral currently matches the page
+   (#0A0A0C in dark, #F6F2E8 in light) still draws its own edge instead of dissolving into it. */
+.sw .chip.full{height:104px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 22%,transparent)}
+
+.sw .foot{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.sw .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sw .nm{font-size:14px;font-weight:600;color:var(--ink)}
+.sw .onfield{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.sw .use{font-size:11.5px;color:var(--faint);line-height:1.5}
+.sw .vals{display:flex;flex-wrap:wrap;gap:4px 16px}
+
+/* The copy affordance is the ⧉ glyph itself: present at rest, so a value reads as copyable
+   without having to be hovered first. min-height carries the target to 24px (WCAG 2.2 SC 2.5.8). */
+.cbtn{display:inline-flex;align-items:center;gap:7px;max-width:100%;min-height:24px;
+  font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.02em;
+  background:none;border:0;padding:2px 0;cursor:pointer;text-align:left}
+.cbtn .g{color:var(--faint);flex:0 0 auto;transition:color .18s var(--ease)}
+.cbtn .sq{width:12px;height:12px;border-radius:50%;flex:0 0 auto;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 25%,transparent)}
+.cbtn .v{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-underline-offset:3px}
+.cbtn:hover .v{text-decoration:underline}
+.cbtn:hover .g{color:var(--ink)}
+.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:5px}
+.cbtn.copied .v,.cbtn.copied .g{color:var(--accent)}
+/* a blocked clipboard has to look blocked, not like a missed animation */
+.cbtn.failed .v,.cbtn.failed .g{color:var(--no-ink)}
 
 /* the section says once, in words, what the dashed underlines mean */
 .copyhint{margin:-4px 0 2px;color:var(--muted);text-transform:none;letter-spacing:.02em;font-size:11.5px}
+
+/* one live region for the page: 26 aria-live nodes each pinned by their own aria-label announced nothing */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 
 /* ---------- house strip (three brands, one row each) ---------- */
 .house{border-top:1px solid var(--rule);margin-top:8px}
@@ -376,7 +402,10 @@ ol{max-width:66ch;padding-left:20px}
   /* specimens depict a fixed field; make it survive the printer's bg stripping.
      .foil, .hyou, the law badge and the solid pill also carry their own fill:
      stripped, their text prints transparent-on-white or paper-on-white. */
-  .stage,.plate,.hchip,.sw .chip,.facet .fc,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  /* hung on .sw, not .sw .chip: print-color-adjust inherits, so every fill inside a swatch
+     (chip, matted ground, gradient-stop dot) prints. Naming the chip alone left the stop
+     dots on `economy`, and they printed as empty outlines beside their hex strings. */
+  .stage,.plate,.hchip,.sw,.facet .fc,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   /* print is the paper field whatever the screen was in: house chips pin their daylight values */
   .z-eco{background:#A54D1F}.z-px{background:#0E7A40}.z-dex{background:#0883A8}
 }
@@ -420,7 +449,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.2.0 · 2026-07-17</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.3.0 · 2026-07-17</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -560,31 +589,98 @@ ol{max-width:66ch;padding-left:20px}
         <div class="body">
           <h2>One accent, <span class="foil">two daylights.</span></h2>
           <p class="lead">One accent, a different hue per theme. Dark is gold; light is emerald, the green facet of the mark, never a tinted gold.</p>
-          <p class="mono copyhint">Every underlined value copies on click: hex, RGB, the foil string, and each of its stops.</p>
+          <p class="mono copyhint">⧉ Every value copies with one click: hex, RGB, the foil string, and each of its stops.</p>
 
-          <div class="grouplabel">Accent · dark (canonical)</div>
+          <div class="grouplabel">Accents</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#FFB627"></div><div class="nm">Predixa Gold</div><div class="hex">#FFB627</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause. 11.3:1 on ink (AAA).</div></div>
-            <div class="sw"><div class="chip" style="background:#D79F1E"></div><div class="nm">Deep Gold</div><div class="hex">#D79F1E</div><div class="use">Small-text AA pair. Use for accent text under ~18px. 8.4:1 on ink (AAA).</div></div>
+            <div class="sw">
+              <div class="ground dk"><div class="chip" style="background:#FFB627"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Predixa Gold</span><span class="onfield">On dark</span></div>
+                <div class="hex">#FFB627</div>
+                <div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause. 11.3:1 on ink (AAA).</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground dk"><div class="chip" style="background:#D79F1E"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Deep Gold</span><span class="onfield">On dark</span></div>
+                <div class="hex">#D79F1E</div>
+                <div class="use">Small-text AA pair. Use for accent text under ~18px. 8.4:1 on ink (AAA).</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground lt"><div class="chip" style="background:#0E7A40"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Predixa Emerald</span><span class="onfield">On light</span></div>
+                <div class="hex">#0E7A40</div>
+                <div class="use">The same roles, on paper. 4.8:1 (AA).</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground lt"><div class="chip" style="background:#0A5630"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Deep Emerald</span><span class="onfield">On light</span></div>
+                <div class="hex">#0A5630</div>
+                <div class="use">The same small-text pair, on paper. 7.9:1 (AAA).</div>
+              </div>
+            </div>
           </div>
 
-          <div class="grouplabel">Accent · light (daylight)</div>
-          <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#0E7A40"></div><div class="nm">Predixa Emerald</div><div class="hex">#0E7A40</div><div class="use">The same roles, on paper. 4.8:1 (AA).</div></div>
-            <div class="sw"><div class="chip" style="background:#0A5630"></div><div class="nm">Deep Emerald</div><div class="hex">#0A5630</div><div class="use">The same small-text pair, on paper. 7.9:1 (AAA).</div></div>
-          </div>
-          <div class="grouplabel">Foil gradient · the italic clause</div>
+          <div class="grouplabel">Foil gradients · the italic clause</div>
           <div class="swatches foils">
-            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)"></div><div class="nm">Foil · dark</div><div class="hex foil-val">linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)</div><div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div></div>
-            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#1FA85C,#0B6E39)"></div><div class="nm">Foil · light</div><div class="hex foil-val">linear-gradient(135deg,#1FA85C,#0B6E39)</div><div class="use">The emerald ramp of the same device, on paper.</div></div>
+            <div class="sw">
+              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Foil</span><span class="onfield">On dark</span></div>
+                <div class="hex foil-val">linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)</div>
+                <div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground lt"><div class="chip foil-chip" style="background:linear-gradient(135deg,#1FA85C,#0B6E39)"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Foil</span><span class="onfield">On light</span></div>
+                <div class="hex foil-val">linear-gradient(135deg,#1FA85C,#0B6E39)</div>
+                <div class="use">The emerald ramp of the same device, on paper.</div>
+              </div>
+            </div>
           </div>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#0A0A0C"></div><div class="nm">Ink field</div><div class="hex">#0A0A0C</div><div class="use">Dark background. Never pure #000.</div></div>
-            <div class="sw"><div class="chip" style="background:#F2F2F2"></div><div class="nm">Paper ink</div><div class="hex">#F2F2F2</div><div class="use">Type on dark. Never pure #FFF.</div></div>
-            <div class="sw"><div class="chip" style="background:#F6F2E8"></div><div class="nm">Warm paper</div><div class="hex">#F6F2E8</div><div class="use">Light background. Never pure #FFF.</div></div>
-            <div class="sw"><div class="chip" style="background:#16140F"></div><div class="nm">Warm ink</div><div class="hex">#16140F</div><div class="use">Type on paper. Never pure #000.</div></div>
+            <div class="sw">
+              <div class="chip full" style="background:#0A0A0C"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Ink field</span></div>
+                <div class="hex">#0A0A0C</div>
+                <div class="use">Dark background. Never pure #000.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#F2F2F2"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Paper ink</span></div>
+                <div class="hex">#F2F2F2</div>
+                <div class="use">Type on dark. Never pure #FFF.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#F6F2E8"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Warm paper</span></div>
+                <div class="hex">#F6F2E8</div>
+                <div class="use">Light background. Never pure #FFF.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#16140F"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Warm ink</span></div>
+                <div class="hex">#16140F</div>
+                <div class="use">Type on paper. Never pure #000.</div>
+              </div>
+            </div>
           </div>
 
           <div class="law">
@@ -738,7 +834,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v2.2.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v2.3.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
     </section>
   </main>
 </div>
@@ -774,53 +870,83 @@ var obs=new IntersectionObserver(function(es){
 },{rootMargin:'-45% 0px -50% 0px'});
 secs.forEach(function(s){if(s)obs.observe(s);});
 
-/* every colour value copies on its own: hex, its derived rgb, a gradient string, and each gradient stop */
-// ponytail: stops + rgb derived at runtime; the authored hex/gradient string stays the only source of truth
-function copyable(el){
-  var val=el.textContent;
-  el.setAttribute('role','button');
-  el.setAttribute('tabindex','0');
-  el.setAttribute('aria-label','Copy '+val);
-  el.setAttribute('aria-live','polite');
-  el.title='Click to copy';
-  function copy(){navigator.clipboard.writeText(val).then(function(){
-    el.textContent='Copied ✓';el.classList.add('copied');
-    setTimeout(function(){el.textContent=val;el.classList.remove('copied');},1100);
-  });}
-  el.addEventListener('click',copy);
-  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();copy();}});
+/* Every colour value is its own copy button, matching the ambassadors hub: the ⧉ glyph carries
+   the affordance at rest, a filled dot stands in for it on a gradient stop (an eyedropper that
+   copies its own hex). Values are authored as plain text in the markup and upgraded here, so the
+   authored hex / gradient string stays the single source of truth and still reads without JS. */
+// ponytail: rgb + stops derived from the authored value; no duplicated literals to drift
+
+/* one shared live region: a per-button aria-live would be 26 of them, and each button's
+   accessible name is its own visible text, which is what changes on copy. */
+// NB: not `status` — a top-level `var status` aliases window.status, which stringifies on assign.
+var liveRegion=document.createElement('div');
+liveRegion.className='sr-only';
+liveRegion.setAttribute('role','status');
+document.body.appendChild(liveRegion);
+function announce(msg){liveRegion.textContent='';setTimeout(function(){liveRegion.textContent=msg;},60);}
+
+function hexToRgb(hex){
+  var n=parseInt(hex.slice(1),16);
+  return 'rgb('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+')';
 }
 
-/* split each foil into its stops first, so they flow through the same hex→rgb→copy pass below */
-[].slice.call(document.querySelectorAll('.sw .foil-val')).forEach(function(el){
-  var stops=el.textContent.match(/#[0-9A-Fa-f]{6}/g);
-  if(!stops)return;
-  var row=document.createElement('div');
-  row.className='stops';
-  stops.forEach(function(hex){
-    var stop=document.createElement('div');
-    stop.className='stop';
-    var sq=document.createElement('span');
-    sq.className='sq';sq.style.background=hex;
-    var hx=document.createElement('div');
-    hx.className='hex';hx.textContent=hex;
-    stop.appendChild(sq);stop.appendChild(hx);
-    row.appendChild(stop);
+function copyBtn(val,swatch){
+  var b=document.createElement('button');
+  b.type='button';b.className='cbtn';b.title='Click to copy';
+  var mark=document.createElement('span');
+  mark.setAttribute('aria-hidden','true');
+  if(swatch){mark.className='sq';mark.style.background=swatch;}
+  else{mark.className='g';mark.textContent='⧉';}
+  var v=document.createElement('span');
+  v.className='v';v.textContent=val;
+  b.appendChild(mark);b.appendChild(v);
+  function ok(){
+    v.textContent='Copied ✓';b.classList.add('copied');
+    announce(val+' copied');
+    setTimeout(function(){v.textContent=val;b.classList.remove('copied');},1400);
+  }
+  /* Never fail silently. A partner who reads a missing ✓ as a dropped animation pastes whatever
+     was already on the clipboard and ships it as a brand colour, which is the one outcome this
+     kit exists to prevent. Say so, and select the value so it can still be copied by hand. */
+  function fail(){
+    b.classList.add('failed');
+    b.title='Copy blocked by the browser: the value is selected, press Ctrl+C / Cmd+C';
+    var r=document.createRange();r.selectNodeContents(v);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
+    announce('Copy blocked. '+val+' is selected: press Control C to copy it.');
+    setTimeout(function(){b.classList.remove('failed');},2600);
+  }
+  /* try/catch as well as the reject branch: on an insecure origin navigator.clipboard is
+     undefined outright, which throws here rather than returning a promise to reject. */
+  b.addEventListener('click',function(){
+    try{ navigator.clipboard.writeText(val).then(ok,fail); }
+    catch(e){ fail(); }
   });
-  el.insertAdjacentElement('afterend',row);
-});
+  return b;
+}
 
 [].slice.call(document.querySelectorAll('.sw .hex')).forEach(function(hexEl){
-  var val=hexEl.textContent.trim();
-  if(/^#[0-9A-Fa-f]{6}$/.test(val)){
-    var n=parseInt(val.slice(1),16);
-    var rgbEl=document.createElement('div');
-    rgbEl.className='hex rgb';
-    rgbEl.textContent='rgb('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+')';
-    hexEl.insertAdjacentElement('afterend',rgbEl);
-    copyable(rgbEl);
+  var raw=hexEl.textContent.trim();
+  var rows=document.createDocumentFragment();
+  if(/^#[0-9A-Fa-f]{6}$/.test(raw)){
+    var vals=document.createElement('div');
+    vals.className='vals';
+    vals.appendChild(copyBtn(raw));
+    vals.appendChild(copyBtn(hexToRgb(raw)));
+    rows.appendChild(vals);
+  }else{
+    /* a foil: each stop copies on its own as an eyedropper dot, then the whole gradient string */
+    var stops=raw.match(/#[0-9A-Fa-f]{6}/g)||[];
+    var stopRow=document.createElement('div');
+    stopRow.className='vals';
+    stops.forEach(function(s){stopRow.appendChild(copyBtn(s,s));});
+    var cssRow=document.createElement('div');
+    cssRow.className='vals';
+    cssRow.appendChild(copyBtn(raw));
+    if(stops.length)rows.appendChild(stopRow);
+    rows.appendChild(cssRow);
   }
-  copyable(hexEl);
+  hexEl.replaceWith(rows);
 });
 </script>
 </body>
