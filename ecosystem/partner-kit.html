@@ -30,9 +30,9 @@
   /* semantic depth scale (page < scrim < drawer < bar) */
   --z-scrim:30; --z-drawer:40; --z-bar:50;
 }
-/* a theme sets the page's field; a specimen (.stage/.plate) pins the field it depicts, so its subtree never inherits the page's palette */
+/* a theme sets the page's field; a specimen (.stage) pins the field it depicts, so its subtree never inherits the page's palette */
 /* ---------- DARK (canonical) ---------- */
-html[data-theme="dark"], .stage.dk, .plate.dark{
+html[data-theme="dark"], .stage.dk{
   --bg:#0A0A0C; --ink:#F2F2F2;
   --muted:rgba(242,242,242,.72); --faint:rgba(242,242,242,.64);
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
@@ -47,7 +47,7 @@ html[data-theme="dark"], .stage.dk, .plate.dark{
   color-scheme:dark;
 }
 /* ---------- LIGHT (daylight twin) ---------- */
-html[data-theme="light"], .stage.lt, .plate.paper{
+html[data-theme="light"], .stage.lt{
   --bg:#F6F2E8; --ink:#16140F;
   --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
@@ -182,24 +182,29 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 /* wide enough that the whole linear-gradient(...) string reads without truncating */
 .swatches.foils{grid-template-columns:repeat(auto-fill,minmax(392px,1fr))}
 
-/* a swatch is a card: specimen on top, name + copyable values below */
-.sw{border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg)}
+/* A swatch is a card: specimen on top, name + copyable values below. The border is mixed from
+   --ink rather than --rule: at --rule's .10/.12 it measured 1.23:1, so a chip whose fill is the
+   page field (Ink field in dark, Warm paper in light) had no readable edge. Drawn on the card,
+   not inside the chip, so it reads as the card's outline and never as a box within the fill. */
+.sw{border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);
+  border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg)}
 
 /* A themed accent is matted on the field it is tuned for, so "on dark" reads without the label,
    and a dark-theme value is never shown sitting on paper (§09 files that image under "Don't").
-   The ground's hairline keys to the GROUND, not the page: a light ring on ink, an ink ring on
-   paper. So the box still has an edge when the page theme happens to match the ground it depicts. */
+   No ring: when the ground matches the page it should merge into the card, because the card IS
+   that field; when it differs it is already a plain box against it. An inset ring drew a second
+   line inside the mat instead of an edge around it. */
 .ground{padding:16px;display:flex}
-.ground.dk{background:#0A0A0C;box-shadow:inset 0 0 0 1px color-mix(in srgb,#F6F2E8 20%,transparent)}
-.ground.lt{background:#F6F2E8;box-shadow:inset 0 0 0 1px color-mix(in srgb,#0A0A0C 20%,transparent)}
+.ground.dk{background:#0A0A0C}
+.ground.lt{background:#F6F2E8}
 .ground .chip{flex:1;height:76px;border-radius:10px}
 /* the foil is matted on its field too: a dark-theme gradient laid straight onto paper is the
    same violation as the flat accent, just larger (predixa's rule: gold never touches paper) */
 .ground .chip.foil-chip{height:112px}
 /* Shared neutrals carry no theme split, so they stay a plain full-bleed field: no ground, no
-   label. The inset hairline keys to --ink, so whichever neutral currently matches the page
-   (#0A0A0C in dark, #F6F2E8 in light) still draws its own edge instead of dissolving into it. */
-.sw .chip.full{height:104px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 22%,transparent)}
+   label. The card's own border is their edge; an inset ring here would draw a second line
+   inside the fill, which read as a box around the pale neutrals rather than as their edge. */
+.sw .chip.full{height:104px}
 
 .sw .foot{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px}
 .sw .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
@@ -223,6 +228,9 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .cbtn.copied .v,.cbtn.copied .g{color:var(--accent)}
 /* a blocked clipboard has to look blocked, not like a missed animation */
 .cbtn.failed .v,.cbtn.failed .g{color:var(--no-ink)}
+/* a hex quoted in prose is a value too: same ⧉ affordance, wearing the <code> chip it replaces */
+.cbtn.inline{display:inline-flex;vertical-align:baseline;gap:5px;min-height:0;font-size:12.5px;
+  padding:2px 7px;border-radius:5px;background:color-mix(in srgb,var(--ink) 7%,transparent)}
 
 /* the section says once, in words, what the dashed underlines mean */
 .copyhint{margin:-4px 0 2px;color:var(--muted);text-transform:none;letter-spacing:.02em;font-size:11.5px}
@@ -265,35 +273,13 @@ th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:up
 td{color:var(--muted)}td:first-child{color:var(--ink);font-weight:500}
 code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(--ink) 7%,transparent);padding:2px 6px;border-radius:5px;color:var(--ink)}
 
-/* ---------- logo feature (asymmetric) ---------- */
-.logo-feature{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
-@media(min-width:760px){.logo-feature{grid-template-columns:1.4fr 1fr}}
-.plate{border:1px solid var(--rule);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;position:relative;min-height:230px;padding:30px}
-.plate img{height:auto;max-height:120px;max-width:80%}
-.plate.dark,.plate.paper{background:var(--bg);color:var(--ink)}
-.plate .cap{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
-.logo-side{display:flex;flex-direction:column;gap:16px}
-.plate.sm{min-height:150px}.plate.sm img{max-height:92px}
-.facets{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.facet{border:1px solid var(--rule);border-radius:14px;padding:14px}
-.facet .fc{height:34px;border-radius:8px;margin-bottom:11px}
-.facet .fn{font-size:12.5px;font-weight:600;color:var(--ink)}
-.facet .fu{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.45}
-
-/* three lockup variants */
+/* the three shipped assets. Sized to be compared, not catalogued: at the previous 52px the flat
+   and 3D finishes were indistinguishable and the globe emblem was too small to read at all. */
 .variants{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
 @media(min-width:640px){.variants{grid-template-columns:repeat(3,1fr)}}
-.variants .v{border:1px solid var(--rule);border-radius:16px;padding:22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.variants .v img{height:52px;width:auto}
-.variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:12px}
-/* iOS app-icon mockup (illustrative squircle tile; not a shipped asset) */
-.app-icon{position:relative;width:104px;height:104px;margin:2px auto 0;border-radius:23%;corner-shape:superellipse(1.8);
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#ffffff,#f1ede2);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(20,18,12,.06),0 7px 18px -7px rgba(20,18,12,.3)}
-.variants .v .app-icon-mark{height:56%;width:56%;object-fit:contain}
-html[data-theme="dark"] .app-icon{background:linear-gradient(180deg,#2a2a30,#161619);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07),0 9px 22px -7px rgba(0,0,0,.6)}
+.variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
+.variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
 html[data-theme="dark"] .globe-light{display:none}
 html[data-theme="light"] .globe-dark{display:none}
 
@@ -405,7 +391,7 @@ ol{max-width:66ch;padding-left:20px}
   /* hung on .sw, not .sw .chip: print-color-adjust inherits, so every fill inside a swatch
      (chip, matted ground, gradient-stop dot) prints. Naming the chip alone left the stop
      dots on `economy`, and they printed as empty outlines beside their hex strings. */
-  .stage,.plate,.hchip,.sw,.facet .fc,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .stage,.hchip,.sw,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   /* print is the paper field whatever the screen was in: house chips pin their daylight values */
   .z-eco{background:#A54D1F}.z-px{background:#0E7A40}.z-dex{background:#0883A8}
 }
@@ -518,29 +504,20 @@ ol{max-width:66ch;padding-left:20px}
           <h2>The shield mark.</h2>
           <p>A terracotta <strong>shield</strong>. Same mark on both themes; only the field behind it changes.</p>
 
-          <div class="logo-feature">
-            <div class="plate dark"><span class="cap">On ink · #0A0A0C</span><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="TMX Ecosystem mark on ink" /></div>
-            <div class="plate paper"><span class="cap">On paper · #F6F2E8</span><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="TMX Ecosystem mark on warm paper" /></div>
-          </div>
-
-          <h3>Flat &amp; 3D</h3>
+          <h3>The three assets</h3>
           <div class="variants">
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · print &amp; small sizes</div></div>
+            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · the primary mark</div></div>
             <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
-          </div>
-          <p class="fine" style="margin-top:14px">Below large sizes the two finishes read almost identically; when in doubt, ship the flat vector. The 3D render is one asset for both themes. Only the globe emblem ships a per-theme pair.</p>
-          <h3>The three lockups</h3>
-          <div class="variants">
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
             <div class="v"><img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" /><img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
-            <div class="v"><div class="app-icon" role="img" aria-label="The TMX Ecosystem mark placed in an iOS app icon (illustrative mockup)"><img class="app-icon-mark" src="assets/ecosystem/favicon/favicon.svg" alt="" /></div><div class="lb">iOS app icon · mockup</div></div>
           </div>
-          <div class="scrollx" tabindex="0" role="region" aria-label="Lockup usage table"><table>
-            <thead><tr><th scope="col">Lockup</th><th scope="col">Use it when</th></tr></thead>
+          <p class="fine" style="margin-top:14px">The flat vector is the primary mark: ship it unless the placement is large enough for the 3D render to read. The 3D render is one asset for both themes. Only the globe emblem ships a per-theme pair.</p>
+          <div class="scrollx" tabindex="0" role="region" aria-label="Asset usage table"><table>
+            <thead><tr><th scope="col">Asset</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
-              <tr><td>Primary shield</td><td>Default. Navbars, ad centerpieces.</td></tr>
-              <tr><td>Emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
-              <tr><td>Favicon / iOS mockup</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. The square tile is an <em>illustrative</em> placement, not a shipped asset; a true iOS 26 "Liquid Glass" render comes from this SVG via Apple's Icon Composer.</td></tr>
+              <tr><td>Flat shield</td><td>Default. Navbars, ad centerpieces, print, small sizes.</td></tr>
+              <tr><td>3D shield</td><td>Premium centerpieces, large placements only. One asset for both themes.</td></tr>
+              <tr><td>Globe emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
+              <tr><td>Favicon</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. An iOS 26 "Liquid Glass" icon renders from this SVG via Apple's Icon Composer.</td></tr>
             </tbody>
           </table></div>
           <div class="grid2">
@@ -923,6 +900,16 @@ function copyBtn(val,swatch){
     rows.appendChild(cssRow);
   }
   hexEl.replaceWith(rows);
+});
+
+/* a hex quoted in prose (§04's ink/paper placements, §05's law) copies on the same terms as a
+   swatch: wherever a partner reads a value, it is a value they can take */
+[].slice.call(document.querySelectorAll('code')).forEach(function(c){
+  var v=c.textContent.trim();
+  if(!/^#[0-9A-Fa-f]{6}$/.test(v))return;
+  var b=copyBtn(v);
+  b.className='cbtn inline';
+  c.replaceWith(b);
 });
 </script>
 </body>
