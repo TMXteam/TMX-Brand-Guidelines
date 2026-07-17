@@ -40,4 +40,6 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `logo/ecosystem-logo-white.png` | Solid white silhouette, reversed for dark surfaces. |
 | `logo/ecosystem-logo.svg` | Colour vector master, the editable source. |
 | `tokens.css` | Brand tokens as CSS custom properties (drop-in, both themes). |
+| `TMX-ecosystem-assets.zip` | The whole pack: every file above. |
+| `TMX-ecosystem-essentials.zip` | Essential marks: flat vector, 3D render, both globe masters. |
 | `TMX-ecosystem-fonts.zip` | Installable desktop fonts with licenses. |

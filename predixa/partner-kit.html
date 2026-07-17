@@ -37,7 +37,7 @@ html[data-theme="dark"], .stage.dk{
   --muted:rgba(242,242,242,.72); --faint:rgba(242,242,242,.64);
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
   --surface:rgba(14,14,16,.55);
-  --accent:#FFB627; --accent-deep:#D79F1E;
+  --accent:#FFB627; --accent-text:#D79F1E;
   --foil:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
   /* status text: dark uses the fills as-is; light derives an ink-deepened pair for AA at label sizes */
@@ -52,7 +52,7 @@ html[data-theme="light"], .stage.lt{
   --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
   --surface:#FCFAF3;
-  --accent:#0E7A40; --accent-deep:#0A5630;
+  --accent:#0E7A40; --accent-text:#0A5630;
   --foil:linear-gradient(135deg,#1FA85C,#0B6E39);
   --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
   --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
@@ -305,7 +305,7 @@ html[data-theme="light"] .globe-dark,html[data-theme="light"] .mono-dark{display
 /* ---------- callout (kept where a box is the right affordance) ---------- */
 .callout{border:.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);
   border-radius:var(--r-card);padding:20px 24px;margin-top:26px}
-.callout .mono{color:var(--accent-deep)}
+.callout .mono{color:var(--accent-text)}
 .callout p{margin:8px 0 0}
 .callout ul{margin:10px 0 0;padding-left:18px}
 
@@ -387,7 +387,7 @@ ol{max-width:66ch;padding-left:20px}
     --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
     --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
     --surface:#FCFAF3;
-    --accent:#0E7A40; --accent-deep:#0A5630;
+    --accent:#0E7A40; --accent-text:#0A5630;
     --foil:linear-gradient(135deg,#1FA85C,#0B6E39);
     --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
     --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
@@ -443,7 +443,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.3.0 · 2026-07-17</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.3.1 · 2026-07-17</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -843,7 +843,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v2.3.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Partner Design-Spec Kit · v2.3.1 · reproduction-only · 2026-07-17 · team@tmx.info</p>
     </section>
   </main>
 </div>
