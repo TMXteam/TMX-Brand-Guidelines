@@ -11,12 +11,8 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `favicon/favicon.svg` | Vector favicon (copy of the colour master). |
 | `fonts/fraunces-500-italic.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/inter-400-italic.woff2` | Bundled webfont (latin subset) for offline use. |
-| `fonts/inter-400.woff2` | Bundled webfont (latin subset) for offline use. |
-| `fonts/inter-500.woff2` | Bundled webfont (latin subset) for offline use. |
-| `fonts/inter-600.woff2` | Bundled webfont (latin subset) for offline use. |
-| `fonts/inter-700.woff2` | Bundled webfont (latin subset) for offline use. |
+| `fonts/inter-400.woff2` | Bundled webfont (latin subset) for offline use. Variable: carries wght 100-900. |
 | `fonts/jetbrains-mono-400.woff2` | Bundled webfont (latin subset) for offline use. |
-| `fonts/jetbrains-mono-500.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/install/Inter-Variable.ttf` | Desktop variable TTF, installable. |
 | `fonts/install/Fraunces14pt-MediumItalic.ttf` | Desktop TTF, the default optical cut. Matches the site. |
 | `fonts/install/Fraunces72pt-MediumItalic.ttf` | Desktop TTF, stylised display cut. |

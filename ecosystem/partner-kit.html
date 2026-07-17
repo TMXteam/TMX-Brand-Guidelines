@@ -7,15 +7,15 @@
 <meta name="description" content="How to reproduce TMX Ecosystem correctly in a campaign. Reproduction-only design spec." />
 <link rel="icon" href="assets/ecosystem/favicon/favicon.svg" />
 <style>
-/* bundled webfonts: self-contained, no CDN. Fraunces is cut static at opsz 14 to match the site. */
-@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("assets/ecosystem/fonts/inter-400.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url("assets/ecosystem/fonts/inter-500.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("assets/ecosystem/fonts/inter-600.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url("assets/ecosystem/fonts/inter-700.woff2") format("woff2")}
+/* Bundled webfonts: self-contained, no CDN. One face per family, per cut:
+   - Inter is a variable font; the 400/500/600/700 files were four byte-identical copies of it,
+     downloaded separately. One face over the wght axis renders the same and fetches once.
+   - Inter italic and JetBrains Mono are static cuts (no live wght axis), so they declare one weight.
+   - Fraunces is cut static at opsz 14 to match the site. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/ecosystem/fonts/inter-400.woff2") format("woff2")}
 @font-face{font-family:"Inter";font-style:italic;font-weight:400;font-display:swap;src:url("assets/ecosystem/fonts/inter-400-italic.woff2") format("woff2")}
 @font-face{font-family:"Fraunces";font-style:italic;font-weight:500;font-display:swap;src:url("assets/ecosystem/fonts/fraunces-500-italic.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("assets/ecosystem/fonts/jetbrains-mono-400.woff2") format("woff2")}
-@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("assets/ecosystem/fonts/jetbrains-mono-500.woff2") format("woff2")}
 :root{
   --sans:"Inter",system-ui,-apple-system,"Helvetica Neue",sans-serif;
   --serif:"Fraunces",Georgia,serif;
@@ -30,9 +30,9 @@
   /* semantic depth scale (page < scrim < drawer < bar) */
   --z-scrim:30; --z-drawer:40; --z-bar:50;
 }
-/* a theme sets the page's field; a specimen (.stage/.plate) pins the field it depicts, so its subtree never inherits the page's palette */
+/* a theme sets the page's field; a specimen (.stage) pins the field it depicts, so its subtree never inherits the page's palette */
 /* ---------- DARK (canonical) ---------- */
-html[data-theme="dark"], .stage.dk, .plate.dark{
+html[data-theme="dark"], .stage.dk{
   --bg:#0A0A0C; --ink:#F2F2F2;
   --muted:rgba(242,242,242,.72); --faint:rgba(242,242,242,.64);
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
@@ -47,7 +47,7 @@ html[data-theme="dark"], .stage.dk, .plate.dark{
   color-scheme:dark;
 }
 /* ---------- LIGHT (daylight twin) ---------- */
-html[data-theme="light"], .stage.lt, .plate.paper{
+html[data-theme="light"], .stage.lt{
   --bg:#F6F2E8; --ink:#16140F;
   --muted:rgba(22,20,15,.78); --faint:rgba(22,20,15,.66);
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
@@ -176,34 +176,68 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 .breather .lead{font-size:clamp(18.5px,2.1vw,23px);max-width:60ch;line-height:1.5;color:var(--ink);margin-bottom:26px}
 .breather h2{font-size:clamp(32px,5.2vw,60px);max-width:17ch;line-height:1.02;margin-bottom:24px}
 
-/* ---------- swatches (borderless, breathe) ---------- */
+/* ---------- swatches (field-matted cards, every value copyable) ---------- */
 .grouplabel{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:34px 0 16px}
-.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:22px 20px;margin-top:4px}
-/* ring sits outside the fill: a translucent hairline drawn as a border composites over a bright
-   gradient and reads as a milky fringe. Outside, it only ever meets the page field. */
-.sw .chip{height:66px;border-radius:12px;box-shadow:0 0 0 1px var(--rule)}
-.sw .nm{font-size:13px;font-weight:600;color:var(--ink);margin-top:11px}
-.sw .hex{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
-.sw .use{font-size:11.5px;color:var(--faint);margin-top:8px;line-height:1.5}
-/* click-to-copy on the value lines: hex and rgb copy separately.
-   The dashed underline rests visible: the affordance has to read without a hover. */
-.sw .hex[role="button"]{cursor:pointer;width:max-content;max-width:100%;
-  border-bottom:1px dashed var(--rule-strong);transition:color .18s var(--ease),border-color .18s var(--ease)}
-.sw .hex[role="button"]:hover{color:var(--ink);border-bottom-color:var(--accent)}
-.sw .hex[role="button"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.sw .hex.copied,.sw .hex.copied:hover{color:var(--accent);border-bottom-color:transparent;text-transform:none}
-.sw .rgb{text-transform:none;margin-top:2px}
-.sw .foil-val{text-transform:none;overflow-wrap:anywhere}
-.swatches.foils{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:20px;margin-top:4px}
+/* wide enough that the whole linear-gradient(...) string reads without truncating */
+.swatches.foils{grid-template-columns:repeat(auto-fill,minmax(392px,1fr))}
 
-/* gradient stops: every step of a foil copies on its own, same as a flat swatch */
-.sw .stops{display:flex;flex-direction:column;gap:7px;margin-top:11px}
-.sw .stop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.sw .stop .sq{width:12px;height:12px;border-radius:3px;flex:0 0 auto;box-shadow:0 0 0 1px var(--rule)}
-.sw .stop .hex{margin-top:0}
+/* A swatch is a card: specimen on top, name + copyable values below. The border is mixed from
+   --ink rather than --rule: at --rule's .10/.12 it measured 1.23:1, so a chip whose fill is the
+   page field (Ink field in dark, Warm paper in light) had no readable edge. Drawn on the card,
+   not inside the chip, so it reads as the card's outline and never as a box within the fill. */
+.sw{border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);
+  border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg)}
+
+/* A themed accent is matted on the field it is tuned for, so "on dark" reads without the label,
+   and a dark-theme value is never shown sitting on paper (§09 files that image under "Don't").
+   No ring: when the ground matches the page it should merge into the card, because the card IS
+   that field; when it differs it is already a plain box against it. An inset ring drew a second
+   line inside the mat instead of an edge around it. */
+.ground{padding:16px;display:flex}
+.ground.dk{background:#0A0A0C}
+.ground.lt{background:#F6F2E8}
+.ground .chip{flex:1;height:76px;border-radius:10px}
+/* the foil is matted on its field too: a dark-theme gradient laid straight onto paper is the
+   same violation as the flat accent, just larger (predixa's rule: gold never touches paper) */
+.ground .chip.foil-chip{height:112px}
+/* Shared neutrals carry no theme split, so they stay a plain full-bleed field: no ground, no
+   label. The card's own border is their edge; an inset ring here would draw a second line
+   inside the fill, which read as a box around the pale neutrals rather than as their edge. */
+.sw .chip.full{height:104px}
+
+.sw .foot{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.sw .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sw .nm{font-size:14px;font-weight:600;color:var(--ink)}
+.sw .onfield{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.sw .use{font-size:11.5px;color:var(--faint);line-height:1.5}
+.sw .vals{display:flex;flex-wrap:wrap;gap:4px 16px}
+
+/* The copy affordance is the ⧉ glyph itself: present at rest, so a value reads as copyable
+   without having to be hovered first. min-height carries the target to 24px (WCAG 2.2 SC 2.5.8). */
+.cbtn{display:inline-flex;align-items:center;gap:7px;max-width:100%;min-height:24px;
+  font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.02em;
+  background:none;border:0;padding:2px 0;cursor:pointer;text-align:left}
+.cbtn .g{color:var(--faint);flex:0 0 auto;transition:color .18s var(--ease)}
+.cbtn .sq{width:12px;height:12px;border-radius:50%;flex:0 0 auto;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 25%,transparent)}
+.cbtn .v{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-underline-offset:3px}
+.cbtn:hover .v{text-decoration:underline}
+.cbtn:hover .g{color:var(--ink)}
+.cbtn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:5px}
+.cbtn.copied .v,.cbtn.copied .g{color:var(--accent)}
+/* a blocked clipboard has to look blocked, not like a missed animation */
+.cbtn.failed .v,.cbtn.failed .g{color:var(--no-ink)}
+/* a hex quoted in prose is a value too: same ⧉ affordance, wearing the <code> chip it replaces */
+.cbtn.inline{display:inline-flex;vertical-align:baseline;gap:5px;min-height:0;font-size:12.5px;
+  padding:2px 7px;border-radius:5px;background:color-mix(in srgb,var(--ink) 7%,transparent)}
 
 /* the section says once, in words, what the dashed underlines mean */
 .copyhint{margin:-4px 0 2px;color:var(--muted);text-transform:none;letter-spacing:.02em;font-size:11.5px}
+
+/* one live region for the page: 26 aria-live nodes each pinned by their own aria-label announced nothing */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 
 /* ---------- house strip (three brands, one row each) ---------- */
 .house{border-top:1px solid var(--rule);margin-top:8px}
@@ -239,37 +273,23 @@ th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:up
 td{color:var(--muted)}td:first-child{color:var(--ink);font-weight:500}
 code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(--ink) 7%,transparent);padding:2px 6px;border-radius:5px;color:var(--ink)}
 
-/* ---------- logo feature (asymmetric) ---------- */
-.logo-feature{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
-@media(min-width:760px){.logo-feature{grid-template-columns:1.4fr 1fr}}
-.plate{border:1px solid var(--rule);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;position:relative;min-height:230px;padding:30px}
-.plate img{height:auto;max-height:120px;max-width:80%}
-.plate.dark,.plate.paper{background:var(--bg);color:var(--ink)}
-.plate .cap{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
-.logo-side{display:flex;flex-direction:column;gap:16px}
-.plate.sm{min-height:150px}.plate.sm img{max-height:92px}
-.facets{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.facet{border:1px solid var(--rule);border-radius:14px;padding:14px}
-.facet .fc{height:34px;border-radius:8px;margin-bottom:11px}
-.facet .fn{font-size:12.5px;font-weight:600;color:var(--ink)}
-.facet .fu{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.45}
-
-/* three lockup variants */
+/* the three shipped assets. Sized to be compared, not catalogued: at the previous 52px the flat
+   and 3D finishes were indistinguishable and the globe emblem was too small to read at all. */
 .variants{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
-@media(min-width:640px){.variants{grid-template-columns:repeat(3,1fr)}}
-.variants .v{border:1px solid var(--rule);border-radius:16px;padding:22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.variants .v img{height:52px;width:auto}
-.variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:12px}
-/* iOS app-icon mockup (illustrative squircle tile; not a shipped asset) */
-.app-icon{position:relative;width:104px;height:104px;margin:2px auto 0;border-radius:23%;corner-shape:superellipse(1.8);
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#ffffff,#f1ede2);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(20,18,12,.06),0 7px 18px -7px rgba(20,18,12,.3)}
-.variants .v .app-icon-mark{height:56%;width:56%;object-fit:contain}
-html[data-theme="dark"] .app-icon{background:linear-gradient(180deg,#2a2a30,#161619);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07),0 9px 22px -7px rgba(0,0,0,.6)}
-html[data-theme="dark"] .globe-light{display:none}
-html[data-theme="light"] .globe-dark{display:none}
+/* four assets: 2x2 rather than auto-fit, which lands 3+1 and orphans the fourth tile at the
+   width this column actually gets. Four across only once the body column can hold them. */
+@media(min-width:560px){.variants{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1560px){.variants{grid-template-columns:repeat(4,1fr)}}
+.variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
+.variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
+/* each asset downloads on its own; the globe ships a per-theme pair, so it carries two.
+   margin-top:auto seats the row on the card floor, so the buttons line up across the three
+   tiles instead of drifting with however far each label wraps. */
+.variants .v .dl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:auto;padding-top:16px}
+/* the two assets that ship a per-theme pair (globe emblem, mono mark): show the cut for the field */
+html[data-theme="dark"] .globe-light,html[data-theme="dark"] .mono-light{display:none}
+html[data-theme="light"] .globe-dark,html[data-theme="light"] .mono-dark{display:none}
 
 .clearspace{border:1px dashed var(--rule-strong);border-radius:16px;display:inline-flex;padding:40px;margin-top:6px}
 .clearspace img{height:44px;width:auto}
@@ -376,7 +396,10 @@ ol{max-width:66ch;padding-left:20px}
   /* specimens depict a fixed field; make it survive the printer's bg stripping.
      .foil, .hyou, the law badge and the solid pill also carry their own fill:
      stripped, their text prints transparent-on-white or paper-on-white. */
-  .stage,.plate,.hchip,.sw .chip,.facet .fc,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  /* hung on .sw, not .sw .chip: print-color-adjust inherits, so every fill inside a swatch
+     (chip, matted ground, gradient-stop dot) prints. Naming the chip alone left the stop
+     dots on `economy`, and they printed as empty outlines beside their hex strings. */
+  .stage,.hchip,.sw,.foil,.hyou,.law .h .badge,.btn.solid{print-color-adjust:exact;-webkit-print-color-adjust:exact}
   /* print is the paper field whatever the screen was in: house chips pin their daylight values */
   .z-eco{background:#A54D1F}.z-px{background:#0E7A40}.z-dex{background:#0883A8}
 }
@@ -420,7 +443,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.2.0 · 2026-07-17</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.3.0 · 2026-07-17</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -489,29 +512,47 @@ ol{max-width:66ch;padding-left:20px}
           <h2>The shield mark.</h2>
           <p>A terracotta <strong>shield</strong>. Same mark on both themes; only the field behind it changes.</p>
 
-          <div class="logo-feature">
-            <div class="plate dark"><span class="cap">On ink · #0A0A0C</span><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="TMX Ecosystem mark on ink" /></div>
-            <div class="plate paper"><span class="cap">On paper · #F6F2E8</span><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="TMX Ecosystem mark on warm paper" /></div>
-          </div>
-
-          <h3>Flat &amp; 3D</h3>
+          <h3>The four assets</h3>
           <div class="variants">
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" /><div class="lb">Flat · print &amp; small sizes</div></div>
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" /><div class="lb">3D · premium centerpieces</div></div>
+            <div class="v">
+              <img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Flat shield vector" />
+              <div class="lb">Flat · the primary mark</div>
+              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo.svg" download aria-label="Download the flat shield, SVG vector master">↓&nbsp; SVG</a></div>
+            </div>
+            <div class="v">
+              <img class="mono-dark" src="assets/ecosystem/logo/ecosystem-logo-white.png" alt="Mono shield, reversed for ink" />
+              <img class="mono-light" src="assets/ecosystem/logo/ecosystem-logo-black.png" alt="Mono shield, silhouette for paper" />
+              <div class="lb">Mono · one colour</div>
+              <div class="dl">
+                <a class="btn" href="assets/ecosystem/logo/ecosystem-logo-mono.svg" download aria-label="Download the mono shield, SVG vector">↓&nbsp; SVG</a>
+                <a class="btn" href="assets/ecosystem/logo/ecosystem-logo-white.png" download aria-label="Download the reversed mono shield for ink, PNG">↓&nbsp; Dark</a>
+                <a class="btn" href="assets/ecosystem/logo/ecosystem-logo-black.png" download aria-label="Download the silhouette mono shield for paper, PNG">↓&nbsp; Light</a>
+              </div>
+            </div>
+            <div class="v">
+              <img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" />
+              <div class="lb">3D · premium centerpieces</div>
+              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
+            </div>
+            <div class="v">
+              <img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" />
+              <img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" />
+              <div class="lb">Emblem · globe centerpiece</div>
+              <div class="dl">
+                <a class="btn" href="assets/ecosystem/globe/ecosystem-globe-dark.png" download aria-label="Download the globe emblem for ink, full-size PNG">↓&nbsp; Dark</a>
+                <a class="btn" href="assets/ecosystem/globe/ecosystem-globe-light.png" download aria-label="Download the globe emblem for paper, full-size PNG">↓&nbsp; Light</a>
+              </div>
+            </div>
           </div>
-          <p class="fine" style="margin-top:14px">Below large sizes the two finishes read almost identically; when in doubt, ship the flat vector. The 3D render is one asset for both themes. Only the globe emblem ships a per-theme pair.</p>
-          <h3>The three lockups</h3>
-          <div class="variants">
-            <div class="v"><img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="Primary shield" /><div class="lb">Primary · shield</div></div>
-            <div class="v"><img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" /><img class="globe-light" src="assets/ecosystem/globe/ecosystem-globe-light.png" alt="Globe emblem" /><div class="lb">Emblem · globe centerpiece</div></div>
-            <div class="v"><div class="app-icon" role="img" aria-label="The TMX Ecosystem mark placed in an iOS app icon (illustrative mockup)"><img class="app-icon-mark" src="assets/ecosystem/favicon/favicon.svg" alt="" /></div><div class="lb">iOS app icon · mockup</div></div>
-          </div>
-          <div class="scrollx" tabindex="0" role="region" aria-label="Lockup usage table"><table>
-            <thead><tr><th scope="col">Lockup</th><th scope="col">Use it when</th></tr></thead>
+          <p class="fine" style="margin-top:14px">The flat vector is the primary mark: ship it unless the placement is large enough for the 3D render to read. The 3D render is one asset for both themes. The mono mark and the globe emblem each ship a per-theme pair.</p>
+          <div class="scrollx" tabindex="0" role="region" aria-label="Asset usage table"><table>
+            <thead><tr><th scope="col">Asset</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
-              <tr><td>Primary shield</td><td>Default. Navbars, ad centerpieces.</td></tr>
-              <tr><td>Emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
-              <tr><td>Favicon / iOS mockup</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. The square tile is an <em>illustrative</em> placement, not a shipped asset; a true iOS 26 "Liquid Glass" render comes from this SVG via Apple's Icon Composer.</td></tr>
+              <tr><td>Flat shield</td><td>Default. Navbars, ad centerpieces, print, small sizes.</td></tr>
+              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
+              <tr><td>3D shield</td><td>Premium centerpieces, large placements only. One asset for both themes.</td></tr>
+              <tr><td>Globe emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
+              <tr><td>Favicon</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. An iOS 26 "Liquid Glass" icon renders from this SVG via Apple's Icon Composer.</td></tr>
             </tbody>
           </table></div>
           <div class="grid2">
@@ -551,29 +592,82 @@ ol{max-width:66ch;padding-left:20px}
         <div class="body">
           <h2>One accent, <span class="foil">two settings.</span></h2>
           <p class="lead">One accent: terracotta, in both themes. Dark uses a brighter value, light a deeper one.</p>
-          <p class="mono copyhint">Every underlined value copies on click: hex, RGB, the foil string, and each of its stops.</p>
+          <p class="mono copyhint">⧉ Every value copies with one click: hex, RGB, the foil string, and each of its stops.</p>
 
-          <div class="grouplabel">Accent · dark (canonical)</div>
+          <div class="grouplabel">Accents</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#D67341"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#D67341</div><div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause, and small accent text. 6:1 on ink (AA).</div></div>
+            <div class="sw">
+              <div class="ground dk"><div class="chip" style="background:#D67341"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Terracotta</span><span class="onfield">On dark</span></div>
+                <div class="hex">#D67341</div>
+                <div class="use">The accent. Pills, live dot, the one foil numeral, the italic clause, and small accent text. 6:1 on ink (AA).</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground lt"><div class="chip" style="background:#A54D1F"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Terracotta</span><span class="onfield">On light</span></div>
+                <div class="hex">#A54D1F</div>
+                <div class="use">The same roles, on paper. 5.1:1 (AA).</div>
+              </div>
+            </div>
           </div>
 
-          <div class="grouplabel">Accent · light (daylight)</div>
-          <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#A54D1F"></div><div class="nm">Ecosystem Terracotta</div><div class="hex">#A54D1F</div><div class="use">The same roles, on paper. 5.1:1 (AA).</div></div>
-          </div>
-          <div class="grouplabel">Foil gradient · the italic clause</div>
+          <div class="grouplabel">Foil gradients · the italic clause</div>
           <div class="swatches foils">
-            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)"></div><div class="nm">Foil · dark</div><div class="hex foil-val">linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)</div><div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div></div>
-            <div class="sw"><div class="chip" style="background:linear-gradient(135deg,#EBB371,#B6562F,#A44A24)"></div><div class="nm">Foil · light</div><div class="hex foil-val">linear-gradient(135deg,#EBB371,#B6562F,#A44A24)</div><div class="use">The same device on paper.</div></div>
+            <div class="sw">
+              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Foil</span><span class="onfield">On dark</span></div>
+                <div class="hex foil-val">linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)</div>
+                <div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="ground lt"><div class="chip foil-chip" style="background:linear-gradient(135deg,#EBB371,#B6562F,#A44A24)"></div></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Foil</span><span class="onfield">On light</span></div>
+                <div class="hex foil-val">linear-gradient(135deg,#EBB371,#B6562F,#A44A24)</div>
+                <div class="use">The same device on paper.</div>
+              </div>
+            </div>
           </div>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
-            <div class="sw"><div class="chip" style="background:#0A0A0C"></div><div class="nm">Ink field</div><div class="hex">#0A0A0C</div><div class="use">Dark background. Never pure #000.</div></div>
-            <div class="sw"><div class="chip" style="background:#F2F2F2"></div><div class="nm">Paper ink</div><div class="hex">#F2F2F2</div><div class="use">Type on dark. Never pure #FFF.</div></div>
-            <div class="sw"><div class="chip" style="background:#F6F2E8"></div><div class="nm">Warm paper</div><div class="hex">#F6F2E8</div><div class="use">Light background. Never pure #FFF.</div></div>
-            <div class="sw"><div class="chip" style="background:#16140F"></div><div class="nm">Warm ink</div><div class="hex">#16140F</div><div class="use">Type on paper. Never pure #000.</div></div>
+            <div class="sw">
+              <div class="chip full" style="background:#0A0A0C"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Ink field</span></div>
+                <div class="hex">#0A0A0C</div>
+                <div class="use">Dark background. Never pure #000.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#F2F2F2"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Paper ink</span></div>
+                <div class="hex">#F2F2F2</div>
+                <div class="use">Type on dark. Never pure #FFF.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#F6F2E8"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Warm paper</span></div>
+                <div class="hex">#F6F2E8</div>
+                <div class="use">Light background. Never pure #FFF.</div>
+              </div>
+            </div>
+            <div class="sw">
+              <div class="chip full" style="background:#16140F"></div>
+              <div class="foot">
+                <div class="head"><span class="nm">Warm ink</span></div>
+                <div class="hex">#16140F</div>
+                <div class="use">Type on paper. Never pure #000.</div>
+              </div>
+            </div>
           </div>
 
           <div class="law">
@@ -728,7 +822,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v2.2.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v2.3.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
     </section>
   </main>
 </div>
@@ -764,53 +858,93 @@ var obs=new IntersectionObserver(function(es){
 },{rootMargin:'-45% 0px -50% 0px'});
 secs.forEach(function(s){if(s)obs.observe(s);});
 
-/* every colour value copies on its own: hex, its derived rgb, a gradient string, and each gradient stop */
-// ponytail: stops + rgb derived at runtime; the authored hex/gradient string stays the only source of truth
-function copyable(el){
-  var val=el.textContent;
-  el.setAttribute('role','button');
-  el.setAttribute('tabindex','0');
-  el.setAttribute('aria-label','Copy '+val);
-  el.setAttribute('aria-live','polite');
-  el.title='Click to copy';
-  function copy(){navigator.clipboard.writeText(val).then(function(){
-    el.textContent='Copied ✓';el.classList.add('copied');
-    setTimeout(function(){el.textContent=val;el.classList.remove('copied');},1100);
-  });}
-  el.addEventListener('click',copy);
-  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();copy();}});
+/* Every colour value is its own copy button, matching the ambassadors hub: the ⧉ glyph carries
+   the affordance at rest, a filled dot stands in for it on a gradient stop (an eyedropper that
+   copies its own hex). Values are authored as plain text in the markup and upgraded here, so the
+   authored hex / gradient string stays the single source of truth and still reads without JS. */
+// ponytail: rgb + stops derived from the authored value; no duplicated literals to drift
+
+/* one shared live region: a per-button aria-live would be 26 of them, and each button's
+   accessible name is its own visible text, which is what changes on copy. */
+// NB: not `status` — a top-level `var status` aliases window.status, which stringifies on assign.
+var liveRegion=document.createElement('div');
+liveRegion.className='sr-only';
+liveRegion.setAttribute('role','status');
+document.body.appendChild(liveRegion);
+function announce(msg){liveRegion.textContent='';setTimeout(function(){liveRegion.textContent=msg;},60);}
+
+function hexToRgb(hex){
+  var n=parseInt(hex.slice(1),16);
+  return 'rgb('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+')';
 }
 
-/* split each foil into its stops first, so they flow through the same hex→rgb→copy pass below */
-[].slice.call(document.querySelectorAll('.sw .foil-val')).forEach(function(el){
-  var stops=el.textContent.match(/#[0-9A-Fa-f]{6}/g);
-  if(!stops)return;
-  var row=document.createElement('div');
-  row.className='stops';
-  stops.forEach(function(hex){
-    var stop=document.createElement('div');
-    stop.className='stop';
-    var sq=document.createElement('span');
-    sq.className='sq';sq.style.background=hex;
-    var hx=document.createElement('div');
-    hx.className='hex';hx.textContent=hex;
-    stop.appendChild(sq);stop.appendChild(hx);
-    row.appendChild(stop);
+function copyBtn(val,swatch){
+  var b=document.createElement('button');
+  b.type='button';b.className='cbtn';b.title='Click to copy';
+  var mark=document.createElement('span');
+  mark.setAttribute('aria-hidden','true');
+  if(swatch){mark.className='sq';mark.style.background=swatch;}
+  else{mark.className='g';mark.textContent='⧉';}
+  var v=document.createElement('span');
+  v.className='v';v.textContent=val;
+  b.appendChild(mark);b.appendChild(v);
+  function ok(){
+    v.textContent='Copied ✓';b.classList.add('copied');
+    announce(val+' copied');
+    setTimeout(function(){v.textContent=val;b.classList.remove('copied');},1400);
+  }
+  /* Never fail silently. A partner who reads a missing ✓ as a dropped animation pastes whatever
+     was already on the clipboard and ships it as a brand colour, which is the one outcome this
+     kit exists to prevent. Say so, and select the value so it can still be copied by hand. */
+  function fail(){
+    b.classList.add('failed');
+    b.title='Copy blocked by the browser: the value is selected, press Ctrl+C / Cmd+C';
+    var r=document.createRange();r.selectNodeContents(v);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
+    announce('Copy blocked. '+val+' is selected: press Control C to copy it.');
+    setTimeout(function(){b.classList.remove('failed');},2600);
+  }
+  /* try/catch as well as the reject branch: on an insecure origin navigator.clipboard is
+     undefined outright, which throws here rather than returning a promise to reject. */
+  b.addEventListener('click',function(){
+    try{ navigator.clipboard.writeText(val).then(ok,fail); }
+    catch(e){ fail(); }
   });
-  el.insertAdjacentElement('afterend',row);
-});
+  return b;
+}
 
 [].slice.call(document.querySelectorAll('.sw .hex')).forEach(function(hexEl){
-  var val=hexEl.textContent.trim();
-  if(/^#[0-9A-Fa-f]{6}$/.test(val)){
-    var n=parseInt(val.slice(1),16);
-    var rgbEl=document.createElement('div');
-    rgbEl.className='hex rgb';
-    rgbEl.textContent='rgb('+(n>>16&255)+', '+(n>>8&255)+', '+(n&255)+')';
-    hexEl.insertAdjacentElement('afterend',rgbEl);
-    copyable(rgbEl);
+  var raw=hexEl.textContent.trim();
+  var rows=document.createDocumentFragment();
+  if(/^#[0-9A-Fa-f]{6}$/.test(raw)){
+    var vals=document.createElement('div');
+    vals.className='vals';
+    vals.appendChild(copyBtn(raw));
+    vals.appendChild(copyBtn(hexToRgb(raw)));
+    rows.appendChild(vals);
+  }else{
+    /* a foil: each stop copies on its own as an eyedropper dot, then the whole gradient string */
+    var stops=raw.match(/#[0-9A-Fa-f]{6}/g)||[];
+    var stopRow=document.createElement('div');
+    stopRow.className='vals';
+    stops.forEach(function(s){stopRow.appendChild(copyBtn(s,s));});
+    var cssRow=document.createElement('div');
+    cssRow.className='vals';
+    cssRow.appendChild(copyBtn(raw));
+    if(stops.length)rows.appendChild(stopRow);
+    rows.appendChild(cssRow);
   }
-  copyable(hexEl);
+  hexEl.replaceWith(rows);
+});
+
+/* a hex quoted in prose (§04's ink/paper placements, §05's law) copies on the same terms as a
+   swatch: wherever a partner reads a value, it is a value they can take */
+[].slice.call(document.querySelectorAll('code')).forEach(function(c){
+  var v=c.textContent.trim();
+  if(!/^#[0-9A-Fa-f]{6}$/.test(v))return;
+  var b=copyBtn(v);
+  b.className='cbtn inline';
+  c.replaceWith(b);
 });
 </script>
 </body>
