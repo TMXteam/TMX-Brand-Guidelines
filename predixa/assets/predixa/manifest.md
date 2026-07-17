@@ -17,6 +17,13 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `fonts/inter-700.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/jetbrains-mono-400.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/jetbrains-mono-500.woff2` | Bundled webfont (latin subset) for offline use. |
+| `fonts/install/Inter-Variable.ttf` | Desktop variable TTF, installable. |
+| `fonts/install/Fraunces-Italic-Variable.ttf` | Desktop variable TTF, installable. |
+| `fonts/install/JetBrainsMono-Variable.ttf` | Desktop variable TTF, installable. |
+| `fonts/install/OFL-Inter.txt` | SIL OFL 1.1 license text. |
+| `fonts/install/OFL-Fraunces.txt` | SIL OFL 1.1 license text. |
+| `fonts/install/OFL-JetBrainsMono.txt` | SIL OFL 1.1 license text. |
+| `fonts/install/README.txt` | Install notes. |
 | `globe/predixa-globe-dark-1024.png` | Dark globe, web size. |
 | `globe/predixa-globe-dark-512.png` | Dark globe, web size. |
 | `globe/predixa-globe-dark.png` | Dark globe, full-res master. |
@@ -34,3 +41,4 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `logo/predixa-logo-white.png` | Solid white silhouette, reversed for dark surfaces. |
 | `logo/predixa-logo.svg` | Colour vector master, the editable source. |
 | `tokens.css` | Brand tokens as CSS custom properties (drop-in, both themes). |
+| `TMX-predixa-fonts.zip` | Installable desktop fonts with licenses. |
