@@ -7,7 +7,7 @@
 
 # TMX Brand Kits
 
-**Partner design-spec kits for the TMX ecosystem.**
+**Brand kits for the TMX ecosystem.**
 
 [![Open the TMX Ecosystem kit](https://img.shields.io/badge/Open_the_TMX_Ecosystem_kit-live-A54D1F?style=for-the-badge)](https://tmxteam.github.io/TMX-Brand-Guidelines/ecosystem/partner-kit.html)
 [![Open the Predixa kit](https://img.shields.io/badge/Open_the_Predixa_kit-live-0E7A40?style=for-the-badge)](https://tmxteam.github.io/TMX-Brand-Guidelines/predixa/partner-kit.html)
