@@ -275,7 +275,10 @@ code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(-
 /* the three shipped assets. Sized to be compared, not catalogued: at the previous 52px the flat
    and 3D finishes were indistinguishable and the globe emblem was too small to read at all. */
 .variants{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
-@media(min-width:640px){.variants{grid-template-columns:repeat(3,1fr)}}
+/* four assets: 2x2 rather than auto-fit, which lands 3+1 and orphans the fourth tile at the
+   width this column actually gets. Four across only once the body column can hold them. */
+@media(min-width:560px){.variants{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1560px){.variants{grid-template-columns:repeat(4,1fr)}}
 .variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
 .variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
@@ -283,8 +286,9 @@ code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(-
    margin-top:auto seats the row on the card floor, so the buttons line up across the three
    tiles instead of drifting with however far each label wraps. */
 .variants .v .dl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:auto;padding-top:16px}
-html[data-theme="dark"] .globe-light{display:none}
-html[data-theme="light"] .globe-dark{display:none}
+/* the two assets that ship a per-theme pair (globe emblem, mono mark): show the cut for the field */
+html[data-theme="dark"] .globe-light,html[data-theme="dark"] .mono-light{display:none}
+html[data-theme="light"] .globe-dark,html[data-theme="light"] .mono-dark{display:none}
 
 .clearspace{border:1px dashed var(--rule-strong);border-radius:16px;display:inline-flex;padding:40px;margin-top:6px}
 .clearspace img{height:44px;width:auto}
@@ -513,12 +517,22 @@ ol{max-width:66ch;padding-left:20px}
           <p>A <strong>four-leaf clover</strong> rests on the shield, green with a gold edge. It is part of the core mark, not an ornament, and ships inside every export below. Never redraw it, rescale it against the shield, or swap in a stock clover.</p>
 
 
-          <h3>The three assets</h3>
+          <h3>The four assets</h3>
           <div class="variants">
             <div class="v">
               <img src="assets/predixa/logo/predixa-logo.svg" alt="Flat shield vector" />
               <div class="lb">Flat · the primary mark</div>
               <div class="dl"><a class="btn" href="assets/predixa/logo/predixa-logo.svg" download aria-label="Download the flat shield, SVG vector master">↓&nbsp; SVG</a></div>
+            </div>
+            <div class="v">
+              <img class="mono-dark" src="assets/predixa/logo/predixa-logo-white.png" alt="Mono shield, reversed for ink" />
+              <img class="mono-light" src="assets/predixa/logo/predixa-logo-black.png" alt="Mono shield, silhouette for paper" />
+              <div class="lb">Mono · one colour</div>
+              <div class="dl">
+                <a class="btn" href="assets/predixa/logo/predixa-logo-mono.svg" download aria-label="Download the mono shield, SVG vector">↓&nbsp; SVG</a>
+                <a class="btn" href="assets/predixa/logo/predixa-logo-white.png" download aria-label="Download the reversed mono shield for ink, PNG">↓&nbsp; Dark</a>
+                <a class="btn" href="assets/predixa/logo/predixa-logo-black.png" download aria-label="Download the silhouette mono shield for paper, PNG">↓&nbsp; Light</a>
+              </div>
             </div>
             <div class="v">
               <img src="assets/predixa/logo/predixa-logo-3d-512.png" alt="3D shield render" />
@@ -535,11 +549,12 @@ ol{max-width:66ch;padding-left:20px}
               </div>
             </div>
           </div>
-          <p class="fine" style="margin-top:14px">The flat vector is the primary mark: ship it unless the placement is large enough for the 3D render to read. The 3D render is one asset for both themes. Only the globe emblem ships a per-theme pair.</p>
+          <p class="fine" style="margin-top:14px">The flat vector is the primary mark: ship it unless the placement is large enough for the 3D render to read. The 3D render is one asset for both themes. The mono mark and the globe emblem each ship a per-theme pair.</p>
           <div class="scrollx" tabindex="0" role="region" aria-label="Asset usage table"><table>
             <thead><tr><th scope="col">Asset</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
               <tr><td>Flat shield</td><td>Default. Navbars, ad centerpieces, print, small sizes.</td></tr>
+              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
               <tr><td>3D shield</td><td>Premium centerpieces, large placements only. One asset for both themes.</td></tr>
               <tr><td>Globe emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
               <tr><td>Favicon</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. An iOS 26 "Liquid Glass" icon renders from this SVG via Apple's Icon Composer.</td></tr>
