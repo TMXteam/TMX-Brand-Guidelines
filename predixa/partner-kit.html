@@ -282,6 +282,10 @@ code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(-
 @media(min-width:1560px){.variants{grid-template-columns:repeat(4,1fr)}}
 .variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
+/* the 3D render is the only portrait export (445x512) and bleeds to its frame edges; under the
+   shared width constraint that lets it render taller than the square marks at every breakpoint.
+   Give it a slightly-landscape box so its 100%-fill height lands level with the marks' ~94% fill. */
+.variants .v img.threed{aspect-ratio:1.06}
 .variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
 /* each asset downloads on its own; the globe ships a per-theme pair, so it carries two.
    margin-top:auto seats the row on the card floor, so the buttons line up across the three
@@ -443,7 +447,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.4.0 · 2026-07-17</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.4.1 · 2026-07-17</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -526,6 +530,11 @@ ol{max-width:66ch;padding-left:20px}
               <div class="dl"><a class="btn" href="assets/predixa/logo/predixa-logo.svg" download aria-label="Download the flat shield, SVG vector master">↓&nbsp; SVG</a></div>
             </div>
             <div class="v">
+              <img class="threed" src="assets/predixa/logo/predixa-logo-3d-512.png" alt="3D shield render" />
+              <div class="lb">3D · premium centerpieces</div>
+              <div class="dl"><a class="btn" href="assets/predixa/logo/predixa-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
+            </div>
+            <div class="v">
               <img class="mono-dark" src="assets/predixa/logo/predixa-logo-white.png" alt="Mono shield, reversed for ink" />
               <img class="mono-light" src="assets/predixa/logo/predixa-logo-black.png" alt="Mono shield, silhouette for paper" />
               <div class="lb">Mono · one colour</div>
@@ -534,11 +543,6 @@ ol{max-width:66ch;padding-left:20px}
                 <a class="btn" href="assets/predixa/logo/predixa-logo-white.png" download aria-label="Download the reversed mono shield for ink, PNG">↓&nbsp; Dark</a>
                 <a class="btn" href="assets/predixa/logo/predixa-logo-black.png" download aria-label="Download the silhouette mono shield for paper, PNG">↓&nbsp; Light</a>
               </div>
-            </div>
-            <div class="v">
-              <img src="assets/predixa/logo/predixa-logo-3d-512.png" alt="3D shield render" />
-              <div class="lb">3D · premium centerpieces</div>
-              <div class="dl"><a class="btn" href="assets/predixa/logo/predixa-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
             </div>
             <div class="v">
               <img class="globe-dark" src="assets/predixa/globe/predixa-globe-dark.png" alt="Globe emblem" />
@@ -555,8 +559,8 @@ ol{max-width:66ch;padding-left:20px}
             <thead><tr><th scope="col">Asset</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
               <tr><td>Flat shield</td><td>Default. Navbars, ad centerpieces, print, small sizes.</td></tr>
-              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
               <tr><td>3D shield</td><td>Premium centerpieces, large placements only. One asset for both themes.</td></tr>
+              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
               <tr><td>Globe emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
               <tr><td>Favicon</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. An iOS 26 "Liquid Glass" icon renders from this SVG via Apple's Icon Composer.</td></tr>
             </tbody>
@@ -843,7 +847,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.4.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.4.1 · reproduction-only · 2026-07-17 · team@tmx.info</p>
     </section>
   </main>
 </div>
