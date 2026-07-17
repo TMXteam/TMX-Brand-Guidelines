@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>TMX Ecosystem: Partner Design-Spec Kit</title>
+<title>TMX Ecosystem: Brand Kit</title>
 <meta name="description" content="How to reproduce TMX Ecosystem correctly in a campaign. Reproduction-only design spec." />
 <link rel="icon" href="assets/ecosystem/favicon/favicon.svg" />
 <style>
@@ -282,6 +282,10 @@ code{font-family:var(--mono);font-size:12.5px;background:color-mix(in srgb,var(-
 @media(min-width:1560px){.variants{grid-template-columns:repeat(4,1fr)}}
 .variants .v{border:1px solid var(--rule);border-radius:16px;padding:28px 22px 22px;text-align:center;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .variants .v img{width:min(196px,86%);height:auto;max-height:196px;object-fit:contain}
+/* the 3D render is the only portrait export (445x512) and bleeds to its frame edges; under the
+   shared width constraint that lets it render taller than the square marks at every breakpoint.
+   Give it a slightly-landscape box so its 100%-fill height lands level with the marks' ~94% fill. */
+.variants .v img.threed{aspect-ratio:1.06}
 .variants .v .lb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:18px}
 /* each asset downloads on its own; the globe ships a per-theme pair, so it carries two.
    margin-top:auto seats the row on the card floor, so the buttons line up across the three
@@ -410,7 +414,7 @@ ol{max-width:66ch;padding-left:20px}
 
 <div class="bar">
   <button class="btn" id="navToggle" aria-label="Sections" aria-expanded="false" aria-controls="toc" onclick="toggleNav()"><span></span><span></span><span></span></button>
-  <span class="tag">TMX Ecosystem · Partner Design-Spec Kit</span>
+  <span class="tag">TMX Ecosystem · Brand Kit</span>
   <button class="btn" onclick="window.print()">Print / PDF</button>
   <button class="btn icon" id="themeBtn" onclick="toggleTheme()" aria-label="Switch to dark theme">
     <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -426,7 +430,7 @@ ol{max-width:66ch;padding-left:20px}
       <img src="assets/ecosystem/logo/ecosystem-logo.svg" alt="TMX Ecosystem mark" />
       <span class="wm">TMX Ecosystem</span>
     </div>
-    <div class="kind">Partner Design-Spec Kit</div>
+    <div class="kind">Brand Kit</div>
     <a href="#cover"><span class="n">00</span>Overview</a>
     <a href="#use"><span class="n">01</span>How to use this kit</a>
     <a href="#which"><span class="n">02</span>Which TMX is this</a>
@@ -443,7 +447,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Partner Design-Spec Kit · v2.3.0 · 2026-07-17</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.4.1 · 2026-07-17</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -520,6 +524,11 @@ ol{max-width:66ch;padding-left:20px}
               <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo.svg" download aria-label="Download the flat shield, SVG vector master">↓&nbsp; SVG</a></div>
             </div>
             <div class="v">
+              <img class="threed" src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" />
+              <div class="lb">3D · premium centerpieces</div>
+              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
+            </div>
+            <div class="v">
               <img class="mono-dark" src="assets/ecosystem/logo/ecosystem-logo-white.png" alt="Mono shield, reversed for ink" />
               <img class="mono-light" src="assets/ecosystem/logo/ecosystem-logo-black.png" alt="Mono shield, silhouette for paper" />
               <div class="lb">Mono · one colour</div>
@@ -528,11 +537,6 @@ ol{max-width:66ch;padding-left:20px}
                 <a class="btn" href="assets/ecosystem/logo/ecosystem-logo-white.png" download aria-label="Download the reversed mono shield for ink, PNG">↓&nbsp; Dark</a>
                 <a class="btn" href="assets/ecosystem/logo/ecosystem-logo-black.png" download aria-label="Download the silhouette mono shield for paper, PNG">↓&nbsp; Light</a>
               </div>
-            </div>
-            <div class="v">
-              <img src="assets/ecosystem/logo/ecosystem-logo-3d-512.png" alt="3D shield render" />
-              <div class="lb">3D · premium centerpieces</div>
-              <div class="dl"><a class="btn" href="assets/ecosystem/logo/ecosystem-logo-3d.png" download aria-label="Download the 3D shield render, full-size PNG">↓&nbsp; PNG</a></div>
             </div>
             <div class="v">
               <img class="globe-dark" src="assets/ecosystem/globe/ecosystem-globe-dark.png" alt="Globe emblem" />
@@ -549,8 +553,8 @@ ol{max-width:66ch;padding-left:20px}
             <thead><tr><th scope="col">Asset</th><th scope="col">Use it when</th></tr></thead>
             <tbody>
               <tr><td>Flat shield</td><td>Default. Navbars, ad centerpieces, print, small sizes.</td></tr>
-              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
               <tr><td>3D shield</td><td>Premium centerpieces, large placements only. One asset for both themes.</td></tr>
+              <tr><td>Mono shield</td><td>One colour: stencil, cutout, watermark, emboss. Reversed (white) on ink, silhouette (black) on paper.</td></tr>
               <tr><td>Globe emblem</td><td>Premium centerpieces. Dark globe on ink, light globe on paper.</td></tr>
               <tr><td>Favicon</td><td>Browser tabs and small square slots: <code>favicon.svg</code> plus 16/32px PNGs. An iOS 26 "Liquid Glass" icon renders from this SVG via Apple's Icon Composer.</td></tr>
             </tbody>
@@ -822,7 +826,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Partner Design-Spec Kit · v2.3.0 · reproduction-only · 2026-07-17 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Brand Kit · v2.4.1 · reproduction-only · 2026-07-17 · team@tmx.info</p>
     </section>
   </main>
 </div>

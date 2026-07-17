@@ -40,4 +40,6 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `logo/predixa-logo-white.png` | Solid white silhouette, reversed for dark surfaces. |
 | `logo/predixa-logo.svg` | Colour vector master, the editable source. |
 | `tokens.css` | Brand tokens as CSS custom properties (drop-in, both themes). |
+| `TMX-predixa-assets.zip` | The whole pack: every file above. |
+| `TMX-predixa-essentials.zip` | Essential marks: flat vector, 3D render, both globe masters. |
 | `TMX-predixa-fonts.zip` | Installable desktop fonts with licenses. |
