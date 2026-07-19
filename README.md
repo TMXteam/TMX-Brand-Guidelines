@@ -45,6 +45,16 @@ usage terms. Every value is verified against the TMX design source of truth.
 | **Marks** | [`predixa/assets/predixa/`](predixa/assets/predixa) &middot; grouped into `logo/`, `globe/`, `favicon/`, `fonts/` |
 | **One download** | [`TMX-predixa-assets.zip`](predixa/assets/predixa/TMX-predixa-assets.zip) &middot; the whole pack |
 
+### Everything, in one file
+
+**[`TMX-brand-kits.zip`](TMX-brand-kits.zip)** &middot; every kit, every asset, each
+file once. Both kit pages open offline from the extracted folder. Prefer this to
+downloading the repo as a zip &mdash; the repo also carries the per-kit packs
+(`*-assets.zip`, `*-essentials.zip`, `*-fonts.zip`), which are copies of the
+loose asset trees, so a repo zip ships each mark two to three times.
+
+Rebuild it after any kit change: `pwsh tools/build-bundle.ps1`.
+
 _More kits (TMX DEX) will be added here._
 
 ## Reproduce, don't redraw
