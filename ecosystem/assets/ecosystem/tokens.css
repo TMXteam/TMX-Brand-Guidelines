@@ -19,7 +19,12 @@ html[data-theme="dark"]{
   --rule-strong: rgba(242,242,242,.18);
   --surface: rgba(14,14,16,.55);
   --accent: #D67341; /* also the small-text accent: 6:1 on ink (AA) */
-  --foil: linear-gradient(135deg,#FEE5A2,#D67341,#AF592D);
+  /* --foil is the static still (crest -> deep). The live emphasis clause animates
+     a symmetric 5-stop sweep at background-size:215%:
+       dark  linear-gradient(135deg,#FEE5A2,#D67341,#AF592D,#D67341,#FEE5A2)
+       light linear-gradient(135deg,#EBB371,#B6562F,#A44A24,#B6562F,#EBB371)
+     Use the 2-stop still for static artwork; the 5-stop only to animate. */
+  --foil: linear-gradient(135deg,#FEE5A2,#AF592D);
   --shadow: 0 24px 60px rgba(0,0,0,.45);
 }
 /* light (daylight twin) */
@@ -32,6 +37,6 @@ html[data-theme="light"]{
   --rule-strong: rgba(22,20,15,.20);
   --surface: #FCFAF3;
   --accent: #A54D1F; /* also the small-text accent: 5.1:1 on paper (AA) */
-  --foil: linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
+  --foil: linear-gradient(135deg,#EBB371,#A44A24); /* static still; see the 5-stop note in the dark block */
   --shadow: 0 14px 30px -20px rgba(22,20,15,.28);
 }

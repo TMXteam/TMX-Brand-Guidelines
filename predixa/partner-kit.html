@@ -38,7 +38,7 @@ html[data-theme="dark"], .stage.dk{
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
   --surface:rgba(14,14,16,.55);
   --accent:#FFB627; --accent-text:#D79F1E;
-  --foil:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F);
+  --foil:linear-gradient(135deg,#FFD89A,#E08F0F);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
   /* status text: dark uses the fills as-is; light derives an ink-deepened pair for AA at label sizes */
   --yes-ink:var(--yes); --no-ink:var(--no);
@@ -447,7 +447,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.4.2 · 2026-07-21</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.5.0 · 2026-07-21</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -643,10 +643,10 @@ ol{max-width:66ch;padding-left:20px}
           <div class="grouplabel">Foil gradients · the italic clause</div>
           <div class="swatches foils">
             <div class="sw">
-              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)"></div></div>
+              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FFD89A,#E08F0F)"></div></div>
               <div class="foot">
                 <div class="head"><span class="nm">Foil</span><span class="onfield">On dark</span></div>
-                <div class="hex foil-val">linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F)</div>
+                <div class="hex foil-val">linear-gradient(135deg,#FFD89A,#E08F0F)</div>
                 <div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div>
               </div>
             </div>
@@ -659,6 +659,8 @@ ol{max-width:66ch;padding-left:20px}
               </div>
             </div>
           </div>
+
+          <p class="fine" style="margin-top:14px">The on-dark swatch is the static still: two stops, lightest to darkest. On-site the gold clause animates, a symmetric five-stop sweep, crest → mid → deep → mid → crest (<code>linear-gradient(135deg,#FFD89A,#FFB627,#E08F0F,#FFB627,#FFD89A)</code>) at <code>background-size:215%</code>. Reproduce the two-stop still for artwork; use the five-stop only to animate. The on-light emerald foil is already a still and does not animate.</p>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
@@ -847,7 +849,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.4.2 · reproduction-only · 2026-07-21 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.5.0 · reproduction-only · 2026-07-21 · team@tmx.info</p>
     </section>
   </main>
 </div>

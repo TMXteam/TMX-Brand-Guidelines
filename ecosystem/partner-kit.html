@@ -38,7 +38,7 @@ html[data-theme="dark"], .stage.dk{
   --rule:rgba(242,242,242,.10); --rule-strong:rgba(242,242,242,.18);
   --surface:rgba(14,14,16,.55);
   --accent:#D67341;
-  --foil:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D);
+  --foil:linear-gradient(135deg,#FEE5A2,#AF592D);
   --select:#7DF9D5; --yes:#7DE0B0; --no:#E07A7A;
   /* status text: dark uses the fills as-is; light derives an ink-deepened pair for AA at label sizes */
   --yes-ink:var(--yes); --no-ink:var(--no);
@@ -53,7 +53,7 @@ html[data-theme="light"], .stage.lt{
   --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
   --surface:#FCFAF3;
   --accent:#A54D1F;
-  --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
+  --foil:linear-gradient(135deg,#EBB371,#A44A24);
   --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
   --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
   --shadow:0 14px 30px -20px rgba(22,20,15,.28);
@@ -392,7 +392,7 @@ ol{max-width:66ch;padding-left:20px}
     --rule:rgba(22,20,15,.12); --rule-strong:rgba(22,20,15,.20);
     --surface:#FCFAF3;
     --accent:#A54D1F;
-    --foil:linear-gradient(135deg,#EBB371,#B6562F,#A44A24);
+    --foil:linear-gradient(135deg,#EBB371,#A44A24);
     --select:#9CE1C8; --yes:#1F9E57; --no:#C0392B;
     --yes-ink:color-mix(in srgb,var(--yes) 60%,var(--ink)); --no-ink:color-mix(in srgb,var(--no) 60%,var(--ink));
     --shadow:none; --divider:rgba(22,20,15,.30);
@@ -447,7 +447,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.4.2 · 2026-07-21</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.5.0 · 2026-07-21</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce TMX Ecosystem <span class="foil">exactly as it is.</span></h1>
@@ -621,22 +621,24 @@ ol{max-width:66ch;padding-left:20px}
           <div class="grouplabel">Foil gradients · the italic clause</div>
           <div class="swatches foils">
             <div class="sw">
-              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)"></div></div>
+              <div class="ground dk"><div class="chip foil-chip" style="background:linear-gradient(135deg,#FEE5A2,#AF592D)"></div></div>
               <div class="foot">
                 <div class="head"><span class="nm">Foil</span><span class="onfield">On dark</span></div>
-                <div class="hex foil-val">linear-gradient(135deg,#FEE5A2,#D67341,#AF592D)</div>
+                <div class="hex foil-val">linear-gradient(135deg,#FEE5A2,#AF592D)</div>
                 <div class="use">The italic-clause fill on ink. One clause per fold; never body copy or buttons.</div>
               </div>
             </div>
             <div class="sw">
-              <div class="ground lt"><div class="chip foil-chip" style="background:linear-gradient(135deg,#EBB371,#B6562F,#A44A24)"></div></div>
+              <div class="ground lt"><div class="chip foil-chip" style="background:linear-gradient(135deg,#EBB371,#A44A24)"></div></div>
               <div class="foot">
                 <div class="head"><span class="nm">Foil</span><span class="onfield">On light</span></div>
-                <div class="hex foil-val">linear-gradient(135deg,#EBB371,#B6562F,#A44A24)</div>
+                <div class="hex foil-val">linear-gradient(135deg,#EBB371,#A44A24)</div>
                 <div class="use">The same device on paper.</div>
               </div>
             </div>
           </div>
+
+          <p class="fine" style="margin-top:14px">The swatch is the static still: two stops, lightest to darkest. On-site the emphasis clause animates, a symmetric five-stop sweep, crest → mid → deep → mid → crest (<code>linear-gradient(135deg,#FEE5A2,#D67341,#AF592D,#D67341,#FEE5A2)</code> on ink, the paper values likewise) at <code>background-size:215%</code>. Reproduce the two-stop still for artwork; use the five-stop only to animate.</p>
 
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
@@ -826,7 +828,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/ecosystem-logo[-variant]</code> and the emblem is <code>globe/ecosystem-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Brand Kit · v2.4.2 · reproduction-only · 2026-07-21 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">TMX Ecosystem · Brand Kit · v2.5.0 · reproduction-only · 2026-07-21 · team@tmx.info</p>
     </section>
   </main>
 </div>
