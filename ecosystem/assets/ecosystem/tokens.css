@@ -4,6 +4,8 @@
   --serif: "Fraunces",Georgia,serif;
   --mono: "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --r-card: 22px;
+  --r-panel: 16px; /* panels, drawers, images */
+  --r-field: 12px; /* fields, inline callouts */
   --r-pill: 9999px;
   --ease: cubic-bezier(.22,1,.36,1);
 }
