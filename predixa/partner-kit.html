@@ -11,9 +11,11 @@
    - Inter is a variable font; the 400/500/600/700 files were four byte-identical copies of it,
      downloaded separately. One face over the wght axis renders the same and fetches once.
    - Inter italic and JetBrains Mono are static cuts (no live wght axis), so they declare one weight.
-   - Fraunces is cut static at opsz 14 to match the site. */
+   - Fraunces ships two static cuts, both at opsz 14 to match the site: normal 400 for the base
+     neutrals' live type specimen, italic 500 for the one emphasis clause per fold. */
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/predixa/fonts/inter-400.woff2") format("woff2")}
 @font-face{font-family:"Inter";font-style:italic;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/inter-400-italic.woff2") format("woff2")}
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/fraunces-400.woff2") format("woff2")}
 @font-face{font-family:"Fraunces";font-style:italic;font-weight:500;font-display:swap;src:url("assets/predixa/fonts/fraunces-500-italic.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("assets/predixa/fonts/jetbrains-mono-400.woff2") format("woff2")}
 :root{
@@ -201,10 +203,13 @@ html[data-theme="light"] .cover-mark img{filter:drop-shadow(0 18px 36px rgba(22,
 /* the foil is matted on its field too: a dark-theme gradient laid straight onto paper is the
    same violation as the flat accent, just larger (predixa's rule: gold never touches paper) */
 .ground .chip.foil-chip{height:112px}
-/* Shared neutrals carry no theme split, so they stay a plain full-bleed field: no ground, no
-   label. The card's own border is their edge; an inset ring here would draw a second line
-   inside the fill, which read as a box around the pale neutrals rather than as their edge. */
-.sw .chip.full{height:104px}
+/* Base neutrals collapse from four flat chips to two SURFACE cards, one per theme: the ground
+   fills the card and its paired ink sits on it as a live specimen (name, then its own usage
+   note) instead of a second flat chip, so the ground reads as a background, not another
+   swatch. Both values stay listed and copyable below, tagged Background / Text. */
+.ground .specimen{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:76px}
+.ground .specimen .sname{font-family:var(--serif);font-style:normal;font-weight:400;font-size:clamp(24px,2.6vw,30px);line-height:1.08}
+.ground .specimen .suse{font-family:var(--sans);font-size:13px;line-height:1.5;opacity:.72}
 
 .sw .foot{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px}
 .sw .head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
@@ -447,7 +452,7 @@ ol{max-width:66ch;padding-left:20px}
   <main>
     <!-- 00 COVER -->
     <section id="cover" class="cover">
-      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.5.0 · 2026-07-21</div>
+      <div class="eyebrow mono"><span class="dot">●</span>&nbsp; Brand Kit · v2.6.0 · 2026-07-24</div>
       <div class="cover-grid">
         <div>
           <h1>Reproduce Predixa <span class="foil">exactly as it is.</span></h1>
@@ -665,35 +670,31 @@ ol{max-width:66ch;padding-left:20px}
           <div class="grouplabel">Base neutrals (shared, both themes)</div>
           <div class="swatches">
             <div class="sw">
-              <div class="chip full" style="background:#0A0A0C"></div>
+              <div class="ground dk">
+                <div class="specimen">
+                  <span class="sname" style="color:#F2F2F2">Paper ink</span>
+                  <span class="suse" style="color:#F2F2F2">Type on dark. Never pure #FFF.</span>
+                </div>
+              </div>
               <div class="foot">
-                <div class="head"><span class="nm">Ink field</span></div>
+                <div class="head"><span class="nm">Ink field</span><span class="onfield">Background</span></div>
                 <div class="hex">#0A0A0C</div>
-                <div class="use">Dark background. Never pure #000.</div>
-              </div>
-            </div>
-            <div class="sw">
-              <div class="chip full" style="background:#F2F2F2"></div>
-              <div class="foot">
-                <div class="head"><span class="nm">Paper ink</span></div>
+                <div class="head"><span class="nm">Paper ink</span><span class="onfield">Text</span></div>
                 <div class="hex">#F2F2F2</div>
-                <div class="use">Type on dark. Never pure #FFF.</div>
               </div>
             </div>
             <div class="sw">
-              <div class="chip full" style="background:#F6F2E8"></div>
+              <div class="ground lt">
+                <div class="specimen">
+                  <span class="sname" style="color:#16140F">Warm ink</span>
+                  <span class="suse" style="color:#16140F">Type on paper. Never pure #000.</span>
+                </div>
+              </div>
               <div class="foot">
-                <div class="head"><span class="nm">Warm paper</span></div>
+                <div class="head"><span class="nm">Warm paper</span><span class="onfield">Background</span></div>
                 <div class="hex">#F6F2E8</div>
-                <div class="use">Light background. Never pure #FFF.</div>
-              </div>
-            </div>
-            <div class="sw">
-              <div class="chip full" style="background:#16140F"></div>
-              <div class="foot">
-                <div class="head"><span class="nm">Warm ink</span></div>
+                <div class="head"><span class="nm">Warm ink</span><span class="onfield">Text</span></div>
                 <div class="hex">#16140F</div>
-                <div class="use">Type on paper. Never pure #000.</div>
               </div>
             </div>
           </div>
@@ -849,7 +850,7 @@ ol{max-width:66ch;padding-left:20px}
       </table></div>
       <h3>Naming &amp; manifest</h3>
       <p>The shield is <code>logo/predixa-logo[-variant]</code> and the emblem is <code>globe/predixa-globe-{dark,light}</code>; <code>-mono</code> is the one-colour vector, <code>-white</code> / <code>-black</code> are the reversed and silhouette rasters, and numeric suffixes are pixel sizes. A <code>manifest.md</code> at the pack root lists every file and its use.</p>
-      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.5.0 · reproduction-only · 2026-07-21 · team@tmx.info</p>
+      <p class="mono" style="margin-top:32px;color:var(--faint);max-width:none">Predixa · Brand Kit · v2.6.0 · reproduction-only · 2026-07-24 · team@tmx.info</p>
     </section>
   </main>
 </div>
