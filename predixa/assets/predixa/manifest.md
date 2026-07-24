@@ -9,6 +9,7 @@ webfonts bundled for offline use. These are generated exports; use them as-is.
 | `favicon/favicon-16.png` | Browser tab / home-screen icon. |
 | `favicon/favicon-32.png` | Browser tab / home-screen icon. |
 | `favicon/favicon.svg` | Vector favicon (copy of the colour master). |
+| `fonts/fraunces-400.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/fraunces-500-italic.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/inter-400-italic.woff2` | Bundled webfont (latin subset) for offline use. |
 | `fonts/inter-400.woff2` | Bundled webfont (latin subset) for offline use. Variable: carries wght 100-900. |

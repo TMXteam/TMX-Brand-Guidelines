@@ -1,6 +1,6 @@
 # Predixa: Brand Usage & Trademark Policy
 
-Version 2.5.0 · 2026-07-21 · Not legal advice.
+Version 2.6.0 · 2026-07-24 · Not legal advice.
 
 ## You may
 
