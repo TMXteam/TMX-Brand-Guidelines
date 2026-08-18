@@ -23,3 +23,21 @@ leave the version behind a change.
 - All kit changes reach `main` by PR; the maintainer merges.
 
 A kit's current version is shown in its top bar and at the top of its `<brand>/CHANGELOG.md`.
+
+## The AI brief
+
+`ai/tmx-ai-brief.md` is versioned independently of the kits, on the same scale
+and by the same rules, with its own `ai/CHANGELOG.md`. Read the bump table above
+as: **MAJOR** = a changed rule that could make earlier AI-assisted work
+non-compliant; **MINOR** = a new rule, section, or example pair; **PATCH** = a
+typo or link fix.
+
+Two things in the brief carry the version, and both move in the same commit:
+
+- the `Version X.Y.Z · YYYY-MM-DD` line at the top, and
+- the version inside the memory-pointer block near the end, which is the copy an
+  ambassador's AI stores.
+
+The brief is deliberately fetched live from `main`, so a merge publishes it. Its
+facts must stay derivable from the kits and `usage-policy.md`; if a kit changes a
+rule the brief restates, both bump together.
