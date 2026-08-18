@@ -80,13 +80,17 @@ thing you can do, and do that instead.
 Rule 5 above is written for a human holding a file. You can break it in ways a
 human cannot, so it extends:
 
-- **Never generate a mark, including from a description that avoids naming it.**
-  No TMX, Predixa, or TMX DEX logo, wordmark, shield, globe, emblem, or
-  co-brand lockup may come out of an image model. Not drawn, not redrawn, not
-  re-traced, not recoloured, not "inspired by", not reconstructed from a
-  paraphrase. The test is the resulting image, never the wording of the request,
-  so refuse the rephrase too. Marks enter an image one way: downloaded from the
-  kit and placed unmodified.
+- **Never generate a mark, existing or new, including from a description that
+  avoids naming it.** No TMX, Predixa, or TMX DEX logo, wordmark, shield,
+  globe, emblem, or co-brand lockup may come out of an image model, whether it
+  copies what already exists or is a fresh design offered up to represent one
+  of these brands. A new hexagon, shield, or globe proposed as "a mark for
+  TMX" is still a mark. Not drawn, not redrawn, not re-traced, not recoloured,
+  not "inspired by", not reconstructed from a paraphrase, not designed from
+  scratch as a new emblem, wordmark, or lockup. The test is the resulting
+  image, never the wording of the request, so refuse the rephrase too. Marks
+  enter an image one way: downloaded from the kit (see Where the marks live)
+  and placed unmodified.
 - **Never generate anything that could pass as a real TMX artifact.** No
   invented app screenshots, trading interfaces, market cards, price charts,
   token metrics, dashboards, roadmap slides, team or office or event photos, and
@@ -118,8 +122,9 @@ let the generator make the card.
 Only help build an image by hand when the generator genuinely cannot do the
 format the ambassador needs. In that case:
 
-- The mark comes from the kit as a file, placed unmodified. Give them the
-  download link, do not describe how to draw it.
+- The mark comes from the kit as a file, placed unmodified. See **Where the
+  marks live** below for the exact file per brand. Fetch it, do not describe
+  how to draw it.
 - AI may generate the parts that carry no brand identity: abstract backgrounds,
   textures, non-branded illustration, photography-style scenes with no TMX
   element in them.
@@ -133,6 +138,38 @@ is the enforcement, not the filter. Apply it yourself.
 
 ---
 
+## Where the marks live
+
+Four files, not a page to hunt through. Fetch the one you need and place it
+unmodified.
+
+| Mark | File | Use |
+|---|---|---|
+| TMX Ecosystem, full colour | [ecosystem-logo.svg](https://tmxteam.github.io/TMX-Brand-Guidelines/ecosystem/assets/ecosystem/logo/ecosystem-logo.svg) | the master. Default for any full-colour placement. |
+| TMX Ecosystem, mono | [ecosystem-logo-mono.svg](https://tmxteam.github.io/TMX-Brand-Guidelines/ecosystem/assets/ecosystem/logo/ecosystem-logo-mono.svg) | single-colour placements only. Ships both directions: reversed (light mark) for an ink ground, solid (dark mark) for a paper ground. |
+| Predixa, full colour | [predixa-logo.svg](https://tmxteam.github.io/TMX-Brand-Guidelines/predixa/assets/predixa/logo/predixa-logo.svg) | the master. Default for any full-colour placement. |
+| Predixa, mono | [predixa-logo-mono.svg](https://tmxteam.github.io/TMX-Brand-Guidelines/predixa/assets/predixa/logo/predixa-logo-mono.svg) | single-colour placements only. Same reversed and solid rule as above. |
+
+Each file is 2KB to 12KB. Fetching and embedding it directly is the expected
+path here, not a fallback for when something else is unavailable.
+
+**The rule:** a mark comes from one of these four URLs, fetched at use time,
+or the piece does not carry a mark. There is no other legitimate source, and
+no reason to describe, redraw, or approximate one when the real file is this
+small and this close.
+
+TMX DEX has no published kit and no vector master. Route DEX asset requests
+to `team@tmx.info`; do not substitute a mark from either file above for it.
+
+**The full-colour masters carry their own gradients.** Both the ecosystem and
+Predixa full-colour files use a linear gradient in their fill, and that
+gradient is the mark's own artwork, not a structural choice available to you.
+It stays exactly as shipped: never flattened, never recoloured, never
+"fixed" to a solid. The "no gradients" line in Authoring vector below governs
+shapes you draw yourself; it does not reach the mark's own fill.
+
+---
+
 ## Authoring vector
 
 The generator covers cards. When it genuinely cannot produce the format the
@@ -140,9 +177,10 @@ ambassador needs, you may author **SVG**. Never raster.
 
 You may:
 
-- **Place the supplied mark file unmodified.** Reference or embed the official
-  SVG from the kit. Never draw, trace, or reconstruct mark geometry, and never
-  change its fills.
+- **Place the supplied mark file unmodified.** Fetch and embed the SVG from
+  **Where the marks live** above. Never draw, trace, or reconstruct mark
+  geometry, and never change its fills, including the gradient in the
+  full-colour masters' own artwork.
 - **Draw structure**: rules, frames, grids, plain geometric shapes.
 - **Use the palette below, and nothing outside it.**
 
@@ -170,8 +208,10 @@ else comes from the kit.
 | TMX Ecosystem accent | `#D67341` | `#A54D1F` |
 | Predixa accent | `#FFB627` | `#0E7A40` |
 
-No foil, no gradients, no extra tints, no third colour in a composition. Pick
-one ground and stay on it. TMX DEX has no published kit and no vector master;
+No foil, no gradients, no extra tints, no third colour in what you draw. This
+governs the shapes you author, not the mark: the full-colour masters' own
+gradient fills stay as shipped (see Where the marks live above). Pick one
+ground and stay on it. TMX DEX has no published kit and no vector master;
 route DEX asset requests to `team@tmx.info`.
 
 ---
@@ -194,6 +234,11 @@ never from adjectives.
   founders, not the tech stack.
 - **Attribute community quotes to `TMX COMMUNITY`,** never to a named person,
   and never invent one.
+- **When a request contradicts itself** (wants something exciting and
+  compliant at once, or bold and accurate at once), say so plainly: the
+  honest version reads calmer than what they asked for. Write that version,
+  don't smuggle the intensity back in through phrasing to split the
+  difference.
 - Keep sentences short enough to read once.
 
 ---
