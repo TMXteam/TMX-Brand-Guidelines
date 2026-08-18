@@ -26,7 +26,7 @@ A kit's current version is shown in its top bar and at the top of its `<brand>/C
 
 ## The AI brief
 
-`ai/tmx-ai-brief.md` is versioned independently of the kits, on the same scale
+`ai/tmx-brand/SKILL.md` is versioned independently of the kits, on the same scale
 and by the same rules, with its own `ai/CHANGELOG.md`. Read the bump table above
 as: **MAJOR** = a changed rule that could make earlier AI-assisted work
 non-compliant; **MINOR** = a new rule, section, or example pair; **PATCH** = a

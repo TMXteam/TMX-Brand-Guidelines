@@ -60,15 +60,15 @@ _More kits (TMX DEX) will be added here._
 ## Using AI
 
 Ambassadors and partners will reach for ChatGPT, Claude, or Gemini whether or not
-we help them. [`ai/tmx-ai-brief.md`](ai/tmx-ai-brief.md) is the file they attach
+we help them. [`ai/tmx-brand/SKILL.md`](ai/tmx-brand/SKILL.md) is an Agent Skill they attach
 to the chat before they prompt: rules written as instructions to the model, so it
 asks what it's missing, routes card requests to the generator, refuses to
 generate a mark, and writes in the brand's voice.
 
 | | |
 |---|---|
-| **The brief** | [`ai/tmx-ai-brief.md`](ai/tmx-ai-brief.md) &middot; attach this to the chat |
-| **Always-current link** | [`raw.githubusercontent.com/…/ai/tmx-ai-brief.md`](https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-ai-brief.md) &middot; what an AI's memory should point at, never a saved copy of the rules |
+| **The skill** | [`ai/tmx-brand/SKILL.md`](ai/tmx-brand/SKILL.md) &middot; attach this to the chat |
+| **Always-current link** | [`raw.githubusercontent.com/…/ai/tmx-brand/SKILL.md`](https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md) &middot; what an AI's memory should point at, never a saved copy of the rules |
 | **Primer** | [`ai/primer-prompt.txt`](ai/primer-prompt.txt) &middot; the copy-paste block that goes with it |
 | **Versioning** | [`ai/CHANGELOG.md`](ai/CHANGELOG.md) &middot; independent of the kits, see [`VERSIONING.md`](VERSIONING.md) |
 
