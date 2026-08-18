@@ -349,38 +349,64 @@ exchanges, so treat this as a standing part of the job:
 
 - **Tell the ambassador to reload you** when the conversation runs past roughly
   three or four exchanges, or the moment you notice your own output drifting off
-  these rules. A fresh chat with this file reloaded beats a long chat, whether
-  that means reattaching it or fetching it again from the URL at the top of
-  this file.
+  these rules. A fresh chat with this file reloaded beats a long chat.
 - **One job per chat.** Start a new conversation for a new piece of content.
 
-**To stop reloading by hand,** tell the ambassador which of these fits their
-assistant:
+That covers drift inside one conversation. Getting the rules into a new
+conversation in the first place is a different problem, and downloading this
+file is the **last** way to solve it, not the first. Four paths, in the order
+an ambassador should try them:
 
-- **If it can keep a file loaded across every conversation** (a persistent
-  project, workspace, or custom assistant with attachable knowledge), add this
-  file there once. New chats pick it up automatically, no reattaching or
-  refetching needed.
-- **If it cannot,** this file has to be attached or fetched again at the start
-  of each new chat. When the ambassador is prompting by URL rather than by
-  upload, the line to reuse every time is:
+1. **A one-off chat.** Paste the fetch line below. The model reads the file
+   from its URL; nothing is downloaded.
 
-  > Read `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
-  > and follow it for anything I ask you to write or make about TMX. If you
-  > cannot open the link, tell me instead of guessing.
+   > Read `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
+   > and follow it for anything I ask you to write or make about TMX. If you
+   > cannot open the link, tell me instead of guessing.
 
-**If you have a memory feature, save the pointer, not the rules.** These rules
-are versioned and they change. A cached copy goes stale silently, which is worse
-than no copy. Save exactly this and nothing more:
+2. **An assistant that keeps instructions across conversations:** a
+   workspace's or project's custom instructions, or a memory feature. Put the
+   fetch line above into that field, once. It is short enough to fit where the
+   whole file is not, and because it re-fetches rather than storing a copy,
+   every new conversation in that workspace loads the rules at their current
+   version with nothing to go stale. This is where most ambassadors should
+   end up: no file, set once, always current.
 
-> TMX brand rules: fetch
-> `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
-> (currently v1.0.0) whenever TMX, TMX Ecosystem, Predixa, or TMX DEX comes up,
-> and follow it. Do not answer from a remembered copy of the rules.
+3. **An agent that can write files for itself:** a coding agent or an IDE
+   assistant that reads its skills or rules from a directory. Told to install
+   the skill, it fetches the URL and writes this file to wherever it keeps
+   skills, then loads it automatically from then on with no fetching per
+   chat. Where that directory lives differs by harness; let the agent use its
+   own rather than assuming one here. This file is already shaped the way
+   those harnesses expect a skill (`SKILL.md`, `name` and `description` up
+   top), so it installs as-is.
 
-If you cannot fetch that file in a given session, say so and ask the ambassador
-to reattach it or repaste the fetch line above, rather than working from
-memory.
+   > Install `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
+   > as a skill, then follow it whenever I ask you to write or make anything
+   > about TMX.
+
+   An installed copy is still a copy: see the rule below.
+
+4. **Download the file and attach it.** Only when the assistant genuinely
+   cannot open a link at all. This is the fallback, not a convenience: a
+   downloaded copy is frozen at the moment it was saved, while paths 1
+   through 3 always read the current version. Same rule as path 3: a stale
+   attached copy is not something to keep reusing; ask the ambassador to
+   re-download and reattach it periodically.
+
+**Any stored copy is a cached copy, and it goes stale.** This file is
+versioned and it changes. Path 2 works precisely because it stores only a
+pointer, the fetch line, never a copy of the rules themselves. Paths 3 and 4
+do end up with an actual copy of this file sitting somewhere: an
+installed-skills folder, or a chat attachment. Neither is exempt from the
+same discipline. Re-fetch and overwrite that copy on the same cadence as the
+reload guidance above; installing it or downloading it once is not the end of
+the job. Neither "I already installed it" nor "I already downloaded it" is a
+reason to stop: they are the two cases this rule is for.
+
+If you cannot fetch or re-fetch the file in a given session, say so and ask
+the ambassador to repaste the fetch line, reinstall, or reattach, rather than
+working from memory.
 
 ---
 
