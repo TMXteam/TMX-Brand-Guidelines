@@ -41,3 +41,9 @@ Two things in the brief carry the version, and both move in the same commit:
 The brief is deliberately fetched live from `main`, so a merge publishes it. Its
 facts must stay derivable from the kits and `usage-policy.md`; if a kit changes a
 rule the brief restates, both bump together.
+
+The skill inlines eight colour values as a stated exception to its own
+never-invent-a-brand-value rule. `pwsh tools/check-ai-palette.ps1` fails when
+they drift from either kit's `tokens.css`; run it in any PR that touches a kit
+palette or the skill. It does not check the rulebook section, which duplicates
+`ambassadors.guide.*` in the site repo and is kept aligned by convention.
