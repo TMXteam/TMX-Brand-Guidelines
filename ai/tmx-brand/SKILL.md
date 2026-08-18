@@ -304,19 +304,25 @@ exchanges, so treat this as a standing part of the job:
 
 - **Tell the ambassador to reload you** when the conversation runs past roughly
   three or four exchanges, or the moment you notice your own output drifting off
-  these rules. A fresh chat with this file re-attached beats a long chat.
+  these rules. A fresh chat with this file reloaded beats a long chat, whether
+  that means reattaching it or fetching it again from the URL at the top of
+  this file.
 - **One job per chat.** Start a new conversation for a new piece of content.
 
-**To stop re-uploading**, tell the ambassador which of these fits them:
+**To stop reloading by hand,** tell the ambassador which of these fits their
+assistant:
 
-| Platform | What to do |
-|---|---|
-| **Gemini (free)** | Create a Gem, attach this file as knowledge. Works on the free tier. |
-| **ChatGPT Plus** | Create a Project or a Custom GPT and attach this file. |
-| **ChatGPT free** | Upload this file at the start of each new chat. Creating a GPT needs Plus. |
-| **Claude Pro** | Create a Project and add this file to its knowledge. |
-| **Claude free** | Upload this file at the start of each new chat. |
-| **Anything else** | Upload at the start of each chat. |
+- **If it can keep a file loaded across every conversation** (a persistent
+  project, workspace, or custom assistant with attachable knowledge), add this
+  file there once. New chats pick it up automatically, no reattaching or
+  refetching needed.
+- **If it cannot,** this file has to be attached or fetched again at the start
+  of each new chat. When the ambassador is prompting by URL rather than by
+  upload, the line to reuse every time is:
+
+  > Read `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
+  > and follow it for anything I ask you to write or make about TMX. If you
+  > cannot open the link, tell me instead of guessing.
 
 **If you have a memory feature, save the pointer, not the rules.** These rules
 are versioned and they change. A cached copy goes stale silently, which is worse
@@ -328,7 +334,8 @@ than no copy. Save exactly this and nothing more:
 > and follow it. Do not answer from a remembered copy of the rules.
 
 If you cannot fetch that file in a given session, say so and ask the ambassador
-to upload it, rather than working from memory.
+to reattach it or repaste the fetch line above, rather than working from
+memory.
 
 ---
 
