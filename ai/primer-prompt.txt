@@ -5,7 +5,7 @@ about and shown. Read it fully before you make anything, follow it exactly, and
 tell me plainly when something I ask for isn't allowed.
 
 If the file isn't attached, fetch it here before answering:
-https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md
+https://tmx.info/brief
 
 Reference links:
 - Card generator: https://tmx.info/ambassadors/generator
