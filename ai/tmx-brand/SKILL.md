@@ -5,10 +5,12 @@ description: Brand rules for the TMX ecosystem (TMX Ecosystem, Predixa, TMX DEX)
 
 # TMX AI Brief
 
-Version 1.0.0 · 2026-08-18 · Not legal advice.
+Version 1.0.1 · 2026-08-19 · Not legal advice.
 
 Current version always lives at
 `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
+`https://tmx.info/brief` serves the same current file; the two URLs are
+interchangeable.
 
 ---
 
@@ -415,9 +417,9 @@ an ambassador should try them:
 1. **A one-off chat.** Paste the fetch line below. The model reads the file
    from its URL; nothing is downloaded.
 
-   > Read `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
-   > and follow it for anything I ask you to write or make about TMX. If you
-   > cannot open the link, tell me instead of guessing.
+   > Read `https://tmx.info/brief` and follow it for anything I ask you to
+   > write or make about TMX. If you cannot open the link, tell me instead
+   > of guessing.
 
 2. **An assistant that keeps instructions across conversations:** a
    workspace's or project's custom instructions, or a memory feature. Put the
@@ -436,9 +438,8 @@ an ambassador should try them:
    those harnesses expect a skill (`SKILL.md`, `name` and `description` up
    top), so it installs as-is.
 
-   > Install `https://raw.githubusercontent.com/TMXteam/TMX-Brand-Guidelines/main/ai/tmx-brand/SKILL.md`
-   > as a skill, then follow it whenever I ask you to write or make anything
-   > about TMX.
+   > Install `https://tmx.info/brief` as a skill, then follow it whenever I
+   > ask you to write or make anything about TMX.
 
    An installed copy is still a copy: see the rule below.
 
