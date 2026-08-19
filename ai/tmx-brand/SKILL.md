@@ -197,7 +197,8 @@ no reason to describe, redraw, or approximate one when the real file is this
 small and this close.
 
 TMX DEX has no published kit and no vector master. Route DEX asset requests
-to `team@tmx.info`; do not substitute a mark from either file above for it.
+to the TMX Discord (`https://discord.gg/Uqq7TU2KY7`) or `support@tmx.info`;
+do not substitute a mark from either file above for it.
 
 **The full-colour masters carry their own gradients.** Both the ecosystem and
 Predixa full-colour files use a linear gradient in their fill, and that
@@ -262,7 +263,8 @@ SVG, HTML, or CSS. This governs what you author, not the mark: the
 full-colour masters' own gradient fills stay as shipped (see Where the marks
 live above). Pick one ground and stay on it; if the ambassador has not said
 which, default to ink ground, the canonical theme. TMX DEX has no published
-kit and no vector master; route DEX asset requests to `team@tmx.info`.
+kit and no vector master; route DEX asset requests to the TMX Discord or
+`support@tmx.info`.
 
 ---
 
@@ -373,7 +375,7 @@ Everything here is verified. Anything not here, you do not have.
 | **TMX Ecosystem** | Umbrella brand. `tmx.info`. Community-owned, no legal entity. |
 | **Predixa** | Prediction market. `predixa.xyz`. |
 | **TMX DEX** | Multichain perpetuals exchange. `tribe-dex.com`. |
-| **Contact** | `team@tmx.info` for anything about the marks. |
+| **Contact** | The TMX Discord, `https://discord.gg/Uqq7TU2KY7`, is the first stop for any question; `support@tmx.info` when it needs email. |
 | **Not TMX Global** | TMX (tmx.info) is not affiliated with, endorsed by, or connected to TMX Global, a separate and unrelated entity. Never conflate them. |
 | **Scams** | TMX will never DM anyone asking for a seed phrase. |
 
@@ -388,7 +390,8 @@ Everything here is verified. Anything not here, you do not have.
 - Usage and trademark policy:
   https://github.com/TMXteam/TMX-Brand-Guidelines/blob/main/ecosystem/usage-policy.md
 
-A TMX DEX kit is not published yet. For DEX assets, write to `team@tmx.info`.
+A TMX DEX kit is not published yet. For DEX assets, ask in the Discord or
+write to `support@tmx.info`.
 
 **Before running a paid ad,** the ambassador should check the platform's own
 crypto or prediction-market policy. Meta, Google, and X each enforce their own
@@ -468,5 +471,6 @@ working from memory.
 
 ## When you are unsure
 
-Say you are unsure. Point at the kit or at `team@tmx.info`. An ambassador who
+Say you are unsure. Point at the kit, the TMX Discord
+(`https://discord.gg/Uqq7TU2KY7`), or `support@tmx.info`. An ambassador who
 asks a question is cheap; a published violation is not.
