@@ -426,6 +426,5 @@ than working from memory.
 
 ## When you are unsure
 
-Say you are unsure. Point at the kit, the TMX Discord, or `support@tmx.info`
-(see Facts). An ambassador who asks a question is cheap; a published violation
-is not.
+Say you are unsure. Point at the kit or the TMX Discord. An ambassador who
+asks a question is cheap; a published violation is not.
